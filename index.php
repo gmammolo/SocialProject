@@ -16,15 +16,14 @@ GestoreTemplate::addTabMenu("<span class=\"icon fa-envelope\">Contact</span>", '
 GestoreTemplate::addJavascript("Template/js/jquery.min.js");
 GestoreTemplate::addJavascript("Template/js/jquery.scrolly.min.js");
 GestoreTemplate::addJavascript("Template/js/jquery.scrollzer.min.js");
-GestoreTemplate::addJavascript("Template/js/skel.min.js");
-GestoreTemplate::addJavascript("Template/js/skel-layers.min.js");
-GestoreTemplate::addJavascript("Template/js/init.js");
+//GestoreTemplate::addJavascript("Template/js/skel.min.js");
+//GestoreTemplate::addJavascript("Template/js/skel-layers.min.js");
+//GestoreTemplate::addJavascript("Template/js/init.js");
 
 GestoreTemplate::addCss("Template/css/skel.css");
 GestoreTemplate::addCss("Template/css/style.css");
 GestoreTemplate::addCss("Template/css/style-wide.css");
 require_once  "Template/page.php";
-
 
 
 ?>

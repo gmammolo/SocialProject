@@ -10,13 +10,22 @@
             echo "<script src=\"$js\"></script>". PHP_EOL;
         }
         ?>
-        <style type="text/css">
         <?php
-        foreach (GestoreTemplate::getCss() as $css) {
-            echo("@import \"$css\";"). PHP_EOL;
-        }
+//        echo "<noscript>".PHP_EOL;
+//            foreach (GestoreTemplate::getCss() as $css) {
+//                echo("<link rel=\"stylesheet\" href=\"$css\" />"). PHP_EOL;
+//            }
+//	echo "</noscript>".PHP_EOL;
+
+        echo '<style type="text/css">';
+            
+            foreach (GestoreTemplate::getCss() as $css)
+            {
+                echo("@import \"$css\";");
+            }
+        echo '</style>';
+        
         ?>
-        </style>
     </head>
     <body>
 
@@ -156,13 +165,13 @@
                         </div>
                         <div class="4u">
                             <article class="item">
-                                <a href="#" class="image fit"><img src="images/pic06.jpg" alt="" /></a>
+                                <a href="#" class="image fit"><img src="Template/images/pic06.jpg" alt="" /></a>
                                 <header>
                                     <h3>Dolor Penatibus</h3>
                                 </header>
                             </article>
                             <article class="item">
-                                <a href="#" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
+                                <a href="#" class="image fit"><img src="Template/images/pic07.jpg" alt="" /></a>
                                 <header>
                                     <h3>Orci Convallis</h3>
                                 </header>
@@ -181,7 +190,7 @@
                         <h2>About Me</h2>
                     </header>
 
-                    <a href="#" class="image featured"><img src="images/pic08.jpg" alt="" /></a>
+                    <a href="#" class="image featured"><img src="Template/images/pic08.jpg" alt="" /></a>
 
                     <p>Tincidunt eu elit diam magnis pretium accumsan etiam id urna. Ridiculus 
                         ultricies curae quis et rhoncus velit. Lobortis elementum aliquet nec vitae 
