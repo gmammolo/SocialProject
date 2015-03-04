@@ -16,7 +16,6 @@
 //                echo("<link rel=\"stylesheet\" href=\"$css\" />"). PHP_EOL;
 //            }
 //	echo "</noscript>".PHP_EOL;
-
         echo '<style type="text/css">';
             
             foreach (GestoreTemplate::getCss() as $css)
