@@ -7,10 +7,13 @@ define("_ROOT_",dirname(__FILE__)."/");
 
 require_once "Config/Config.php";
 
+
+
 GestoreTemplate::addTabMenu("<span class=\"icon fa-home\">Intro</span>", '#top');
 GestoreTemplate::addTabMenu("<span class=\"icon fa-th\">Portfolio</span>", '#portfolio');
 GestoreTemplate::addTabMenu("<span class=\"icon fa-user\">About Me</span>", '#about');
 GestoreTemplate::addTabMenu("<span class=\"icon fa-envelope\">Contact</span>", '#contact');
+
 
 
 GestoreTemplate::addJavascript("Template/js/jquery.min.js");
