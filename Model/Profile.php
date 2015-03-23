@@ -17,6 +17,7 @@ class Profile extends Model {
     //put your code here
     
     protected $nome;
+    protected $avatar;
     protected $email;
     protected $residenza;
     protected $data;
@@ -52,9 +53,17 @@ class Profile extends Model {
     public function setData($data) {
         $this->data = $data;
     }
+    public function getAvatar() {
+        return $this->avatar;
+    }
 
-        public function __construct($arr = array() ) {
+    public function setAvatar($avatar) {
+        $this->avatar = $avatar;
+    }
+
+    public function __construct($arr = array() ) {
         $this->id = $arr['id'];
+        $this->avatar =  $arr['avatar'];
         $this->nome = $arr['nome'];
         $this->data = $arr['data'];
         $this->email = $arr['email'];
@@ -68,5 +77,9 @@ class Profile extends Model {
         return new Profile($ar[0]);
         
     }
-    
+
+    public function Update() {
+        throw new Exception("Not Implement Yet!");
+    }
+
 }

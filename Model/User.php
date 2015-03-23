@@ -95,5 +95,19 @@ class User extends Model{
     public function setProfile($profile) {
         $this->profile = $profile;
     }
+
+    public function Update() {
+        throw new Exception("Not Implement Yet!");
+    }
     
+    
+    /**
+     * ritorna un utente non amico da proporre come tale
+     */
+    public function GetRandomNotFriend()
+    {
+        throw new Exception("Not Implement Yet!");
+    }
+    
+
 }

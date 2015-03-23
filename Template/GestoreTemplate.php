@@ -25,6 +25,7 @@ class GestoreTemplate {
      */
     protected static $css = array();
     
+    
     /**
      * array contente il contenuto da stampare nel content <br>
      * Non permette di gestire direttamente la posizione dei vari content inseriti, <br> 
@@ -136,7 +137,7 @@ class GestoreTemplate {
      * Ritorna l'array dei content
      * @return array
      */
-    public static function getContent()
+    public static function getContents()
     {
         return self::$contents;
     }

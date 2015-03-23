@@ -11,7 +11,7 @@ require_once 'Database.php';
  *
  * @author Giuseppe
  */
-class Model {
+abstract class Model {
     //put your code here
     
     
@@ -52,6 +52,8 @@ class Model {
         return $ris;
     }
     
+    
+    public abstract function Update();
     
     
 }
