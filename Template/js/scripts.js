@@ -4,8 +4,19 @@
  * @param {String} string
  * @returns {boolean}
  */
-function validateString(string)
+function validatePassword(string)
 {
     var re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
-    return re.test(string);
+    return !re.test(string);
+}
+
+function validateRegularString(string)
+{
+    var re = /[^(A-Z|a-z|0-9)]/i ;
+    return !re.test(string) ;
+}
+
+function getHome()
+{
+    return "http://php.server/SocialProject/index.php";
 }

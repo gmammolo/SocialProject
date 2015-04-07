@@ -7,20 +7,26 @@
 
 function loginAction()
 {
-    checkFields();
+
+    if (checkFields())
+    {
+        document.forms["login"].action = getHome() + "?Login=true";
+        document.forms["login"].submit();
+    }
+    
 }
 
 function checkFields()
 {
     var username = document.forms["login"].username;
     var password = document.forms["login"].password;
-    if(!validateString(username.value)) { 
+    if(!validateRegularString(username.value)) { 
         alert("Errore: campo Username non accettabile!"); 
         username.focus(); 
         return false; 
     }
     
-    if(!validateString(password.value)) { 
+    if(!validatePassword(password.value)) { 
         alert("Errore: campo password non accettabile!"); 
         password.focus(); 
         return false; 
