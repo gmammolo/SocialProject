@@ -1,5 +1,5 @@
 <?php
-require_once 'Session.php';
+
 
 class DatabaseException extends Exception
 {
@@ -44,6 +44,12 @@ class Database
         }
     }
     
+    /**
+     * Esegue una query in cui ci si aspetta dei valori di ritorno
+     * @param type $sql
+     * @param type $attr
+     * @return type
+     */
     public function query($sql, $attr=array())
     {
         $q = $this->conn->prepare($sql);

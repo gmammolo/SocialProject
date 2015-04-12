@@ -18,8 +18,6 @@ class User extends Model{
     
     protected $username;
     protected $password; 
-    protected $enabled;
-    protected $verified;
     protected $roles;
     protected $email;
     protected $profile;
@@ -32,11 +30,9 @@ class User extends Model{
         $this->username = $ar['username'];
         //TODO:: VALUTARE LA PRESENZA DI QUESTO CAMPO PER MOTIVI DI SICUREZZA...
         $this->password = $ar['password'];
-        $this->enabled = $ar['enabled'];
-        $this->verified = $ar['verified'];
-        $this->roles = $ar['roles'];
+        $this->roles = unserialize($ar['roles']);
         $this->email = $ar['email'];
-        $this->profile = Profile::GetByID($ar['profile']);
+        $this->profile = Profile::getProfileByID($ar['profile']);
     }
 
 
@@ -46,14 +42,6 @@ class User extends Model{
 
     public function getPassword() {
         return $this->password;
-    }
-
-    public function getEnabled() {
-        return $this->enabled;
-    }
-
-    public function getVerified() {
-        return $this->verified;
     }
 
     public function getRoles() {
@@ -76,14 +64,6 @@ class User extends Model{
         $this->password = $password;
     }
 
-    public function setEnabled($enabled) {
-        $this->enabled = $enabled;
-    }
-
-    public function setVerified($verified) {
-        $this->verified = $verified;
-    }
-
     public function setRoles($roles) {
         $this->roles = $roles;
     }
@@ -97,6 +77,7 @@ class User extends Model{
     }
 
     public function Update() {
+        //TODO: serialize(role);
         throw new Exception("Not Implement Yet!");
     }
     
@@ -109,5 +90,62 @@ class User extends Model{
         throw new Exception("Not Implement Yet!");
     }
     
+    
+    
+    
+    
+    
+    //*********************************************************************
+    //*******************************************************************
+    
+    public static $utente;
+    
+    public static function getUser() {
+        if(isset(self::$utente)) 
+            return self::$utente;
+        
+        if(!Session::check('utente'))  {
+            return User::getVisitator();
+        }
+        else  {
+            self::$utente = Session::get ('utente', 'User');
+            return self::$utente;
+        }
+            
+    }
+    
+    public static function checkUserRole($role)
+    {
+        $utente = self::getUser();
+        return in_array($role,$utente->getRoles()) ;
+    }
+    
+    
+    public static function getVisitator()
+    {
+        $ar = array(
+            "username" => "Visitatore",
+            "roles" => serialize(array(Role::Unregister)),
+            "email" => "",
+            "id"=> -1,
+            "password" => "",
+            "profile" => -1
+            
+        );
+        return new User($ar);
+    }
+    
+    
+    public static function CheckUser($user, $pass) {
+        $sql = "SELECT COUNT(username) FROM User WHERE username = ? AND password = ? ";
+        $ris = Database::getInstance()->query($sql, array($user, crypt($pass) ));
+        var_dump($ris);
+    }
+    
+    
+    
+    
 
 }
+ 
+

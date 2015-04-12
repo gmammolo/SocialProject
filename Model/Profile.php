@@ -15,7 +15,7 @@ require_once 'Model.php';
  */
 class Profile extends Model {
     //put your code here
-    
+    protected $id;
     protected $nome;
     protected $avatar;
     protected $email;
@@ -73,6 +73,9 @@ class Profile extends Model {
     
     public static function getProfileByID($id)
     {
+        if($id == -1)
+            return self::getVisitator ();
+        
         $ar = Self::ExecuteQuery("SELECT * FROM Profile WHERE id=?;", array($id));
         return new Profile($ar[0]);
         
@@ -80,6 +83,20 @@ class Profile extends Model {
 
     public function Update() {
         throw new Exception("Not Implement Yet!");
+    }
+    
+    
+    public static function getVisitator()
+    {
+        $ar = array(
+            "avatar" => "default",
+            "nome" => "Visitatore",
+            "data" => "00/00/0000",
+            "email" => "",
+            "residenza" => "",
+            "id" => -1
+        );
+        return new Profile($ar);
     }
 
 }

@@ -27,12 +27,17 @@ if(isset($login))
     require_once _DIR_CONTROLLER_ . 'LoginController.php';
 }
 
+$join = filter_input(INPUT_GET, 'Join');
+if(isset($join))
+{
+    require_once _DIR_CONTROLLER_ . 'JoinController.php';
+}
 
 //#############################à
 //GESTIONE ACCESSI 
 //TODO: questo sistema va cambiato con un sistema di gestione permessi di visualizzazione
 //il visitatore ha il "permesso" di visualizzare la schermata di login
-if( !Session::check('utente') ) 
+if( User::checkUserRole(Role::Unregister) ) 
 {
     //NO LOGIN EFFETTUATO
     GestoreTemplate::addJavascript("View/Login/Login.js");
