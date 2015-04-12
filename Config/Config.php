@@ -7,6 +7,7 @@ define("_DIR_VIEW_", _ROOT_."View/");
 define("_DIR_CONTROLLER_", _ROOT_."Controller/");
 define("_DIR_CONFIG_", _ROOT_."Config/");
 
+require_once _DIR_MODEL_. 'Utility.php';
 require_once _DIR_MODEL_. 'Database.php';
 require_once _DIR_MODEL_. 'Session.php';
 require_once _DIR_MODEL_ . 'Role.php';

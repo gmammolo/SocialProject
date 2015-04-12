@@ -19,7 +19,7 @@ GestoreTemplate::addJavascript("Template/js/scripts.js");
 GestoreTemplate::addCss("Template/css/skel.css");
 GestoreTemplate::addCss("Template/css/style.css");
 GestoreTemplate::addCss("Template/css/style-wide.css");
-  
+GestoreTemplate::addCss("http://yui.yahooapis.com/pure/0.6.0/pure-min.css");
 
 $login = filter_input(INPUT_GET, 'Login');
 if(isset($login))
@@ -42,6 +42,8 @@ if( User::checkUserRole(Role::Unregister) )
     //NO LOGIN EFFETTUATO
     GestoreTemplate::addJavascript("View/Login/Login.js");
     GestoreTemplate::addContent(_DIR_VIEW_."Login/Login.php");
+    GestoreTemplate::addJavascript("View/Join/Join.js");
+    GestoreTemplate::addContent(_DIR_VIEW_."Join/Join.php");
 }
 else
 {

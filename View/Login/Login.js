@@ -8,7 +8,7 @@
 function loginAction()
 {
 
-    if (checkFields())
+    if (loginCheckFields())
     {
         document.forms["login"].action = getHome() + "?Login=true";
         document.forms["login"].submit();
@@ -16,63 +16,43 @@ function loginAction()
     
 }
 
-function checkFields()
+function loginCheckFields()
 {
-    var username = document.forms["login"].username;
-    var password = document.forms["login"].password;
-    if(!validateRegularString(username.value)) { 
+    /** @type HTMLInputElement */
+    var username = document.forms["login"].Username;
+    /** @type HTMLInputElement */
+    var password = document.forms["login"].Password;
+    
+    if(/['\x22]+/.test(username.value)) { 
         alert("Errore: campo Username non accettabile!"); 
         username.focus(); 
         return false; 
     }
     
-    if(!validatePassword(password.value)) { 
-        alert("Errore: campo password non accettabile!"); 
+    if(!/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(.){4,16}/.test(password.value)) { 
+        if(password.value.length < 4 || password.value.length > 16 )
+        {
+            alert("La Password deve contenere da 4 a 16 caratteri");
+        }
+        else if(!/(?=.*[A-Z])/.test(password.value))
+        {
+            alert("La Password deve contenere almeno una lettera Maiuscola");
+        }
+        else if(!/(?=.*[a-z])/.test(password.value))
+        {
+            alert("La Password deve contenere almeno una lettera minuscola");
+        }
+        else if(!/(?=.*[0-9])/.test(password.value))
+        {
+            alert("La Password deve contenere almeno un numero");
+        }
+        else
+        {
+            alert("Attenzione, la password contiene caratteri illegali.");
+        }
         password.focus(); 
         return false; 
     }
-    
-    
     return true;
-    /* SERVE PER LA REGISTRAZIONE*
-     * http://www.the-art-of-web.com/javascript/validate-password/
-     
-    re = /^\w+$/; 
-    if(!re.test(username.value)) {
-        alert("Errore: l'username può contenere solo caratteri, numeri e underscore "); 
-        username.focus();
-        return false;
-    }
-    
-    if(password.value.length <= 4 ) { 
-        alert("Errore: La Password deve contenere almeno 4 caratteri");
-        password.focus(); 
-        return false;
-    }
-    if(password.value === username.value) { 
-        alert("Errore: La Password deve essere diversa dall' Username"); 
-        password.focus(); 
-        return false; 
-    }
-    re = /[0-9]/;
-    if(!re.test(password.value)) { 
-        alert("Error: password must contain at least one number (0-9)!");
-        password.focus(); 
-        return false; 
-    }
-    re = /[a-z]/; 
-    if(!re.test(password.value)) {
-        alert("Error: password must contain at least one lowercase letter (a-z)!");
-        password.focus();
-        return false;
-    }
-    re = /[A-Z]/; 
-    if(!re.test(password.value)) {
-        alert("Error: password must contain at least one uppercase letter (A-Z)!");
-        password.focus(); 
-        return false;
-    }
-    
-    */
     
 }

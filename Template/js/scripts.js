@@ -12,8 +12,8 @@ function validatePassword(string)
 
 function validateRegularString(string)
 {
-    var re = /[^(A-Z|a-z|0-9)]/i ;
-    return !re.test(string) ;
+    var re = /\w*/i ;
+    return re.test(string) ;
 }
 
 function getHome()
