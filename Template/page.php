@@ -1,3 +1,4 @@
+<?php $user = Session::get('user', 'User'); ?>
 <!DOCTYPE HTML>
 <html>
     <head>
@@ -36,8 +37,8 @@
                 <!-- Logo -->
                 <div id="logo">
                     <span class="image avatar48"><img src="Template/images/avatar.jpg" alt="" /></span>
-                    <h1 id="title">Jane Doe</h1>
-                    <p>Hyperspace Engineer</p>
+                    <h1 id="title"><?php echo $user->getProfile()->getNome(); ?></h1>
+                    <p><?php echo $user->getUsername(); ?></p>
                 </div>
 
                 <!-- Nav -->

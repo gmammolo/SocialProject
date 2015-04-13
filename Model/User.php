@@ -29,7 +29,7 @@ class User extends Model{
         $this->id = $ar['id'];
         $this->username = $ar['username'];
         //TODO:: VALUTARE LA PRESENZA DI QUESTO CAMPO PER MOTIVI DI SICUREZZA...
-        $this->password = $ar['password'];
+        //$this->password = $ar['password'];
         $this->roles = unserialize($ar['roles']);
         $this->email = $ar['email'];
         $this->profile = Profile::getProfileByID($ar['profile']);
@@ -136,15 +136,38 @@ class User extends Model{
     }
     
     
-    public static function CheckUser($user, $pass) {
-        $sql = "SELECT COUNT(username) FROM User WHERE username = ? AND password = ? ";
-        $ris = Database::getInstance()->query($sql, array($user, crypt($pass) ));
-        var_dump($ris);
+    public static function checkUserValid($user, $pass) {
+        $sql = "SELECT username, password FROM User WHERE username = ? ";
+        $ris = self::ExecuteQuery($sql, array($user))->fetch();
+        return isset($ris['password']) && crypt($pass , $ris['password'] ) == $ris['password'] ;
+    }
+    
+    public static function checkUser($user) {
+        $sql = "SELECT COUNT(*) as NUM FROM User WHERE username = ? ";
+        $ris = self::ExecuteQuery($sql, array($user ))->fetch();
+        return $ris["NUM"]== 1;
     }
     
     
+    public static function getUserByLogin($user, $pass) {
+        $sql = "SELECT * FROM User WHERE username = ?";
+        $ris = self::ExecuteQuery($sql, array($user ))->fetch();
+        return (isset($ris['password']) && crypt($pass , $ris['password'] ) == $ris['password']) ? new User($ris) : NULL;
+                
+    }
     
+    public static function getUserByID($id) {
+        $sql = "SELECT * FROM User WHERE id = ? ";
+        $ris = self::ExecuteQuery($sql, array($id ))->fetch();
+        return new User($ris);
+    }
     
+    public static function createAccount($user, $pass, $email) {
+        $idprofile= Profile::createProfile($user, $email); 
+        $sql = "INSERT INTO `socialproject`.`User` (`id`, `username`, `password`, `roles`, `email`, `profile`) VALUES (NULL, :user, :pass, '', :email, :profile );";
+        $id =  self::InsertQuery($sql, array(":user" => $user, ":pass" => crypt($pass), ":email" => $email, ":profile" => $idprofile ));
+        return User::getUserByID($id);
+    }
 
 }
  

@@ -16,6 +16,13 @@ if(!preg_match("/['\x22]/", $username ) &&
     else
     {
         Utility::GreenMessage("Registrazione in corso");
+        $user = User::createAccount($username, $password, $email);
+        if(!$user)
+            Utility::RedMessage ("Errore nella creazione Account. Si prega di contattare un amministratore");
+        else
+        {
+           Session::set('user', $user);
+        }
     }
 }
 else

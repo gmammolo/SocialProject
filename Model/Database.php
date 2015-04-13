@@ -48,13 +48,18 @@ class Database
      * Esegue una query in cui ci si aspetta dei valori di ritorno
      * @param type $sql
      * @param type $attr
-     * @return type
+     * @return PDOStatement
      */
     public function query($sql, $attr=array())
     {
         $q = $this->conn->prepare($sql);
 	$q->execute($attr);
-        return $q->fetchAll();
+        return $q;
+    }
+    
+    public function lastInsertId()
+    {
+        return $this->conn->lastInsertId();
     }
 
 

@@ -21,6 +21,10 @@ GestoreTemplate::addCss("Template/css/style.css");
 GestoreTemplate::addCss("Template/css/style-wide.css");
 GestoreTemplate::addCss("http://yui.yahooapis.com/pure/0.6.0/pure-min.css");
 
+if(!Session::check('user'))
+    Session::set ('user', User::getVisitator ());
+
+
 $login = filter_input(INPUT_GET, 'Login');
 if(isset($login))
 {
@@ -32,6 +36,13 @@ if(isset($join))
 {
     require_once _DIR_CONTROLLER_ . 'JoinController.php';
 }
+
+$logout = filter_input(INPUT_GET, 'Logout');
+if(isset($logout))
+{
+    Session::destroy();
+}
+
 
 //#############################à
 //GESTIONE ACCESSI 

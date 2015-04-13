@@ -45,7 +45,8 @@ class Session {
             $return = &self::$deserialized[$name];
         else
         {
-            $return = &self::_deseriaize ($name, $type);
+            //& tolta perchè generava un errore: controllare
+            $return = self::_deseriaize ($name, $type);
             self::$deserialized[$name] = &$return;
         }
         if(class_exists($type) & !is_a($return, $type))
@@ -53,6 +54,10 @@ class Session {
         return $return;    
     }
     
+    public static function set($name, $obj)
+    {
+        self::$deserialized[$name]=$obj;
+    }
     
     public static function toString()
     {
@@ -85,14 +90,16 @@ class Session {
 
     public static function destroy()
     {
-        foreach (self::$deserialized as $key => $obj )
-        {
-            unset(self::$deserialized[$key]);
-        }
-        foreach ($_SESSION as $key => $obj )
-        {
-            unset($_SESSION[$key]);
-        }
+        if(isset(self::$deserialized )) 
+            foreach (self::$deserialized as $key => $obj )
+            {
+                unset(self::$deserialized[$key]);
+            }
+        if(isset($_SESSION ))     
+            foreach ($_SESSION as $key => $obj )
+            {
+                unset($_SESSION[$key]);
+            }
     }
     
     public static function shutdown()

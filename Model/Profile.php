@@ -76,8 +76,8 @@ class Profile extends Model {
         if($id == -1)
             return self::getVisitator ();
         
-        $ar = Self::ExecuteQuery("SELECT * FROM Profile WHERE id=?;", array($id));
-        return new Profile($ar[0]);
+        $ar = Self::ExecuteQuery("SELECT * FROM Profile WHERE id=?;", array($id))->fetch();
+        return new Profile($ar);
         
     }
 
@@ -97,6 +97,14 @@ class Profile extends Model {
             "id" => -1
         );
         return new Profile($ar);
+    }
+    
+    
+    public static function createProfile($nome, $email)
+    {
+        $avatar = "default";
+        $sql = "INSERT INTO `socialproject`.`Profile` (`id`, `nome`, `avatar`, `residenza`, `email`) VALUES (NULL, ?, ?, '', ?)";
+        return self::InsertQuery($sql, array($nome, $avatar, $email));
     }
 
 }
