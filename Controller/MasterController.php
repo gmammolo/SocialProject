@@ -22,7 +22,7 @@ GestoreTemplate::addCss("Template/css/style-wide.css");
 GestoreTemplate::addCss("http://yui.yahooapis.com/pure/0.6.0/pure-min.css");
 
 if(!Session::check('user'))
-    Session::set ('user', User::getVisitator ());
+    Session::set ('user', User::getVisitator());
 
 
 $login = filter_input(INPUT_GET, 'Login');
@@ -48,17 +48,19 @@ if(isset($logout))
 //GESTIONE ACCESSI 
 //TODO: questo sistema va cambiato con un sistema di gestione permessi di visualizzazione
 //il visitatore ha il "permesso" di visualizzare la schermata di login
-if( User::checkUserRole(Role::Unregister) ) 
-{
+if( User::checkUserRole(Role::Unregister) ) {
     //NO LOGIN EFFETTUATO
-    GestoreTemplate::addJavascript("View/Login/Login.js");
-    GestoreTemplate::addContent(_DIR_VIEW_."Login/Login.php");
-    GestoreTemplate::addJavascript("View/Join/Join.js");
-    GestoreTemplate::addContent(_DIR_VIEW_."Join/Join.php");
+    GestoreTemplate::addJavascript(_DIR_VIEW_ . "Account/Login.js");
+//    GestoreTemplate::addContent(_DIR_VIEW_."Account/Login.php");
+    GestoreTemplate::addJavascript(_DIR_VIEW_."Account/Join.js");
+//    GestoreTemplate::addContent(_DIR_VIEW_."Account/Join.php");
+     GestoreTemplate::addContent(_DIR_VIEW_."Account/Account.php");
 }
-else
-{
+else if(User::checkUserRole(Role::Unverified)) {
     //LOGIN EFFETTUATO
     GestoreTemplate::addContent(_DIR_VIEW_."Profile/Profile.php");
 }
 
+else {
+    GestoreTemplate::addContent(_DIR_VIEW_."Profile/Profile.php");
+}

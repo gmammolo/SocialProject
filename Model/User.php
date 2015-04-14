@@ -158,14 +158,16 @@ class User extends Model{
     
     public static function getUserByID($id) {
         $sql = "SELECT * FROM User WHERE id = ? ";
-        $ris = self::ExecuteQuery($sql, array($id ))->fetch();
-        return new User($ris);
+        $ris = self::ExecuteQuery($sql, array($id ));
+        if ( $ris->rowCount() == 0 )
+            return null;
+        return new User($ris->fetch());
     }
     
     public static function createAccount($user, $pass, $email) {
         $idprofile= Profile::createProfile($user, $email); 
-        $sql = "INSERT INTO `socialproject`.`User` (`id`, `username`, `password`, `roles`, `email`, `profile`) VALUES (NULL, :user, :pass, '', :email, :profile );";
-        $id =  self::InsertQuery($sql, array(":user" => $user, ":pass" => crypt($pass), ":email" => $email, ":profile" => $idprofile ));
+        $sql = "INSERT INTO `socialproject`.`User` (`id`, `username`, `password`, `roles`, `email`, `profile`) VALUES (NULL, :user, :pass, :role, :email, :profile );";
+        $id =  self::InsertQuery($sql, array(":user" => $user, ":pass" => crypt($pass), ":role" => serialize(array(Role::Unverified)) , ":email" => $email, ":profile" => $idprofile ));
         return User::getUserByID($id);
     }
 

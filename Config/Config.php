@@ -16,8 +16,14 @@ require_once _DIR_MODEL_.'User.php';
 require_once _DIR_MODEL_.'Profile.php';
 require_once _DIR_MODEL_.'Friendship.php';
 
+?>
+
+<script>
+    var __LOGIN_URL__ = "/SocialProject/View/Account/Login.php ";
+    var __JOIN_URL__ = "/SocialProject/View/Account/Join.php ";
+</script>
+
+
+<?php
 require_once _DIR_TEMPLATE_.'/GestoreTemplate.php';
-
-
-
 ?>
