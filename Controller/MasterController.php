@@ -50,9 +50,9 @@ if(isset($logout))
 //il visitatore ha il "permesso" di visualizzare la schermata di login
 if( User::checkUserRole(Role::Unregister) ) {
     //NO LOGIN EFFETTUATO
-    GestoreTemplate::addJavascript(_DIR_VIEW_ . "Account/Login.js");
+    GestoreTemplate::addJavascript("View/Account/Login.js");
 //    GestoreTemplate::addContent(_DIR_VIEW_."Account/Login.php");
-    GestoreTemplate::addJavascript(_DIR_VIEW_."Account/Join.js");
+    GestoreTemplate::addJavascript("View/Account/Join.js");
 //    GestoreTemplate::addContent(_DIR_VIEW_."Account/Join.php");
      GestoreTemplate::addContent(_DIR_VIEW_."Account/Account.php");
 }

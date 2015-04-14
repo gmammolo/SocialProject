@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generato il: Apr 13, 2015 alle 16:32
+-- Generato il: Apr 14, 2015 alle 17:32
 -- Versione del server: 5.5.41-0ubuntu0.14.04.1
 -- Versione PHP: 5.5.9-1ubuntu4.6
 
@@ -48,22 +48,21 @@ CREATE TABLE IF NOT EXISTS `Friendship` (
 --
 
 CREATE TABLE IF NOT EXISTS `Profile` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(64) NOT NULL,
   `avatar` varchar(250) NOT NULL,
   `residenza` varchar(250) NOT NULL,
   `data` date NOT NULL,
   `email` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dump dei dati per la tabella `Profile`
 --
 
 INSERT INTO `Profile` (`id`, `nome`, `avatar`, `residenza`, `data`, `email`) VALUES
-(1, 'tester', '', 'fidati', '2015-03-04', 'gdftr@gfds.it'),
-(2, 'tester', '', 'prova', '2015-03-02', 'testo');
+(2, 'root', 'default', '', '0000-00-00', 'root@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -74,14 +73,19 @@ INSERT INTO `Profile` (`id`, `nome`, `avatar`, `residenza`, `data`, `email`) VAL
 CREATE TABLE IF NOT EXISTS `User` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(32) NOT NULL,
-  `password` varchar(32) NOT NULL,
-  `enabled` tinyint(1) NOT NULL,
-  `verified` tinyint(1) NOT NULL,
+  `password` varchar(74) NOT NULL,
   `roles` varchar(250) NOT NULL,
   `email` varchar(32) NOT NULL,
   `profile` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+
+--
+-- Dump dei dati per la tabella `User`
+--
+
+INSERT INTO `User` (`id`, `username`, `password`, `roles`, `email`, `profile`) VALUES
+(9, 'root', '$1$0HpBTyzg$mM0v2TBKJFdRNbjEDoK67/', 'a:1:{i:0;i:1;}', 'root@gmail.com', 2);
 
 --
 -- Limiti per le tabelle scaricate
