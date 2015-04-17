@@ -1,0 +1,28 @@
+Gestire Inserimento dati:
+    Invio di un modulo da parte dell’utente con i dati
+    personali privati (username, password, generalità,
+    email, etc.).
+    ! I dati da mostrare nel profilo pubblico (nome,
+    cognome, data di nascita, fotografia personale)
+    possono essere inseriti solo dopo che l’account sarà
+    attivato, senza appesantire la procedura di
+    registrazione
+
+Un utente ordinario, dopo aver eseguito la
+procedura di login, avrà la possibilità di inserire/
+modificare i dati di profilo mediante l’accesso ad
+un’area privata.
+    ! Deve essere possibile:
+        ! Modificare dati utente.
+        ! Modificare la password (ma non lo username).
+
+
+ Funzionalità disponibile solo per l’utente
+administrator. Se il login è effettuato con le
+credenziali di amministratore, si deve avere la
+possibilità di:
+! Visionare tutti gli utenti iscritti
+!   Eliminare utenti
+!   Eliminare/modificare contenuti degli utenti
+
+

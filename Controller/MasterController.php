@@ -46,21 +46,22 @@ if(isset($logout))
 
 //#############################à
 //GESTIONE ACCESSI 
-//TODO: questo sistema va cambiato con un sistema di gestione permessi di visualizzazione
-//il visitatore ha il "permesso" di visualizzare la schermata di login
 if( User::checkUserRole(Role::Unregister) ) {
     //NO LOGIN EFFETTUATO
     GestoreTemplate::addJavascript("View/Account/Login.js");
-//    GestoreTemplate::addContent(_DIR_VIEW_."Account/Login.php");
     GestoreTemplate::addJavascript("View/Account/Join.js");
-//    GestoreTemplate::addContent(_DIR_VIEW_."Account/Join.php");
-     GestoreTemplate::addContent(_DIR_VIEW_."Account/Account.php");
+    GestoreTemplate::addContent(_DIR_VIEW_."Account/Account.php");
+    require_once  "Template/login-page.php";
 }
-else if(User::checkUserRole(Role::Unverified)) {
+else {
+    require_once  "Template/page.php";
+}
+
+
+if(User::checkUserRole(Role::Unverified)) {
     //LOGIN EFFETTUATO
     GestoreTemplate::addContent(_DIR_VIEW_."Profile/Profile.php");
 }
-
 else {
     GestoreTemplate::addContent(_DIR_VIEW_."Profile/Profile.php");
 }

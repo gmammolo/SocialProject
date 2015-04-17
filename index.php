@@ -10,6 +10,6 @@ require_once "Config/Config.php";
 
 require_once _DIR_CONTROLLER_ . 'MasterController.php';
 
-require_once  "Template/page.php";
+//require_once  "Template/page.php"; //inglobato nel MasterController;
 
 

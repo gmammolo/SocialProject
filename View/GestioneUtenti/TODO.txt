@@ -1,0 +1,12 @@
+Utente ordinario: utente standard che accede al
+sito previa registrazione. La registrazione ha
+effetto immediato e l’utente sarà abilitato all’uso
+del sito da subito, senza che la sua registrazione
+sia abilitata dall’amministratore
+
+
+Administrator: utente con privilegi di amministrazione.
+Questo utente non può essere rimosso e deve essere in
+grado di rimuovere e/o modificare i contributi di tutti
+gli utenti.
+NOTA: Sarà presente il founder che potrà invece rimuovere gli amministratori

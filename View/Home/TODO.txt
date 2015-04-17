@@ -1,0 +1,14 @@
+ Il servizio dovrà fornire le funzionalità di:
+    ! Aggiornamento del proprio messaggio di stato (da
+    adesso in poi il messaggio di stato di un utente è
+    considerato un contenuto)
+    ! OPZIONALE: ad un nuovo contenuto inserito si può
+    associare un’immagine
+    ! Modifica e cancellazione contenuti
+    ! Commentare i contenuti o il messaggio di stato dei
+    propri amici
+    ! Tutti i dati devono essere validati a livello js (ove
+    possibile) e a livello php
+
+Notifiche: Ogni volta che un utente inserisce un
+nuovo contenuto e/o effettua un commento, gliamici ricevono una notifica

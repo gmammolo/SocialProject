@@ -121,6 +121,7 @@ class User extends Model{
     }
     
     
+    
     public static function getVisitator()
     {
         $ar = array(
