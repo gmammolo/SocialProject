@@ -1,4 +1,5 @@
-<?php $user = Session::get('user', 'User'); ?>
+<?php $user = Session::get('user', 'User'); 
+var_dump($user)?>
 <!DOCTYPE HTML>
 <html>
     <head>

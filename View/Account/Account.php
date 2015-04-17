@@ -22,19 +22,15 @@
             $( "#button_login" ).on( "click", function( event ) { 
                 $("#login").show(); 
                 $("#join").hide(); 
-                $( "#button_login" ).prop("disabled",true);  
-                $( "#button_login" ).css("background-color", "#888");
-                $( "#button_join" ).prop("disabled",false);  
-                $( "#button_join" ).css("background-color", "");
+                $( "#button_login" ).addClass("selected no-touch");
+                $( "#button_join" ).removeClass("selected no-touch");
                 
             });
             $( "#button_join" ).on( "click", function( event ) { 
                 $("#join").show(); 
                 $("#login").hide();  
-                $( "#button_join" ).prop("disabled",true); 
-                $( "#button_join" ).css("background-color", "#888");
-                $( "#button_login" ).prop("disabled", false);  
-                $( "#button_login" ).css("background-color", "");
+                $( "#button_join" ).addClass("selected no-touch");
+                $( "#button_login" ).removeClass("selected no-touch");
             });
         </script>   
      <footer>footer della sezione</footer>
