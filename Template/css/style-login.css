@@ -1,0 +1,82 @@
+/* 
+    Created on : 17-apr-2015, 13.29.23
+    Author     : giuseppe
+*/
+
+#main
+{
+    //background-color: #b1e2dd;
+    position: relative;
+    top: 0px;
+    right: 0px;
+    width: 800px;
+    height: 2000px;
+    margin: 0 auto auto auto;
+    padding: 30px;
+}
+
+#account-form
+{
+    position: relative;
+    width: 90%;
+    max-width: 960px;
+    margin: 2em auto;
+    //background-color: #b1e2dd;
+}
+
+
+
+
+.div-menu
+{
+    position: relative;
+    float: none;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: auto;
+    
+}
+
+
+
+ul li
+{
+    margin: 0px;
+    padding: 0px;
+    border: 0px none;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+.tab-ul {
+    width: auto;
+    box-shadow: 0px -2px 3px rgba(203, 196, 130, 0.06) inset;
+    background-color: #b1e2dd;
+}
+
+.tab-li {
+    margin: 0px;
+    border-radius: 0;
+    left: -1em;
+    cursor: pointer;
+}
+
+.selected
+{
+    
+}
+
+.no-touch a.hover
+{
+   opacity: .8;
+}
+
+
+
+.tab-contents
+{
+    min-height: 0px;
+    background: none repeat scroll 0% 0% #b1e2dd;
+    background-color: #b1e2dd;
+}

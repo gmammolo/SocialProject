@@ -26,9 +26,9 @@
 
 foreach (GestoreTemplate::getContents() as $content)
 {
-    echo '<section id="portfolio" class="two">'.PHP_EOL;
+    echo '<div class="section">'.PHP_EOL;
     include $content;
-    echo '</section>'.PHP_EOL;
+    echo '</div>'.PHP_EOL;
 }
 
 ?>

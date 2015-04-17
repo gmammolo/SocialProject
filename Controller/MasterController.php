@@ -51,17 +51,22 @@ if( User::checkUserRole(Role::Unregister) ) {
     GestoreTemplate::addJavascript("View/Account/Login.js");
     GestoreTemplate::addJavascript("View/Account/Join.js");
     GestoreTemplate::addContent(_DIR_VIEW_."Account/Account.php");
+    GestoreTemplate::addCss("Template/css/style-login.css");
     require_once  "Template/login-page.php";
+    
 }
 else {
+    
+    if(User::checkUserRole(Role::Unverified)) {
+        //LOGIN EFFETTUATO
+        GestoreTemplate::addContent(_DIR_VIEW_."Profile/Profile.php");
+    }
+    else {
+        GestoreTemplate::addContent(_DIR_VIEW_."Profile/Profile.php");
+    }
+
+    
     require_once  "Template/page.php";
 }
 
 
-if(User::checkUserRole(Role::Unverified)) {
-    //LOGIN EFFETTUATO
-    GestoreTemplate::addContent(_DIR_VIEW_."Profile/Profile.php");
-}
-else {
-    GestoreTemplate::addContent(_DIR_VIEW_."Profile/Profile.php");
-}

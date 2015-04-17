@@ -10,13 +10,6 @@
         foreach (GestoreTemplate::getJavascript() as $js) {
             echo "<script src=\"$js\"></script>". PHP_EOL;
         }
-        ?>
-        <?php
-//        echo "<noscript>".PHP_EOL;
-//            foreach (GestoreTemplate::getCss() as $css) {
-//                echo("<link rel=\"stylesheet\" href=\"$css\" />"). PHP_EOL;
-//            }
-//	echo "</noscript>".PHP_EOL;
         echo '<style type="text/css">';
             
             foreach (GestoreTemplate::getCss() as $css)
