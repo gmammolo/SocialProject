@@ -10,7 +10,7 @@ define("_DIR_CONFIG_", _ROOT_."Config/");
 require_once _DIR_MODEL_. 'Utility.php';
 require_once _DIR_MODEL_. 'Database.php';
 require_once _DIR_MODEL_. 'Session.php';
-require_once _DIR_MODEL_ . 'Role.php';
+require_once _DIR_MODEL_ . 'Enum.php';
 
 require_once _DIR_MODEL_.'User.php';
 require_once _DIR_MODEL_.'Profile.php';

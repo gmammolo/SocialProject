@@ -8,7 +8,7 @@
     position: relative;
     top: 0px;
     right: 0px;
-    width: 800px;
+    width: 1024px;
     height: 2000px;
     margin: 0 auto auto auto;
     padding: 30px;
@@ -38,51 +38,3 @@
 }
 
 
-
-ul li
-{
-
-    padding: 0px;
-    border: 0px none;
-    vertical-align: baseline;
-    color: #FFF;
-}
-
-.tab-ul {
-    width: auto; 
-    box-shadow: 0px -2px 3px rgba(203, 196, 130, 0.06) inset;
-    background-color: #b1e2dd;
-    background: none repeat scroll 0% 0% #B1E2DD;
-    
-}
-
-.tab-li {
-    float: left;
-    margin: 0px;
-    border-radius: 0;
-    cursor: pointer;
-    background-color: #8EBEBC;
-    
-}
-
-.selected
-{
-    background: none repeat scroll 0% 0% #B1E2DD;
-}
-
-.no-touch
-{
-   color: #000 !important;
-   cursor: default;
-   pointer-events: none; 
-}
-
-
-
-.tab-contents
-{
-    float: none;
-    min-height: 0px;
-    background: none repeat scroll 0% 0% #b1e2dd;
-    background-color: #b1e2dd;
-}

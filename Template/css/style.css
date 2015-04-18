@@ -8,14 +8,15 @@
 */
 
 
-
-/********************************************************************************/
-/* Basic                                                                         */
-/*********************************************************************************/
+ /* <editor-fold defaultstate="collapsed" desc=" Basic"> */
 
 body
 {
     background: #fff;
+    background-image: url("../images/bg.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 body,input,textarea,select
@@ -148,10 +149,28 @@ br.clear
     clear: both;
 }
 
-/* Form */
+
+#main
+{
+    position: relative;
+    top: 0px;
+    right: 0px;
+/*    width: auto;
+    height: 2000px;*/
+    margin: 0 auto auto auto;
+    padding: 30px;
+    background-color: #DAE9E8;
+}
+
+
+ /* </editor-fold > */
+
+ /* <editor-fold defaultstate="collapsed" desc=" Forms"> */
 
 form
 {
+    display: block;
+    margin: 3px;
 }
 
 .form_field
@@ -159,6 +178,13 @@ form
     position: relative;
     padding-bottom: 10px;
     padding-top: 10px;
+}
+
+form fieldset
+{
+    position: relative;
+    top: 5px;
+    left: 5px;
 }
 
 form label
@@ -252,7 +278,9 @@ form ::-moz-focus-inner
     border: 0;
 }
 
-/* Table */
+ /* </editor-fold> */
+
+ /* <editor-fold defaultstate="collapsed" desc=" Table"> */
 
 table
 {
@@ -298,7 +326,9 @@ table.default tbody
 {
 }
 
-/* Button */
+ /* </editor-fold> */
+
+ /* <editor-fold defaultstate="collapsed" desc=" Button"> */
 
 input[type="button"],
 input[type="submit"],
@@ -342,66 +372,90 @@ input[type="reset"]:active,
     background-color: #7eaeac;
 }
 
-/* Item */
+ /* </editor-fold> */
 
-.item
+ /* <editor-fold defaultstate="collapsed" desc=" Tab System"> */
+ 
+ul li
 {
-    box-shadow: 0 0.05em 0.15em 0 rgba(0,0,0,0.05);
-    margin-bottom: 40px;
+
+    padding: 0px;
+    border: 0px none;
+    vertical-align: baseline;
+    color: #FFF;
 }
 
-.item header
-{
-    background: #fff;
-    margin: 0;
-    padding: 1em 0 1em 0;
-    font-size: 0.8em;
+.tab-ul {
+    width: auto; 
+    box-shadow: 0px -2px 3px rgba(203, 196, 130, 0.06) inset;
+    background-color: #b1e2dd;
+    background: none repeat scroll 0% 0% #B1E2DD;
+    
 }
 
-.item header h3
-{
-    font-size: 1em;
-}
-
-/*********************************************************************************/
-/* Icons                                                                         */
-/*********************************************************************************/
-
-.icon {
-    text-decoration: none;
-}
-
-.icon:before {
-    display: inline-block;
-    font-family: FontAwesome;
-    font-size: 1.25em;
-    text-decoration: none;
-    font-style: normal;
-    font-weight: normal;
-    line-height: 1;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-}
-
-.icon > .label {
-    display: none;
-}
-
-
-
-
-.tab-li
-{
+.tab-li {
     position: relative;
     display: inline-block;
-    border-radius: 0.35em;
     color: #FFF !important;
     text-decoration: none;
     padding: 0.75em 2.5em;
-    background-color: #8EBEBC;
     border: 0px none;
-    cursor: pointer;
     background-image: -moz-linear-gradient(center top , transparent, rgba(0, 0, 0, 0.15)), url("Template/images/overlay.png");
     transition: background-color 0.35s ease-in-out 0s;
+    float: left;
     margin: 0px;
+    border-radius: 0;
+    cursor: pointer;
+    background-color: #8EBEBC;
+    
 }
+
+.selected
+{
+    background: none repeat scroll 0% 0% #B1E2DD;
+}
+
+.no-touch
+{
+   color: #000 !important;
+   cursor: default;
+   pointer-events: none; 
+}
+
+
+
+.tab-contents
+{
+    float: none;
+    min-height: 0px;
+    background: none repeat scroll 0% 0% #b1e2dd;
+    background-color: #b1e2dd;
+}
+
+
+ /* </editor-fold> */
+
+ /* <editor-fold defaultstate="collapsed" desc=" Message"> */
+ 
+ #message {
+     
+ }
+ 
+ .message-field {
+     margin: 5px 0 5px 0;
+     padding: 5px;
+ }
+ 
+ .redmessage {
+     background-color: #C55252;
+     color: black;
+ }
+ 
+ ·yellowmessage {
+     background-color: yellow;
+ }
+ 
+ .greenmessage {
+     background-color: green;
+ }
+ /* </editor-fold> */

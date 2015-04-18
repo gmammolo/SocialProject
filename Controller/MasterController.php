@@ -17,7 +17,7 @@ GestoreTemplate::addJavascript("Template/js/scripts.js");
 //GestoreTemplate::addJavascript("Template/js/init.js");
 
 GestoreTemplate::addCss("Template/css/skel.css");
-GestoreTemplate::addCss("Template/css/style_1.css");
+GestoreTemplate::addCss("Template/css/style.css");
 GestoreTemplate::addCss("Template/css/style-wide.css");
 GestoreTemplate::addCss("http://yui.yahooapis.com/pure/0.6.0/pure-min.css");
 

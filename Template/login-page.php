@@ -1,5 +1,6 @@
 <?php $user = Session::get('user', 'User'); 
-var_dump($user)?>
+// var_dump(Role::getConstant($user->role[0]));
+?>
 <!DOCTYPE HTML>
 <html>
     <head>
@@ -23,8 +24,29 @@ var_dump($user)?>
     </head>
     <body>
         <div id="main">
+            <div id="message">
+                <?php
+                $redmessage = &Session::get('redmessage', 'array');
+                foreach ($redmessage as $message) {
+                    echo '<div class="message-field redmessage">'.$message.'</div>';
+                }
+                $redmessage = array();
+                
+                $yellowmessage = &Session::get('yellowmessage', 'array');
+                foreach ($yellowmessage as $message) {
+                    echo '<div class="message-field yellowmessage">'.$message.'</div>';
+                }
+                $yellowmessage = array();
+                
+                $greenmessage = &Session::get('greenmessage', 'array');
+                foreach ($greenmessage as $message) {
+                    echo '<div class="message-field greenmessage">'.$message.'</div>';
+                }
+                $greenmessage = array();
+                ?>
+            </div>
+            
 <?php
-
 foreach (GestoreTemplate::getContents() as $content)
 {
     echo '<div class="section">'.PHP_EOL;

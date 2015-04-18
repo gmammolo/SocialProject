@@ -8,17 +8,56 @@
                 <li id="button_login" class="tab-li no-touch selected">Login</li>               
                 <li id="button_join" class="tab-li" >Join</li>
             </ul>
-<!--            <button id="button_login" class="tabmenu" disabled="" style="background-color: #888;">Login</button>
-            <button id="button_join" class="tabmenu" >Join</button>-->
         </div>
         <div class="tab-contents" >
-            <div id="login"></div>
-            <div id="join"></div>
+            <div id="login">
+                <form method="POST" name="login" class="pure-form pure-form-aligned">
+                    <fieldset>
+                        <div class="pure-control-group">
+                            <label>Username</label>
+                            <input type="text" name="Username" pattern="[^'\x22]+" placeholder="Username"/> 
+                        </div>
+                        <div class="pure-control-group">
+                            <label>Password</label>
+                            <input type="password" name="Password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}" title="Deve contenere almeno un carattere Maiuscolo, uno minuscolo e un numero. (4-16 caratteri)." /> 
+                        </div>
+                        <div class="pure-control-group">
+                            <input type="submit" name="Login" value="Login" onclick="loginAction()"/>
+                        </div>
+                    </fieldset>
+                </form>  
+            </div>
+            <div id="join">
+                <form method="POST" name="join" class="pure-form pure-form-aligned">
+                    <fieldset>
+                        <div class="pure-control-group">
+                            <label for="username">Username</label>
+                            <input id="username" type="text" name="username" pattern="[^'\x22]+" placeholder="Username"/> 
+                        </div>
+                        <div class="pure-control-group">
+                            <label for="email">Email</label>
+                            <input id="email" placeholder="email@dominio.com" type="text" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" /> 
+                        </div>
+                        <div class="pure-control-group">
+                            <label>Password</label>
+                            <input placeholder="Password" type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}" title="Deve contenere almeno un carattere Maiuscolo, uno minuscolo e un numero. (4-16 caratteri)."/> 
+                        </div>
+                        <div class="pure-control-group">
+                            <label>Confirm Password</label>
+                            <input placeholder="Password" type="password" name="cpassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}" title="Deve contenere almeno un carattere Maiuscolo, uno minuscolo e un numero. (4-16 caratteri)."/> 
+                        </div>
+                        <div class="pure-control-group">
+                            <input class="pure-button pure-button-primary" type="submit" name="Join" value="Join" onclick="joinAction()"/>
+                        </div>    
+                    </fieldset>
+                </form>
+                
+            </div>
         </div>
         <script>
-            $("#login").load(__LOGIN_URL__);
+//            $("#login").load(__LOGIN_URL__);
             $("#join").hide();
-            $("#join").load(__JOIN_URL__);
+//            $("#join").load(__JOIN_URL__);
             $( "#button_login" ).on( "click", function( event ) { 
                 $("#login").show(); 
                 $("#join").hide(); 
