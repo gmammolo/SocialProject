@@ -8,3 +8,78 @@ and open the template in the editor.
     Author     : giuseppe
 */
 
+
+
+body {
+    
+}
+
+/* <editor-fold defaultstate="collapsed" desc=" Header"> */
+
+header
+{
+    background-color: #1D1717;
+    height:  80px;
+    color: white;
+}
+
+/* </editor-fold> */
+
+/* <editor-fold defaultstate="collapsed" desc=" Menu"> */
+
+aside
+{
+    background-color: #1D1717;
+    position: absolute;
+    top: 80px; 
+    bottom: 0px;
+    min-width: 300px;
+}
+
+
+/* </editor-fold> */
+
+
+
+/* <editor-fold defaultstate="collapsed" desc=" Container"> */
+
+#container
+{
+    position: absolute;
+    top: 80px; 
+    left: 300px;
+    right: 0px;
+    bottom: 0px;
+    background-color: #DAE9E8;
+}
+
+main {
+    position: relative;
+    bottom: 20px;
+    
+}
+
+section {
+    min-height: 200px;
+}
+
+footer {
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: #1D1717;
+}
+
+.copyright {
+    margin: 5px;
+    text-align: center;
+    font-size: 13px;
+}
+
+.copyright li
+{
+    padding: 0.1em;
+}
+
+/* </editor-fold> */

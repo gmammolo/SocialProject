@@ -23,7 +23,11 @@
     <body>
 
         <!-- Header -->
-        <div id="header" class="skel-layers-fixed">
+        <header>
+            //TODO: BArra di ricerca
+        </header>
+       
+        <aside class="skel-layers-fixed">
 
             <div class="top">
 
@@ -36,25 +40,7 @@
 
                 <!-- Nav -->
                 <nav id="nav">
-                    <!--
-                    
-                            Prologue's nav expects links in one of two formats:
-                            
-                            1. Hash link (scrolls to a different section within the page)
-                            
-                               <li><a href="#foobar" id="foobar-link" class="icon fa-whatever-icon-you-want skel-layers-ignoreHref"><span class="label">Foobar</span></a></li>
 
-                            2. Standard link (sends the user to another page/site)
-
-                               <li><a href="http://foobar.tld" id="foobar-link" class="icon fa-whatever-icon-you-want"><span class="label">Foobar</span></a></li>
-                    
-                    -->
-<!--                    <ul>
-                        <li><a href="#top" id="top-link" class="skel-layers-ignoreHref"><span class="icon fa-home">Intro</span></a></li>
-                        <li><a href="#portfolio" id="portfolio-link" class="skel-layers-ignoreHref"><span class="icon fa-th">Portfolio</span></a></li>
-                        <li><a href="#about" id="about-link" class="skel-layers-ignoreHref"><span class="icon fa-user">About Me</span></a></li>
-                        <li><a href="#contact" id="contact-link" class="skel-layers-ignoreHref"><span class="icon fa-envelope">Contact</span></a></li>
-                    </ul>-->
 
                     <?php
                     echo "<ul>";
@@ -78,83 +64,53 @@
 
             </div>
 
-            <div class="bottom">
-
-                <!-- Social Icons -->
-                <ul class="icons">
-                    <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-                    <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-                    <li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
-                    <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
-                    <li><a href="#" class="icon fa-envelope"><span class="label">Email</span></a></li>
-                </ul>
-
-            </div>
-
-        </div>
+        </aside>
 
         <!-- Main -->
-        <div id="main">
-            <div id="message">
-                <?php
-                $redmessage = &Session::get('redmessage', 'array');
-                foreach ($redmessage as $message) {
-                    echo '<div class="message-field redmessage">'.$message.'</div>';
-                }
-                $redmessage = array();
-                
-                $yellowmessage = &Session::get('yellowmessage', 'array');
-                foreach ($yellowmessage as $message) {
-                    echo '<div class="message-field yellowmessage">'.$message.'</div>';
-                }
-                $yellowmessage = array();
-                
-                $greenmessage = &Session::get('greenmessage', 'array');
-                foreach ($greenmessage as $message) {
-                    echo '<div class="message-field greenmessage">'.$message.'</div>';
-                }
-                $greenmessage = array();
-                ?>
-            </div>
-            <!-- Intro -->
-            <section id="top" class="one dark cover">
-                <div class="container">
+        <div id="container">
+            <main>
+                <div id="message">
+                    <?php
+                    $redmessage = &Session::get('redmessage', 'array');
+                    foreach ($redmessage as $message) {
+                        echo '<div class="message-field redmessage">'.$message.'</div>';
+                    }
+                    $redmessage = array();
 
-                    <header>
-                        <h2 class="alt">Hi! I'm <strong>Prologue</strong>, a <a href="http://html5up.net/license">free</a> responsive<br />
-                            site template designed by <a href="http://html5up.net">HTML5 UP</a>.</h2>
-                        <p>Ligula scelerisque justo sem accumsan diam quis<br />
-                            vitae natoque dictum sollicitudin elementum.</p>
-                    </header>
+                    $yellowmessage = &Session::get('yellowmessage', 'array');
+                    foreach ($yellowmessage as $message) {
+                        echo '<div class="message-field yellowmessage">'.$message.'</div>';
+                    }
+                    $yellowmessage = array();
 
-                    <footer>
-                        <a href="#portfolio" class="button scrolly">Magna Aliquam</a>
-                    </footer>
-
+                    $greenmessage = &Session::get('greenmessage', 'array');
+                    foreach ($greenmessage as $message) {
+                        echo '<div class="message-field greenmessage">'.$message.'</div>';
+                    }
+                    $greenmessage = array();
+                    ?>
                 </div>
-            </section>
 
-            
                 <?php
                 foreach (GestoreTemplate::getContents() as $content)
                 {
-                    echo '<section id="portfolio" class="two">'.PHP_EOL;
+                    echo '<section class="">'.PHP_EOL;
                     include $content;
                     echo '</section>'.PHP_EOL;
                 }
                 ?>
 
+            </main>
+
+            <!-- Footer -->
+            <footer>
+
+                <!-- Copyright -->
+                <ul class="copyright">
+                    <li>GPL 2 License </li><li>Mammolo Giuseppe</li>
+                </ul>
+
+            </footer>
         </div>
-
-        <!-- Footer -->
-        <div id="footer">
-
-            <!-- Copyright -->
-            <ul class="copyright">
-                <li>GPL 2 License </li><li>Mammolo Giuseppe</li>
-            </ul>
-
-        </div>
-
     </body>
 </html>

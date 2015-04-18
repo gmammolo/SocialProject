@@ -56,6 +56,7 @@ if( User::checkUserRole(Role::Unregister) ) {
     
 }
 else {
+    GestoreTemplate::addCss("Template/css/style-site.css");
     
     if(User::checkUserRole(Role::Unverified)) {
         //LOGIN EFFETTUATO
