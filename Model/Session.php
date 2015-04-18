@@ -72,7 +72,7 @@ class Session {
      */
     public static function check($name)
     {
-        return isset($_SESSION[$name]) || isset($deserialized[$name]);
+        return isset($_SESSION[$name]) || isset(self::$deserialized[$name]);
     }
     
     /**

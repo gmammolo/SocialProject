@@ -10,7 +10,6 @@ if ($user_irregular && $pass_irregular) {
         
         $user = User::getUserByLogin($username, $password);
         $user = Session::set('user', $user);
-        
     }
     else
         Utility::RedMessage ("Account non esistente");

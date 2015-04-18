@@ -91,25 +91,19 @@ class User extends Model{
     }
     
     
-    
-    
+   
     
     
     //*********************************************************************
     //*******************************************************************
     
-    public static $utente;
     
     public static function getUser() {
-        if(isset(self::$utente)) 
-            return self::$utente;
-        
-        if(!Session::check('utente'))  {
+        if(!Session::check('user'))  {
             return User::getVisitator();
         }
         else  {
-            self::$utente = Session::get ('utente', 'User');
-            return self::$utente;
+            return Session::get ('user', 'User');
         }
             
     }
