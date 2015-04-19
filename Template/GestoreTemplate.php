@@ -6,6 +6,58 @@
  * and open the template in the editor.
  */
 
+class Menu
+{
+    protected $icon;
+    protected $name;
+    protected $param;
+    protected $accessLevel;
+    
+    public function __construct($name, $param,$icon , $accessLevel ) {
+        $this->icon = $icon;
+        $this->name = $name;
+        $this->param =  $param;
+        $this->accessLevel = $accessLevel;
+        
+    }
+    
+    function getIcon() {
+        return '<span class="icon"><img src="'.$this->icon.'"/></span>';
+    }
+
+    function getName() {
+        return $this->name;
+    }
+
+    function getParam() {
+        return $this->param;
+    }
+
+    function setIcon($icon) {
+        $this->icon = $icon;
+    }
+
+    function setName($name) {
+        $this->name = $name;
+    }
+
+    function setParam($html) {
+        $this->param = $html;
+    }
+
+    function getAccessLevel() {
+        return $this->accessLevel;
+    }
+
+    function setAccessLevel($accessLevel) {
+        $this->accessLevel = $accessLevel;
+    }
+
+
+}
+
+
+
 /**
  * Description of GestoreTemplate
  *
@@ -90,28 +142,23 @@ class GestoreTemplate {
      * @param string $nome
      * @param string $url optional
      */
-    public static function addTabMenu($nome, $url = NULL)
+    public static function addTabMenu($nome, $url = NULL,$icon = null, $accessLevel = Role::Unregister , $menuName = NULL)
     {
-            if(is_null($url))
+            if(isset($menuName) && isset(self::$menu[$menuName]) && is_array(self::$menu[$menuName]))
             {
+                self::$menu[$menuName] []= new Menu($nome,$url,$icon , $accessLevel );
+            }
+            else if(is_null($url))
+            {
+                
                 self::$menu[$nome] = array();
             }
-            else //string
+            else
             {
-                self::$menu[$nome] = $url ;
+                self::$menu[$nome] = new Menu($nome,$url,$icon,$accessLevel );
             }
-    }
-    
-    /**
-     * Inserisce un subtab del Menu <br>
-     * @param string $menuName Nome del Menu
-     * @param string $nome Nome del subMenu 
-     * @param string $url
-     */
-    public static function addSubTabMenu($menuName, $nome, $url)
-    {
-        if(isset(self::$menu[$menuName]))
-            self::$menu[$menuName][$nome] = $url ; 
+                
+
     }
     
     

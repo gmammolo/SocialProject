@@ -3,10 +3,12 @@
 
 //################################à
 //DEFAULT TEMPLATE
-GestoreTemplate::addTabMenu("<span class=\"icon fa-home\">Intro</span>", '#top');
-GestoreTemplate::addTabMenu("<span class=\"icon fa-th\">Portfolio</span>", '#portfolio');
-GestoreTemplate::addTabMenu("<span class=\"icon fa-user\">About Me</span>", '#about');
-GestoreTemplate::addTabMenu("<span class=\"icon fa-envelope\">Contact</span>", '#contact');
+GestoreTemplate::addTabMenu("Home","#", "home.jpg" , Role::Unverified );
+GestoreTemplate::addTabMenu("News","news" ,  'news.jpg' , Role::Register);
+GestoreTemplate::addTabMenu("Profilo", "profile" ,"profile" , Role::Register );
+GestoreTemplate::addTabMenu("Amministrazione","admin", "admin.jpg" , Role::Administrator );
+GestoreTemplate::addTabMenu("Friends","friend" ,  'amici.jpg' , Role::Register);
+GestoreTemplate::addTabMenu("Logout", 'Logout', 'logout.jpg' , Role::Unverified);
 
 GestoreTemplate::addJavascript("Template/js/jquery.min.js");
 GestoreTemplate::addJavascript("Template/js/jquery.scrolly.min.js");
@@ -46,19 +48,11 @@ if(isset($logout))
 
 //#############################à
 //GESTIONE ACCESSI 
-if( User::checkUserRole(Role::Unregister) ) {
-    //NO LOGIN EFFETTUATO
-    GestoreTemplate::addJavascript("View/Account/Login.js");
-    GestoreTemplate::addJavascript("View/Account/Join.js");
-    GestoreTemplate::addContent(_DIR_VIEW_."Account/Account.php");
-    GestoreTemplate::addCss("Template/css/style-login.css");
-    require_once  "Template/login-page.php";
+if( User::checkAccessLevel(Role::Register) ) {
     
-}
-else {
-    GestoreTemplate::addCss("Template/css/style-site.css");
+        GestoreTemplate::addCss("Template/css/style-site.css");
     
-    if(User::checkUserRole(Role::Unverified)) {
+    if(User::checkAccessLevel(Role::Unverified)) {
         //LOGIN EFFETTUATO
         GestoreTemplate::addContent(_DIR_VIEW_."Profile/Profile.php");
     }
@@ -68,6 +62,20 @@ else {
 
     
     require_once  "Template/page.php";
+    
+   
+    
+}
+else if(User::checkAccessLevel(Role::Unverified)){
+    
+}
+else {
+    //NO LOGIN EFFETTUATO
+    GestoreTemplate::addJavascript("View/Account/Login.js");
+    GestoreTemplate::addJavascript("View/Account/Join.js");
+    GestoreTemplate::addContent(_DIR_VIEW_."Account/Account.php");
+    GestoreTemplate::addCss("Template/css/style-login.css");
+    require_once  "Template/login-page.php";
 }
 
 

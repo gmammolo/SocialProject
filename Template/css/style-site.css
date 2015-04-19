@@ -11,7 +11,7 @@ and open the template in the editor.
 
 
 body {
-    
+
 }
 
 /* <editor-fold defaultstate="collapsed" desc=" Header"> */
@@ -19,7 +19,7 @@ body {
 header
 {
     background-color: #1D1717;
-    height:  80px;
+    height:  5em;
     color: white;
 }
 
@@ -31,12 +31,92 @@ aside
 {
     background-color: #1D1717;
     position: absolute;
-    top: 80px; 
+    top: 3em; 
     bottom: 0px;
-    min-width: 300px;
+    width:500px;
+
+}
+
+#logo
+{
+    position: relative;
+    left: 1em;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    min-height: 200px;
+}
+
+#logo #avatar
+{
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 60px;
+    height: 60px;
+    
+}
+
+#logo #avatar img
+{
+    width: inherit;
+    height: inherit;
+}
+
+#logo div
+{
+    display: inline-block;
+    position: absolute;
+    top: -10px;
+    left: 60px;
+    margin: 0px;
+    padding: 0px;
+    margin-left: 3px;
+}
+
+#logo .name
+{
+    display: inline-block;
+    width: 1em;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 0px;
+    padding-left: 0px;
+    width:15em;
+    font-size: 30px;
+    
+}
+
+#logo .username
+{
+    display: block;
+    width: 1em;
+    margin-top: 0.5em;
+    margin-bottom: 0px;
+    padding-top: 0px;
+    padding-left: 0px;
+    position: relative;
+    top: -20px;
+    
 }
 
 
+nav
+{
+    float: none;
+    position: relative;
+    left: 1em;
+}
+.menutab
+{
+    cursor: pointer;
+}
+
+submenutab
+{
+    cursor: pointer;
+}
+ 
 /* </editor-fold> */
 
 
@@ -46,8 +126,8 @@ aside
 #container
 {
     position: absolute;
-    top: 80px; 
-    left: 300px;
+    top: 3em; 
+    left: 350px;
     right: 0px;
     bottom: 0px;
     background-color: #DAE9E8;
@@ -55,31 +135,33 @@ aside
 
 main {
     position: relative;
-    bottom: 20px;
     
 }
 
 section {
-    min-height: 200px;
+    min-height: 300px;
 }
 
 footer {
     position: absolute;
-    left: 0px;
+    left: 10em;
     right: 0px;
     bottom: 0px;
     background-color: #1D1717;
+    height: 4em;
+    max-height: 50px;
 }
 
 .copyright {
-    margin: 5px;
+    margin: 1em;
     text-align: center;
-    font-size: 13px;
+    font-size: 12px;
 }
 
-.copyright li
+.copyright p
 {
-    padding: 0.1em;
+    margin: 0; 
+    padding-bottom: 0;
 }
 
 /* </editor-fold> */

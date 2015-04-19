@@ -26,6 +26,7 @@
         <div id="main">
             <div id="message">
                 <?php
+                
                 $redmessage = &Session::get('redmessage', 'array');
                 foreach ($redmessage as $message) {
                     echo '<div class="message-field redmessage">'.$message.'</div>';
@@ -43,6 +44,7 @@
                     echo '<div class="message-field greenmessage">'.$message.'</div>';
                 }
                 $greenmessage = array();
+                
                 ?>
             </div>
             

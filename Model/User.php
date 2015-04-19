@@ -19,6 +19,7 @@ class User extends Model{
     protected $username;
     protected $password; 
     protected $roles;
+    protected $accessLevel;
     protected $email;
     protected $profile;
     
@@ -26,17 +27,26 @@ class User extends Model{
     
     
     public function __construct($ar = array()) {
-        $this->id = $ar['id'];
-        $this->username = $ar['username'];
-        //TODO:: VALUTARE LA PRESENZA DI QUESTO CAMPO PER MOTIVI DI SICUREZZA...
-        //$this->password = $ar['password'];
-        $this->roles = unserialize($ar['roles']);
-        $this->email = $ar['email'];
-        $this->profile = Profile::getProfileByID($ar['profile']);
+            $this->id = $ar['id'];
+            $this->username = $ar['username'];
+            //TODO:: VALUTARE LA PRESENZA DI QUESTO CAMPO PER MOTIVI DI SICUREZZA...
+            //$this->password = $ar['password'];
+            $this->roles = unserialize($ar['roles']);
+            $this->email = $ar['email'];
+            $this->profile = Profile::getProfileByID($ar['profile']);
+            $this->accessLevel = $ar['accessLevel'];
+
     }
 
+    function getAccessLevel() {
+        return $this->accessLevel;
+    }
 
-    public function getUsername() {
+    function setAccessLevel($accessLevel) {
+        $this->accessLevel = $accessLevel;
+    }
+
+        public function getUsername() {
         return $this->username;
     }
 
@@ -108,10 +118,10 @@ class User extends Model{
             
     }
     
-    public static function checkUserRole($role)
+    public static function checkAccessLevel($al)
     {
         $utente = self::getUser();
-        return in_array($role,$utente->getRoles()) ;
+        return $utente->getAccessLevel() >= $al;
     }
     
     
@@ -120,7 +130,8 @@ class User extends Model{
     {
         $ar = array(
             "username" => "Visitatore",
-            "roles" => serialize(array(Role::Unregister)),
+            "roles" => serialize(array()),
+            "accessLevel" => Role::Unregister,
             "email" => "",
             "id"=> -1,
             "password" => "",
@@ -161,11 +172,18 @@ class User extends Model{
     
     public static function createAccount($user, $pass, $email) {
         $idprofile= Profile::createProfile($user, $email); 
-        $sql = "INSERT INTO `socialproject`.`User` (`id`, `username`, `password`, `roles`, `email`, `profile`) VALUES (NULL, :user, :pass, :role, :email, :profile );";
-        $id =  self::InsertQuery($sql, array(":user" => $user, ":pass" => crypt($pass), ":role" => serialize(array(Role::Unverified)) , ":email" => $email, ":profile" => $idprofile ));
+        $sql = "INSERT INTO `socialproject`.`User` (`id`, `username`, `password`, accessLevel, `roles`, `email`, `profile`) VALUES (NULL, :user, :pass, :al , :role, :email, :profile );";
+        $id =  self::InsertQuery($sql, array(":user" => $user, ":pass" => crypt($pass), ":al" => Role::Unverified, ":role" => serialize(array()) , ":email" => $email, ":profile" => $idprofile ));
         return User::getUserByID($id);
     }
-
+    
+    
+    public static function hasAccess($levelRequired)
+    {
+        $user = User::getUser();
+        return $user->accessLevel >= $levelRequired;
+    }
+    
 }
  
 

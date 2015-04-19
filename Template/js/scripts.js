@@ -20,3 +20,20 @@ function getHome()
 {
     return "http://php.server/SocialProject/index.php";
 }
+
+
+function jsRedirect(param)
+{
+    $.ajax({
+        type: "GET",
+        url: getHome(),
+        data: { 'page' : param },
+        dataType: "html",
+        success: function(risposta){
+            $("#container").html(risposta);
+        },
+        error: function(){
+            alert("Chiamata fallita!!!");
+        }
+    });
+}
