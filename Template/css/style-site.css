@@ -33,7 +33,7 @@ aside
     position: absolute;
     top: 3em; 
     bottom: 0px;
-    width:500px;
+    width:400px;
 
 }
 
@@ -41,8 +41,8 @@ aside
 {
     position: relative;
     left: 1em;
-    margin-top: 10px;
-    margin-bottom: 50px;
+    margin-top: 30px;
+    margin-bottom: 10px;
     min-height: 200px;
 }
 
@@ -103,20 +103,59 @@ aside
 
 nav
 {
-    float: none;
     position: relative;
     left: 1em;
+    top: -100px;
 }
+
+nav ol, nav ul
+{
+    margin-bottom: 0px;
+}
+
+nav li
+{
+    background-color: #DAE9E8;
+    padding: 5px;
+    color: #000;
+    border: 1px solid #000;
+    width: 10em;
+    text-decoration: none;
+    
+}
+
+nav li a
+{
+    text-decoration: none;
+    border-bottom: none;
+}
+
 .menutab
 {
     cursor: pointer;
 }
 
-submenutab
+.menutab-no-cursor
+{
+    
+}
+
+.submenutab
 {
     cursor: pointer;
+    margin-left: 30px;
+}
+
+.hidden
+{
+    display: none;
 }
  
+
+.empathize
+{
+    background-color: #4090A1;
+}
 /* </editor-fold> */
 
 

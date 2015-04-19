@@ -4,11 +4,12 @@
 //################################à
 //DEFAULT TEMPLATE
 GestoreTemplate::addTabMenu("Home","#", "home.jpg" , Role::Unverified );
-GestoreTemplate::addTabMenu("News","news" ,  'news.jpg' , Role::Register);
-GestoreTemplate::addTabMenu("Profilo", "profile" ,"profile" , Role::Register );
-GestoreTemplate::addTabMenu("Amministrazione","admin", "admin.jpg" , Role::Administrator );
-GestoreTemplate::addTabMenu("Friends","friend" ,  'amici.jpg' , Role::Register);
-GestoreTemplate::addTabMenu("Logout", 'Logout', 'logout.jpg' , Role::Unverified);
+GestoreTemplate::addTabMenu("News","#page=news" ,  'news.jpg' , Role::Register);
+GestoreTemplate::addTabMenu("Gestione", null ,"profile.jpg" , Role::Register );
+GestoreTemplate::addTabMenu("Profilo", "#page=profile" ,"profile" , Role::Register ,"Gestione");
+GestoreTemplate::addTabMenu("Amministrazione","#page=admin", "admin.jpg" , Role::Administrator , "Gestione");
+GestoreTemplate::addTabMenu("Friends","#page=friend" ,  'amici.jpg' , Role::Register);
+GestoreTemplate::addTabMenu("Logout", '#Logout=true', Role::Unverified);
 
 GestoreTemplate::addJavascript("Template/js/jquery.min.js");
 GestoreTemplate::addJavascript("Template/js/jquery.scrolly.min.js");

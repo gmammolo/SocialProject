@@ -10,13 +10,13 @@ class Menu
 {
     protected $icon;
     protected $name;
-    protected $param;
+    protected $html;
     protected $accessLevel;
     
-    public function __construct($name, $param,$icon , $accessLevel ) {
+    public function __construct($name, $html,$icon , $accessLevel ) {
         $this->icon = $icon;
         $this->name = $name;
-        $this->param =  $param;
+        $this->html =  $html;
         $this->accessLevel = $accessLevel;
         
     }
@@ -29,8 +29,8 @@ class Menu
         return $this->name;
     }
 
-    function getParam() {
-        return $this->param;
+    function getHtml() {
+        return $this->html;
     }
 
     function setIcon($icon) {
@@ -41,8 +41,8 @@ class Menu
         $this->name = $name;
     }
 
-    function setParam($html) {
-        $this->param = $html;
+    function setHtml($html) {
+        $this->html = $html;
     }
 
     function getAccessLevel() {
@@ -144,14 +144,15 @@ class GestoreTemplate {
      */
     public static function addTabMenu($nome, $url = NULL,$icon = null, $accessLevel = Role::Unregister , $menuName = NULL)
     {
-            if(isset($menuName) && isset(self::$menu[$menuName]) && is_array(self::$menu[$menuName]))
+            if(!is_null($menuName))
             {
-                self::$menu[$menuName] []= new Menu($nome,$url,$icon , $accessLevel );
+                if(!isset(self::$menu[$menuName]) || !is_array(self::$menu[$menuName]))
+                    self::$menu[$menuName] = array();
+                array_push( self::$menu[$menuName], new Menu($nome,$url,$icon , $accessLevel ));
             }
             else if(is_null($url))
             {
-                
-                self::$menu[$nome] = array();
+                self::$menu[$nome] = array($icon);
             }
             else
             {

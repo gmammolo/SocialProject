@@ -49,25 +49,40 @@
                     echo "<ul>";
 //                    print_r(GestoreTemplate::getMenu());
                     foreach (GestoreTemplate::getMenu() as $key => $submenues) {
-                        if(User::hasAccess($submenues->getAccessLevel())) :
                             $chiave = $key;
-                            if (is_a($submenues, "Menu") && !is_null($submenues->getParam())) {
-                                $chiave = 'onclick="jsRedirect(\''.$submenues->getParam().'\')" ';
+                            if (is_a($submenues, "Menu") && !is_null($submenues->getHtml() && User::hasAccess($submenues->getAccessLevel()))) {
+                                $chiave = '<a href="'.$submenues->getHtml().'" target="_self">'.$submenues->getIcon(). $key.' </a> ';
+                                echo "<li class = \"menutab \">$chiave</li>" . PHP_EOL;   
                             }
-                            echo "<li class = \"menutab\" $chiave>".$submenues->getIcon()." $key.</li>" . PHP_EOL;
-                            if (is_array($submenues)) :
+                            else if (is_array($submenues)) :
+                                $icon = "";
+                                if(count($submenues) > 0 && is_string($submenues[0])  )
+                                    $icon ='<img src="'.array_shift ($submenues).'" />';
+                                echo "<li class = \"menutab-no-cursor \">".$icon.$key."</li>" . PHP_EOL;  
                                 echo "<ol>" . PHP_EOL;
                                 foreach ($submenues as $alias => $submen) {
                                     if(User::hasAccess($submen->getAccessLevel()))
-                                        echo "<li class = \"menutab submenutab\" onclick=\"jsRedirect(\"".$submenues->getParam()."\")\" > ".$submenues->getIcon().$alias."</li>";
+                                        echo "<li class = \"submenutab hidden $key\"><a href=\"".$submen->getHtml()."\" > ".$submen->getIcon().$submen->getName()."</a></li>";
                                 }
                                 echo"</ol>" . PHP_EOL;
-                                $i++;
                             endif;
-                        endif;
                     }
                     ?>
-                    
+                    <script>
+                        $(".menutab").mouseover(function(event){ event.stopPropagation(); $(this).addClass("empathize");   });
+                        $(".menutab-no-cursor").mouseover(function(event){ event.stopPropagation(); $(this).addClass("empathize");   });
+                        $(".submenutab").mouseover(function(event){ event.stopPropagation(); $(this).addClass("empathize");   });
+                        $(".menutab").mouseout(function(event){ event.stopPropagation(); $(this).removeClass("empathize");   });
+                        $(".submenutab").mouseout(function(event){ event.stopPropagation(); $(this).removeClass("empathize");   });
+                        $(".menutab-no-cursor").mouseout(function(event){ event.stopPropagation(); $(this).removeClass("empathize");   });
+                        $(".menutab-no-cursor").click(function(event){ 
+                          var classe = $(this)[0].lastChild.data;       
+                          if( $("."+classe).hasClass("hidden"))
+                            $("."+classe).removeClass("hidden");
+                          else
+                            $("."+classe).addClass("hidden"); 
+                        });
+                    </script>
                 </nav>
 
             </div>
