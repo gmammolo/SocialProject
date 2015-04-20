@@ -22,7 +22,7 @@ class Menu
     }
     
     function getIcon() {
-        return '<span class="icon"><img src="'.$this->icon.'"/></span>';
+        return '<span class="icon"><img src="'.$this->icon.'" alt = " "/></span>';
     }
 
     function getName() {

@@ -3,18 +3,21 @@
 
 //################################à
 //DEFAULT TEMPLATE
-GestoreTemplate::addTabMenu("Home","/SocialProject/index.php", "home.jpg" , Role::Unverified );
-GestoreTemplate::addTabMenu("News","/SocialProject/index.php?page=news" ,  'news.jpg' , Role::Register);
-GestoreTemplate::addTabMenu("Gestione", null ,"profile.jpg" , Role::Register );
-GestoreTemplate::addTabMenu("Profilo", "/SocialProject/index.php?page=profile" ,"profile" , Role::Register ,"Gestione");
-GestoreTemplate::addTabMenu("Amministrazione","/SocialProject/index.php?page=admin", "admin.jpg" , Role::Administrator , "Gestione");
-GestoreTemplate::addTabMenu("Friends","/SocialProject/index.php?page=friend" ,  'amici.jpg' , Role::Register);
-GestoreTemplate::addTabMenu("Logout", '/SocialProject/index.php?Logout=true', Role::Unverified);
+$icon = "Template/images/";
+
+GestoreTemplate::addTabMenu("Home","/SocialProject/index.php",  $icon ."home.png" , Role::Unverified );
+GestoreTemplate::addTabMenu("News","/SocialProject/index.php?page=news" ,  $icon . 'file%203.png' , Role::Register);
+GestoreTemplate::addTabMenu("Gestione", null , $icon . "engine.png" , Role::Register );
+GestoreTemplate::addTabMenu("Profilo", "/SocialProject/index.php?page=profile" , $icon ."eye.png" , Role::Register ,"Gestione");
+GestoreTemplate::addTabMenu("Amministrazione","/SocialProject/index.php?page=admin",  $icon ."shield.png" , Role::Administrator , "Gestione");
+GestoreTemplate::addTabMenu("Friends","/SocialProject/index.php?page=friend" ,   $icon . 'user.png' , Role::Register);
+GestoreTemplate::addTabMenu("Logout", '/SocialProject/index.php?Logout=true', $icon ."display%20down.png" , Role::Unverified);
 
 GestoreTemplate::addJavascript("Template/js/jquery.min.js");
 GestoreTemplate::addJavascript("Template/js/jquery.scrolly.min.js");
 GestoreTemplate::addJavascript("Template/js/jquery.scrollzer.min.js");
 GestoreTemplate::addJavascript("Template/js/scripts.js");
+GestoreTemplate::addJavascript("View/SearchBar/search.js");
 //GestoreTemplate::addJavascript("Template/js/skel.min.js");
 //GestoreTemplate::addJavascript("Template/js/skel-layers.min.js");
 //GestoreTemplate::addJavascript("Template/js/init.js");

@@ -23,10 +23,6 @@ $user = User::getUser(); ?>
     </head>
     <body>
 
-        <!-- Header -->
-        <header>
-            //TODO: BArra di ricerca
-        </header>
        
         <aside class="skel-layers-fixed">
 
@@ -34,16 +30,21 @@ $user = User::getUser(); ?>
 
                 <!-- Logo -->
                 <div id="logo">
-                    <span id="avatar"><img src= <?php echo $user->getProfile()->getAvatar();  ?> /></span>
+                    <span id="avatar"><img src="<?php echo $user->getProfile()->getAvatar();  ?>" alt="avatar" /></span>
                     <div>
                         <h1 class="name"><?php echo $user->getProfile()->getNome(); ?></h1>
                         <p class="username">@<?php echo $user->getUsername(); ?></p>
                     </div>
 
                 </div>
+                
+                <div id="search">
+                    <input id="bar_search" type="text" name="search" pattern="[^'\x22]+" placeholder="Cerca" />
+                    <input id="button_search" type="button" onclick="search()" />
+                </div>
 
-                <!-- Nav -->
-                <nav id="nav">
+                <!-- Nav id="nav"> -->
+                <nav> 
 
 
                     <?php
@@ -57,16 +58,17 @@ $user = User::getUser(); ?>
                             else if (is_array($submenues)) :
                                 $icon = "";
                                 if(count($submenues) > 0 && is_string($submenues[0])  )
-                                    $icon ='<img src="'.array_shift ($submenues).'" />';
+                                    $icon ='<img src="'.array_shift ($submenues).'"  alt=" " />';
                                 echo "<li class = \"menutab-no-cursor \">".$icon.$key."</li>" . PHP_EOL;  
-                                echo "<ol>" . PHP_EOL;
+                                echo "<li class = \"no-visible\"><ol>" . PHP_EOL;
                                 foreach ($submenues as $alias => $submen) {
                                     if(User::hasAccess($submen->getAccessLevel()))
-                                        echo "<li class = \"submenutab hidden $key\"><a href=\"".$submen->getHtml()."\" > ".$submen->getIcon().$submen->getName()."</a></li>";
+                                        echo "<li class = \"submenutab hidden $key\"><a href=\"".$submen->getHtml()."\" > ".$submen->getIcon().$submen->getName()."</a></li>".PHP_EOL;
                                 }
-                                echo"</ol>" . PHP_EOL;
+                                echo"</ol></li>" . PHP_EOL;
                             endif;
                     }
+                    echo("</ul>");
                     ?>
                     <script>
                         var click = function(event){ window.location.href = $(this)[0].childNodes[0].href; 
@@ -121,9 +123,9 @@ $user = User::getUser(); ?>
                 <?php
                 foreach (GestoreTemplate::getContents() as $content)
                 {
-                    echo '<section>'.PHP_EOL;
+                    echo '<div class="section">'.PHP_EOL;
                     include $content;
-                    echo '</section>'.PHP_EOL;
+                    echo '</div>'.PHP_EOL;
                 }
                 ?>
 

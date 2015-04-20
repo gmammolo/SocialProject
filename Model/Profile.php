@@ -89,7 +89,7 @@ class Profile extends Model {
     public static function getVisitator()
     {
         $ar = array(
-            "avatar" => _HOME_DIR_ . "Template/images/avatar.jpg",
+            "avatar" => "Template/images/avatar.jpg",
             "nome" => "Visitatore",
             "data" => "00/00/0000",
             "email" => "",
@@ -102,7 +102,7 @@ class Profile extends Model {
     
     public static function createProfile($nome, $email)
     {
-        $avatar = _HOME_DIR_ ."/Template/images/avatar.jpg";
+        $avatar = "/Template/images/avatar.jpg";
         $sql = "INSERT INTO `socialproject`.`Profile` (`id`, `nome`, `avatar`, `residenza`, `email`) VALUES (NULL, ?, ?, '', ?)";
         return self::InsertQuery($sql, array($nome, $avatar, $email));
     }

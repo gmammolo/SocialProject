@@ -16,12 +16,13 @@ body {
 
 /* <editor-fold defaultstate="collapsed" desc=" Header"> */
 
-header
+/*header
 {
+    position: relative;
     background-color: #1D1717;
     height:  5em;
     color: white;
-}
+}*/
 
 /* </editor-fold> */
 
@@ -31,9 +32,10 @@ aside
 {
     background-color: #1D1717;
     position: absolute;
-    top: 3em; 
+    top: 0px; 
     bottom: 0px;
-    width:400px;
+    width:360px;
+    min-width: 350px;
 
 }
 
@@ -101,6 +103,43 @@ aside
 }
 
 
+
+#search
+{
+    position: relative;
+    top: -120px;
+    left: 0px;
+}
+
+#search input
+{
+    margin: 10px;
+    margin-top: 3px;
+    padding: 6px;
+}
+
+#button_search
+{
+    width: 48px;
+    height: 48px;
+    margin: 0px !important;
+    padding: 0px !important; 
+    margin-left: 1px;
+    background-image: url(../images/search.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    top: 0px;
+    
+}
+
+#bar_search
+{
+    margin-right: 0px;
+}
+
+
+
 nav
 {
     position: relative;
@@ -124,10 +163,31 @@ nav li
     
 }
 
+nav li.no-visible
+{
+    border: 0px;
+    background: #1D1717;
+    padding: 0px;
+    margin: 0px;
+}
+
+
 nav li a
 {
     text-decoration: none;
     border-bottom: none;
+}
+
+nav li img
+{
+   width: 1em;
+   height: 1em;
+   margin: 0px;
+   padding: 0px;
+   margin-right: 5px;
+   position: relative;
+   top: 3px;
+   left: 0px;
 }
 
 .menutab
@@ -144,6 +204,7 @@ nav li a
 {
     cursor: pointer;
     margin-left: 30px;
+    display: block;
 }
 
 .hidden
@@ -165,7 +226,7 @@ nav li a
 #container
 {
     position: absolute;
-    top: 3em; 
+    top: 0px; 
     left: 350px;
     right: 0px;
     bottom: 0px;
