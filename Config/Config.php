@@ -1,6 +1,7 @@
 <?php
 
-
+define("_HOME_DIR_" , "php.server/SocialProject/");
+define("_HOME_URL_" , "/SocialProject/index.php");
 define("_DIR_TEMPLATE_", _ROOT_."Template/");
 define("_DIR_MODEL_", _ROOT_."Model/");
 define("_DIR_VIEW_", _ROOT_."View/");

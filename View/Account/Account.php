@@ -11,7 +11,7 @@
         </div>
         <div class="tab-contents" >
             <div id="login">
-                <form method="POST" name="login" class="pure-form pure-form-aligned">
+                <form method="POST" name="login" class="pure-form pure-form-aligned" action="/SocialProject/index.php?Login=true">
                     <fieldset>
                         <div class="pure-control-group">
                             <label>Username</label>
@@ -28,7 +28,7 @@
                 </form>  
             </div>
             <div id="join">
-                <form method="POST" name="join" class="pure-form pure-form-aligned">
+                <form method="POST" name="join" class="pure-form pure-form-aligned" action="/SocialProject/index.php?Join=true">
                     <fieldset>
                         <div class="pure-control-group">
                             <label for="username">Username</label>

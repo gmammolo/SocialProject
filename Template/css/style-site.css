@@ -179,6 +179,7 @@ main {
 
 section {
     min-height: 300px;
+    margin: 10px;
 }
 
 footer {

@@ -62,6 +62,10 @@ class User extends Model{
         return $this->email;
     }
 
+    /**
+        * 
+        * @return Profile
+        */
     public function getProfile() {
         return $this->profile;
     }
@@ -109,11 +113,19 @@ class User extends Model{
     
     
     public static function getUser() {
+        
         if(!Session::check('user'))  {
             return User::getVisitator();
         }
         else  {
-            return Session::get ('user', 'User');
+            
+            $user = Session::get ('user', 'User');
+            if ($user->getAccessLevel() == "") {
+                Session::remove('user');
+                return User::getVisitator();
+            }
+            return $user ;
+                
         }
             
     }

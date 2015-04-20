@@ -1,6 +1,3 @@
-<?php $user = Session::get('user', 'User'); 
-// var_dump(Role::getConstant($user->role[0]));
-?>
 <!DOCTYPE HTML>
 <html>
     <head>
@@ -26,7 +23,6 @@
         <div id="main">
             <div id="message">
                 <?php
-                
                 $redmessage = &Session::get('redmessage', 'array');
                 foreach ($redmessage as $message) {
                     echo '<div class="message-field redmessage">'.$message.'</div>';

@@ -22,6 +22,8 @@ if(!preg_match("/['\x22]/", $username ) &&
         else
         {
            Session::set('user', $user);
+           header("Location: "._HOME_URL_);
+           die();
         }
     }
 }

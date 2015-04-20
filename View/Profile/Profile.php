@@ -1,5 +1,5 @@
 <?php 
-$utente =  Session::get('utente', 'User'); 
+$utente = User::getUser(); 
 ?>
 
 <div class="container">

@@ -3,13 +3,13 @@
 
 //################################à
 //DEFAULT TEMPLATE
-GestoreTemplate::addTabMenu("Home","#", "home.jpg" , Role::Unverified );
-GestoreTemplate::addTabMenu("News","#page=news" ,  'news.jpg' , Role::Register);
+GestoreTemplate::addTabMenu("Home","/SocialProject/index.php", "home.jpg" , Role::Unverified );
+GestoreTemplate::addTabMenu("News","/SocialProject/index.php?page=news" ,  'news.jpg' , Role::Register);
 GestoreTemplate::addTabMenu("Gestione", null ,"profile.jpg" , Role::Register );
-GestoreTemplate::addTabMenu("Profilo", "#page=profile" ,"profile" , Role::Register ,"Gestione");
-GestoreTemplate::addTabMenu("Amministrazione","#page=admin", "admin.jpg" , Role::Administrator , "Gestione");
-GestoreTemplate::addTabMenu("Friends","#page=friend" ,  'amici.jpg' , Role::Register);
-GestoreTemplate::addTabMenu("Logout", '#Logout=true', Role::Unverified);
+GestoreTemplate::addTabMenu("Profilo", "/SocialProject/index.php?page=profile" ,"profile" , Role::Register ,"Gestione");
+GestoreTemplate::addTabMenu("Amministrazione","/SocialProject/index.php?page=admin", "admin.jpg" , Role::Administrator , "Gestione");
+GestoreTemplate::addTabMenu("Friends","/SocialProject/index.php?page=friend" ,  'amici.jpg' , Role::Register);
+GestoreTemplate::addTabMenu("Logout", '/SocialProject/index.php?Logout=true', Role::Unverified);
 
 GestoreTemplate::addJavascript("Template/js/jquery.min.js");
 GestoreTemplate::addJavascript("Template/js/jquery.scrolly.min.js");
@@ -24,12 +24,12 @@ GestoreTemplate::addCss("Template/css/style.css");
 GestoreTemplate::addCss("Template/css/style-wide.css");
 GestoreTemplate::addCss("http://yui.yahooapis.com/pure/0.6.0/pure-min.css");
 
-if(!Session::check('user'))
-    Session::set ('user', User::getVisitator());
+//if(!Session::check('user'))
+//    Session::set ('user', User::getVisitator());
 
 
 $login = filter_input(INPUT_GET, 'Login');
-if(isset($login))
+if(isset($login) && !User::hasAccess(Role::Unverified) )
 {
     require_once _DIR_CONTROLLER_ . 'LoginController.php';
 }
@@ -44,8 +44,9 @@ $logout = filter_input(INPUT_GET, 'Logout');
 if(isset($logout))
 {
     Session::destroy();
+    header("Location: "._HOME_URL_);
+    die();
 }
-
 
 //#############################à
 //GESTIONE ACCESSI 

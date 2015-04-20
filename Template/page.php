@@ -1,4 +1,5 @@
-<?php $user = Session::get('user', 'User'); ?>
+<?php
+$user = User::getUser(); ?>
 <!DOCTYPE HTML>
 <html>
     <head>
@@ -33,7 +34,7 @@
 
                 <!-- Logo -->
                 <div id="logo">
-                    <span id="avatar"><img src="Template/images/avatar.jpg" /></span>
+                    <span id="avatar"><img src= <?php echo $user->getProfile()->getAvatar();  ?> /></span>
                     <div>
                         <h1 class="name"><?php echo $user->getProfile()->getNome(); ?></h1>
                         <p class="username">@<?php echo $user->getUsername(); ?></p>
@@ -47,7 +48,6 @@
 
                     <?php
                     echo "<ul>";
-//                    print_r(GestoreTemplate::getMenu());
                     foreach (GestoreTemplate::getMenu() as $key => $submenues) {
                             $chiave = $key;
                             if (is_a($submenues, "Menu") && !is_null($submenues->getHtml() && User::hasAccess($submenues->getAccessLevel()))) {
@@ -69,6 +69,10 @@
                     }
                     ?>
                     <script>
+                        var click = function(event){ window.location.href = $(this)[0].childNodes[0].href; 
+                        };
+                        $(".menutab").click(click);
+                        $(".submenutab").click(click);
                         $(".menutab").mouseover(function(event){ event.stopPropagation(); $(this).addClass("empathize");   });
                         $(".menutab-no-cursor").mouseover(function(event){ event.stopPropagation(); $(this).addClass("empathize");   });
                         $(".submenutab").mouseover(function(event){ event.stopPropagation(); $(this).addClass("empathize");   });
@@ -92,7 +96,6 @@
         <!-- Main -->
         <div id="container">
             <main>
-                <?php print_r(User::getUser()); ?>
                 <div id="message">
                     <?php
                     $redmessage = &Session::get('redmessage', 'array');
@@ -118,7 +121,7 @@
                 <?php
                 foreach (GestoreTemplate::getContents() as $content)
                 {
-                    echo '<section class="">'.PHP_EOL;
+                    echo '<section>'.PHP_EOL;
                     include $content;
                     echo '</section>'.PHP_EOL;
                 }

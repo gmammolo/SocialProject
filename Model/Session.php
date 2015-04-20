@@ -39,7 +39,7 @@ class Session {
      * @throws InvalidArgumentException
      */
     public static function &get($name, $type) {
-        if(self::$autostartsession && session_id()==="")
+        if(self::$autostartsession && session_status() == PHP_SESSION_NONE)
             session_start ();
         if(isset(self::$deserialized[$name]))
             $return = &self::$deserialized[$name];
