@@ -59,10 +59,11 @@ if( User::checkAccessLevel(Role::Register) ) {
     
     if(User::checkAccessLevel(Role::Unverified)) {
         //LOGIN EFFETTUATO
-        GestoreTemplate::addContent(_DIR_VIEW_."Profile/Profile.php");
+//        GestoreTemplate::addContent(_DIR_VIEW_."LoremIpsum.php");
     }
     else {
-        GestoreTemplate::addContent(_DIR_VIEW_."Profile/Profile.php");
+        //IN ATTESA DI ABILITAZIONE
+        //GestoreTemplate::addContent(_DIR_VIEW_."LoremIpsum.php");
     }
 
     

@@ -97,6 +97,9 @@ $user = User::getUser(); ?>
 
         <!-- Main -->
         <div id="container">
+            <header>
+                <h1>Social Project</h1>
+            </header>
             <main>
                 <div id="message">
                     <?php
@@ -128,8 +131,21 @@ $user = User::getUser(); ?>
                     echo '</div>'.PHP_EOL;
                 }
                 ?>
-
+                
             </main>
+            
+            <script>
+                
+                $(function(){
+                    var $window = $(window).on('resize', function(){
+                       var document_height = $( document ).height();
+                       $("#container").height(document_height);
+                       $("aside").height(document_height );
+                       $("footer").css("top", document_height-15);
+                    }).trigger('resize'); //on page load
+
+                });
+            </script>
         </div>
        
         <footer>

@@ -16,14 +16,16 @@ body {
 
 /* <editor-fold defaultstate="collapsed" desc=" Header"> */
 
-/*header
+header
 {
-    position: relative;
-    background-color: #1D1717;
-    height:  5em;
-    color: white;
-}*/
+    
+}
 
+header h1
+{
+    color: red;
+    text-align: center;
+}
 /* </editor-fold> */
 
 /* <editor-fold defaultstate="collapsed" desc=" Menu"> */
@@ -238,16 +240,17 @@ main {
     
 }
 
-section {
+.section {
     min-height: 300px;
     margin: 10px;
 }
 
 footer {
-    position: absolute;
-    left: 10em;
+    margin: 0px;
+    position: relative;
+    left: 0px;
     right: 0px;
-    bottom: 0px;
+    bottom: 20px;
     background-color: #1D1717;
     height: 4em;
     max-height: 50px;
@@ -256,7 +259,7 @@ footer {
 .copyright {
     margin: 1em;
     text-align: center;
-    font-size: 12px;
+    font-size: 15px;
 }
 
 .copyright p
@@ -266,3 +269,11 @@ footer {
 }
 
 /* </editor-fold> */
+
+
+.clearfloat { /* questa classe deve essere inserita in un elemento div o break e deve essere l'elemento finale prima della chiusura di un contenitore che deve contenere per intero un elemento mobile */
+    clear:both;
+    height:0;
+    font-size: 1px;
+    line-height: 0px;
+}  
