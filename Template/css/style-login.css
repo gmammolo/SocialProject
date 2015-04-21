@@ -23,7 +23,17 @@
 }
 
 
+#account-form .tab-contents
+{
+    position: relative;
+    margin-top: 5px;
+    padding-top: 30px;
+}
 
+#account-form input[type="submit"]
+{
+    margin-left: 30px;
+}
 
 .div-menu
 {
@@ -37,4 +47,7 @@
     
 }
 
-
+#login, #join
+{
+    
+}

@@ -24,7 +24,7 @@ MenageTemplate::addJavascript("View/SearchBar/search.js");
 
 //MenageTemplate::addCss("Template/css/skel.css");
 MenageTemplate::addCss("Template/css/style.css");
-MenageTemplate::addCss("http://yui.yahooapis.com/pure/0.6.0/pure-min.css");
+MenageTemplate::addCss("Template/css/pure-min.css");
 
 //if(!Session::check('user'))
 //    Session::set ('user', User::getVisitator());

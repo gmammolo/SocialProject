@@ -340,11 +340,13 @@ table.default tbody
 input
 {
    background-color: #8ebebc;
+   line-height: normal;
+   
 }
 
 input[type="text"]
 {
-    
+    width: 200px;
 }
  
  
