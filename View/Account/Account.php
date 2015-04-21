@@ -72,7 +72,6 @@
                 $( "#button_login" ).removeClass("selected no-touch");
             });
         </script>   
-     <footer>footer della sezione</footer>
 
 </div>
     

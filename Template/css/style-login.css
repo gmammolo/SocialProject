@@ -35,6 +35,11 @@
     margin-left: 30px;
 }
 
+#account-form input[type="text"] , #account-form input[type="password"]
+{
+    width: 15em;
+}
+
 .div-menu
 {
     position: relative;
@@ -45,6 +50,11 @@
     
     
     
+}
+
+.div-menu ul
+{
+    padding-left: 0px;
 }
 
 #login, #join
