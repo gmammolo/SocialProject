@@ -102,7 +102,7 @@ class Profile extends Model {
     
     public static function createProfile($nome, $email)
     {
-        $avatar = "/Template/images/avatar.jpg";
+        $avatar = "Template/images/avatar.jpg";
         $sql = "INSERT INTO `socialproject`.`Profile` (`id`, `nome`, `avatar`, `residenza`, `email`) VALUES (NULL, ?, ?, '', ?)";
         return self::InsertQuery($sql, array($nome, $avatar, $email));
     }

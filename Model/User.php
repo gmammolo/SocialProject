@@ -111,7 +111,10 @@ class User extends Model{
     //*********************************************************************
     //*******************************************************************
     
-    
+    /**
+        * Restituisce l'utente che sta visualizzando la pagina
+        * @return /User
+        */
     public static function getUser() {
         
         if(!Session::check('user'))  {

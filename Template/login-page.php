@@ -6,12 +6,12 @@
         <meta name="description" content="" />
         <meta name="keywords" content="" />
         <?php
-        foreach (GestoreTemplate::getJavascript() as $js) {
+        foreach (MenageTemplate::getJavascript() as $js) {
             echo "<script src=\"$js\"></script>". PHP_EOL;
         }
         echo '<style type="text/css">';
             
-            foreach (GestoreTemplate::getCss() as $css)
+            foreach (MenageTemplate::getCss() as $css)
             {
                 echo("@import \"$css\";".PHP_EOL);
             }
@@ -45,7 +45,7 @@
             </div>
             
 <?php
-foreach (GestoreTemplate::getContents() as $content)
+foreach (MenageTemplate::getContents() as $content)
 {
     echo '<div class="section">'.PHP_EOL;
     include $content;

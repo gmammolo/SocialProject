@@ -5,27 +5,27 @@
 //DEFAULT TEMPLATE
 $icon = "Template/images/";
 
-GestoreTemplate::addTabMenu("Home","/SocialProject/index.php",  $icon ."home.png" , Role::Unverified );
-GestoreTemplate::addTabMenu("News","/SocialProject/index.php?page=news" ,  $icon . 'file%203.png' , Role::Register);
-GestoreTemplate::addTabMenu("Gestione", null , $icon . "engine.png" , Role::Register );
-GestoreTemplate::addTabMenu("Profilo", "/SocialProject/index.php?page=profile" , $icon ."eye.png" , Role::Register ,"Gestione");
-GestoreTemplate::addTabMenu("Amministrazione","/SocialProject/index.php?page=admin",  $icon ."shield.png" , Role::Administrator , "Gestione");
-GestoreTemplate::addTabMenu("Friends","/SocialProject/index.php?page=friend" ,   $icon . 'user.png' , Role::Register);
-GestoreTemplate::addTabMenu("Logout", '/SocialProject/index.php?Logout=true', $icon ."display%20down.png" , Role::Unverified);
+MenageTemplate::addTabMenu("Home","/SocialProject/index.php",  $icon ."home.png" , Role::Unverified );
+MenageTemplate::addTabMenu("News","/SocialProject/index.php?page=news" ,  $icon . 'file%203.png' , Role::Register);
+MenageTemplate::addTabMenu("Gestione", null , $icon . "engine.png" , Role::Register );
+MenageTemplate::addTabMenu("Profilo", "/SocialProject/index.php?page=profile" , $icon ."eye.png" , Role::Register ,"Gestione");
+MenageTemplate::addTabMenu("Amministrazione","/SocialProject/index.php?page=admin",  $icon ."shield.png" , Role::Administrator , "Gestione");
+MenageTemplate::addTabMenu("Friends","/SocialProject/index.php?page=friend" ,   $icon . 'user.png' , Role::Register);
+MenageTemplate::addTabMenu("Logout", '/SocialProject/index.php?Logout=true', $icon ."display%20down.png" , Role::Unverified);
 
-GestoreTemplate::addJavascript("Template/js/jquery.min.js");
-GestoreTemplate::addJavascript("Template/js/jquery.scrolly.min.js");
-GestoreTemplate::addJavascript("Template/js/jquery.scrollzer.min.js");
-GestoreTemplate::addJavascript("Template/js/scripts.js");
-GestoreTemplate::addJavascript("View/SearchBar/search.js");
+MenageTemplate::addJavascript("Template/js/jquery.min.js");
+MenageTemplate::addJavascript("Template/js/jquery.scrolly.min.js");
+MenageTemplate::addJavascript("Template/js/jquery.scrollzer.min.js");
+MenageTemplate::addJavascript("Template/js/scripts.js");
+MenageTemplate::addJavascript("View/SearchBar/search.js");
 //GestoreTemplate::addJavascript("Template/js/skel.min.js");
 //GestoreTemplate::addJavascript("Template/js/skel-layers.min.js");
 //GestoreTemplate::addJavascript("Template/js/init.js");
 
-GestoreTemplate::addCss("Template/css/skel.css");
-GestoreTemplate::addCss("Template/css/style.css");
-GestoreTemplate::addCss("Template/css/style-wide.css");
-GestoreTemplate::addCss("http://yui.yahooapis.com/pure/0.6.0/pure-min.css");
+MenageTemplate::addCss("Template/css/skel.css");
+MenageTemplate::addCss("Template/css/style.css");
+MenageTemplate::addCss("Template/css/style-wide.css");
+MenageTemplate::addCss("http://yui.yahooapis.com/pure/0.6.0/pure-min.css");
 
 //if(!Session::check('user'))
 //    Session::set ('user', User::getVisitator());
@@ -54,34 +54,39 @@ if(isset($logout))
 //#############################à
 //GESTIONE ACCESSI 
 if( User::checkAccessLevel(Role::Register) ) {
-    
-        GestoreTemplate::addCss("Template/css/style-site.css");
-    
-    if(User::checkAccessLevel(Role::Unverified)) {
-        //LOGIN EFFETTUATO
-//        GestoreTemplate::addContent(_DIR_VIEW_."LoremIpsum.php");
-    }
-    else {
-        //IN ATTESA DI ABILITAZIONE
-        //GestoreTemplate::addContent(_DIR_VIEW_."LoremIpsum.php");
-    }
-
-    
+    MenageTemplate::addCss("Template/css/style-site.css");
+    $page = filter_input(INPUT_GET, 'page');
+    if(isset($page))
+        managePages ($page);
     require_once  "Template/page.php";
-    
-   
     
 }
 else if(User::checkAccessLevel(Role::Unverified)){
     
+    MenageTemplate::addCss("Template/css/style-site.css");
+    $page = filter_input(INPUT_GET, 'page');
+    if(isset($page))
+        managePages ($page);
+    require_once  "Template/page.php";
 }
 else {
     //NO LOGIN EFFETTUATO
-    GestoreTemplate::addJavascript("View/Account/Login.js");
-    GestoreTemplate::addJavascript("View/Account/Join.js");
-    GestoreTemplate::addContent(_DIR_VIEW_."Account/Account.php");
-    GestoreTemplate::addCss("Template/css/style-login.css");
+    MenageTemplate::addJavascript("View/Account/Login.js");
+    MenageTemplate::addJavascript("View/Account/Join.js");
+    MenageTemplate::addContent(_DIR_VIEW_."Account/Account.php");
+    MenageTemplate::addCss("Template/css/style-login.css");
     require_once  "Template/login-page.php";
 }
 
 
+function managePages($page)
+{
+    $user = User::getUser();
+           
+    if($page=="profile" && $user->getAccessLevel() >= Role::Unverified)
+    {
+        MenageTemplate::addContent(_DIR_VIEW_."Profile/Profile.php");
+        MenageTemplate::addCss("View/Profile/Profile.css");
+        MenageTemplate::addJavascript("View/Profile/Profile.js");
+    }
+}

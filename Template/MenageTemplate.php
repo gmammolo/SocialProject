@@ -63,7 +63,7 @@ class Menu
  *
  * @author giuseppe
  */
-class GestoreTemplate {
+class MenageTemplate {
    
     /**
      * Menu del template

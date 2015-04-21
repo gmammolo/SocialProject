@@ -1,13 +1,7 @@
 <div class="tipfiend">
     <?php
-     $utente =  Session::get('utente', 'User');
-     if(!is_null($utente)) :
-         $find_profile = $utente->GetRandomNotFriend();
-     ?>    
-     
-     
-         
-     <?php    
-     endif;
+     $utente = User::getUser();
+     $find_profile = Friendship::getRandomNotFriend($user);
+     var_dump($find_profile);
     ?>
 </div>

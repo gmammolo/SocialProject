@@ -8,12 +8,12 @@ $user = User::getUser(); ?>
         <meta name="description" content="" />
         <meta name="keywords" content="" />
         <?php
-        foreach (GestoreTemplate::getJavascript() as $js) {
+        foreach (MenageTemplate::getJavascript() as $js) {
             echo "<script src=\"$js\"></script>". PHP_EOL;
         }
         echo '<style type="text/css">';
             
-            foreach (GestoreTemplate::getCss() as $css)
+            foreach (MenageTemplate::getCss() as $css)
             {
                 echo("@import \"$css\";");
             }
@@ -49,7 +49,7 @@ $user = User::getUser(); ?>
 
                     <?php
                     echo "<ul>";
-                    foreach (GestoreTemplate::getMenu() as $key => $submenues) {
+                    foreach (MenageTemplate::getMenu() as $key => $submenues) {
                             $chiave = $key;
                             if (is_a($submenues, "Menu") && !is_null($submenues->getHtml() && User::hasAccess($submenues->getAccessLevel()))) {
                                 $chiave = '<a href="'.$submenues->getHtml().'" target="_self">'.$submenues->getIcon(). $key.' </a> ';
@@ -124,7 +124,7 @@ $user = User::getUser(); ?>
                 </div>
 
                 <?php
-                foreach (GestoreTemplate::getContents() as $content)
+                foreach (MenageTemplate::getContents() as $content)
                 {
                     echo '<div class="section">'.PHP_EOL;
                     include $content;
