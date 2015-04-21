@@ -50,7 +50,10 @@ class Session {
             self::$deserialized[$name] = &$return;
         }
         if(class_exists($type) & !is_a($return, $type))
+        {
+            print_r($type);
             throw new InvalidArgumentException("Oggetto $name non è di classe $type ");
+        }
         return $return;    
     }
     

@@ -17,6 +17,7 @@ class Profile extends Model {
     //put your code here
     protected $id;
     protected $nome;
+    protected $generalita;
     protected $avatar;
     protected $email;
     protected $residenza;
@@ -60,10 +61,26 @@ class Profile extends Model {
     public function setAvatar($avatar) {
         $this->avatar = $avatar;
     }
+    function getId() {
+        return $this->id;
+    }
 
-    public function __construct($arr = array() ) {
+    function getGeneralita() {
+        return $this->generalita;
+    }
+
+    function setId($id) {
+        $this->id = $id;
+    }
+
+    function setGeneralita($generalita) {
+        $this->generalita = $generalita;
+    }
+
+        public function __construct($arr = array() ) {
         $this->id = $arr['id'];
         $this->avatar =  $arr['avatar'];
+        $this->generalita = $arr['generalita'];
         $this->nome = $arr['nome'];
         $this->data = $arr['data'];
         $this->email = $arr['email'];
@@ -92,6 +109,7 @@ class Profile extends Model {
             "avatar" => "Template/images/avatar.jpg",
             "nome" => "Visitatore",
             "data" => "00/00/0000",
+            "generalita" => "nessuno",
             "email" => "",
             "residenza" => "",
             "id" => -1
