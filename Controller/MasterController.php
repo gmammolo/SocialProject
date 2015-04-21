@@ -22,9 +22,8 @@ MenageTemplate::addJavascript("View/SearchBar/search.js");
 //GestoreTemplate::addJavascript("Template/js/skel-layers.min.js");
 //GestoreTemplate::addJavascript("Template/js/init.js");
 
-MenageTemplate::addCss("Template/css/skel.css");
+//MenageTemplate::addCss("Template/css/skel.css");
 MenageTemplate::addCss("Template/css/style.css");
-MenageTemplate::addCss("Template/css/style-wide.css");
 MenageTemplate::addCss("http://yui.yahooapis.com/pure/0.6.0/pure-min.css");
 
 //if(!Session::check('user'))

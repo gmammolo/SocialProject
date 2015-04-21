@@ -146,13 +146,16 @@ aside
 nav
 {
     position: relative;
-    left: 1em;
+    left: 0px;
+    left: 0px;
     top: -100px;
 }
 
 nav ol, nav ul
 {
     margin-bottom: 0px;
+    padding-left: 15px;
+    -webkit-padding-start: 0;
 }
 
 nav li

@@ -17,6 +17,7 @@ body
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    font-size: 17pt;
 }
 
 body,input,textarea,select
@@ -141,7 +142,9 @@ blockquote
 
 p, ul, ol, dl, table
 {
+    margin: 0px;
     margin-bottom: 2em;
+    
 }
 
 br.clear
@@ -149,6 +152,10 @@ br.clear
     clear: both;
 }
 
+ol,ul
+{
+    list-style:none;
+}
 
 #main
 {
@@ -330,6 +337,17 @@ table.default tbody
 
  /* <editor-fold defaultstate="collapsed" desc=" Button"> */
 
+input
+{
+   background-color: #8ebebc;
+}
+
+input[type="text"]
+{
+    
+}
+ 
+ 
 input[type="button"],
 input[type="submit"],
 input[type="reset"],
