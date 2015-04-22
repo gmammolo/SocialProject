@@ -7,5 +7,27 @@
 
 function addForm(event)
 {
-    alert("ok");
+    $.ajax({
+        type: "POST",
+        data: {"ajaxRequest" : "FormProfile"},
+        dataType: "html",
+        success: function(risposta){
+            $("#profile").html(risposta);
+        },
+        error: function(){
+            alert("Chiamata fallita!!!");
+        }
+    });
+}
+
+
+function sendForm(event)
+{
+    alert("Da implementare");
+}
+
+
+function changeAvatar()
+{
+    alert("Da implementare");
 }

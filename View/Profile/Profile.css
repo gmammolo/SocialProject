@@ -74,3 +74,34 @@ and open the template in the editor.
     margin: 5px;
     padding: 0px;
 }
+
+
+
+
+.tab-profile
+{
+    padding: 5px;
+}
+
+.mod-avatar
+{
+    display: inline-block;
+    margin: 10px;
+}
+
+input[name="avatar"]
+{
+    display: block;
+    padding: 5px;
+    
+}
+
+form .name
+{
+    margin-top: 10px !important;
+}
+
+.tab-profile input
+{
+    padding: 5px !important;
+}

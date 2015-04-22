@@ -1,6 +1,4 @@
-<?php 
-$utente = User::getUser(); 
-?>
+<?php $utente = User::getUser(); ?>
 
 <div id="profile">    
     <div class="tab-profile">

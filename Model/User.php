@@ -116,7 +116,6 @@ class User extends Model{
         * @return /User
         */
     public static function getUser() {
-        
         if(!Session::check('user'))  {
             return User::getVisitator();
         }

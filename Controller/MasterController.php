@@ -18,6 +18,7 @@ MenageTemplate::addJavascript("Template/js/jquery.scrolly.min.js");
 MenageTemplate::addJavascript("Template/js/jquery.scrollzer.min.js");
 MenageTemplate::addJavascript("Template/js/scripts.js");
 MenageTemplate::addJavascript("View/SearchBar/search.js");
+
 //GestoreTemplate::addJavascript("Template/js/skel.min.js");
 //GestoreTemplate::addJavascript("Template/js/skel-layers.min.js");
 //GestoreTemplate::addJavascript("Template/js/init.js");
@@ -26,9 +27,16 @@ MenageTemplate::addJavascript("View/SearchBar/search.js");
 MenageTemplate::addCss("Template/css/style.css");
 MenageTemplate::addCss("Template/css/pure-min.css");
 
+
 //if(!Session::check('user'))
 //    Session::set ('user', User::getVisitator());
 
+$ajaxRequest = filter_input(INPUT_POST, 'ajaxRequest');
+if(isset($ajaxRequest))
+{
+    require_once _DIR_CONTROLLER_ . 'ajaxRequest.php';
+    die();
+}
 
 $login = filter_input(INPUT_GET, 'Login');
 if(isset($login) && !User::hasAccess(Role::Unverified) )
@@ -74,7 +82,7 @@ else {
     MenageTemplate::addJavascript("View/Account/Join.js");
     MenageTemplate::addContent(_DIR_VIEW_."Account/Account.php");
     MenageTemplate::addCss("Template/css/style-login.css");
-    require_once  "Template/login-page.php";
+    require_once  "Template/login-page.php";MenageTemplate::addCss("Template/css/style-login.css");
 }
 
 
