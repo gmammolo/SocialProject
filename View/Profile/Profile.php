@@ -5,7 +5,7 @@
     <img class="avatar" src="<?php echo $utente->getProfile()->getAvatar(); ?>" alt="photo">
     <div class="generalita">
         <div class="label-field  name"> <?php echo $utente->getProfile()->getNome(); ?></div>
-        <div class="label-field  username"> @<?php echo $utente->getUsername(); ?></div>
+        <div class="label-field"><span class="username">@<?php echo $utente->getUsername(); ?></span><span id="gender" class="gender"></span> </div>
     </div>
     <div class="label-field  email down-avatar"><div class="label-info">email:</div> <?php echo $utente->getProfile()->getEmail(); ?></div>
     <div class="label-field  residenza down-avatar"><div class="label-info">residente:</div> <?php echo $utente->getProfile()->getResidenza(); ?></div>
@@ -13,3 +13,14 @@
     </div>
     <input name="buttom" type="button" value="Modifica" onclick="addForm(event)"/>
 </div>
+
+<script>
+  //get gender
+  var gender = "<?php echo $utente->getProfile()->getGeneralita(); ?>";
+  if(gender === "uomo")
+        $("#gender").html("<img src=\"http://php.server/SocialProject/Template/images/man.jpg\" ALT='sesso' />");
+  else if(gender === "donna")
+        $("#gender").html("<img src=\"http://php.server/SocialProject/Template/images/woman.jpg\" ALT='sesso'/>");
+  else
+        $("#gender").html("<img src=\"http://php.server/SocialProject/Template/images/woman.jpg\"  ALT='sesso'/>");
+</script>

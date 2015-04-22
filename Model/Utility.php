@@ -14,7 +14,7 @@
 class Utility {
 
     public static function RedMessage($param0) {
-        $redmessage = &Session::get('redmessage', 'array');
+        $redmessage = &Session::get('redMessage', 'array');
         $redmessage[]=$param0;
         
     }

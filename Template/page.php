@@ -103,19 +103,19 @@ $user = User::getUser(); ?>
             <main>
                 <div id="message">
                     <?php
-                    $redmessage = &Session::get('redmessage', 'array');
+                    $redmessage = &Session::get('redMessage', 'array');
                     foreach ($redmessage as $message) {
                         echo '<div class="message-field redmessage">'.$message.'</div>';
                     }
                     $redmessage = array();
 
-                    $yellowmessage = &Session::get('yellowmessage', 'array');
+                    $yellowmessage = &Session::get('yellowMessage', 'array');
                     foreach ($yellowmessage as $message) {
                         echo '<div class="message-field yellowmessage">'.$message.'</div>';
                     }
                     $yellowmessage = array();
 
-                    $greenmessage = &Session::get('greenmessage', 'array');
+                    $greenmessage = &Session::get('greenMessage', 'array');
                     foreach ($greenmessage as $message) {
                         echo '<div class="message-field greenmessage">'.$message.'</div>';
                     }

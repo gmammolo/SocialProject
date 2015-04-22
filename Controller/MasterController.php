@@ -31,6 +31,13 @@ MenageTemplate::addCss("Template/css/pure-min.css");
 //if(!Session::check('user'))
 //    Session::set ('user', User::getVisitator());
 
+$formValidate = filter_input(INPUT_POST, 'formValidate');
+if(isset($formValidate))
+{
+    require_once _DIR_CONTROLLER_ . 'formValidate.php';
+    die();
+}
+
 $ajaxRequest = filter_input(INPUT_POST, 'ajaxRequest');
 if(isset($ajaxRequest))
 {
