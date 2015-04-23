@@ -76,10 +76,6 @@ function sendForm(profilo)
 }
 
 
-function changeAvatar()
-{
-    $("#change-photo").removeClass("hidden");
-}
 
 
 function Profile (username , avatar, email, residenza, data, sesso) {
@@ -89,6 +85,13 @@ function Profile (username , avatar, email, residenza, data, sesso) {
     this.residenza= residenza;
     this.data = data;
     this.sesso = sesso;
+}
+
+
+
+function changeAvatar()
+{
+    $("#change-photo").removeClass("hidden");
 }
 
 function sendPhotoRequest()
@@ -113,4 +116,9 @@ function selectURL()
 function selectFILE()
 {
     $("input[name=choose]").filter('[value="file"]').prop('checked', true);
+}
+
+function closeFormAvatar()
+{
+    $("#change-photo").addClass("hidden");
 }

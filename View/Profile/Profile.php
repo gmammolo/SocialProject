@@ -1,7 +1,7 @@
 <?php 
     $id = filter_input(INPUT_GET, 'id');
     if(is_null($id))
-        $id = User::getUser ()->getId (); 
+        $id = User::getUser()->getId(); 
     $utente = User::getUserByID($id);
     if(is_null($utente))
     {

@@ -1,6 +1,5 @@
 <?php
 
-
 //################################à
 //DEFAULT TEMPLATE
 $icon = "Template/images/";

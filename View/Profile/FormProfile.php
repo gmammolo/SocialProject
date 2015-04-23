@@ -27,6 +27,7 @@
         <div class="change-avatar-url"><input type="radio" name="choose" value="url"><input type="url" name="url" placeholder="http://" value="http://" onclick="selectURL();" /></div>
         <div class="change-avatar-url"><input type="radio" name="choose" value="file"><input type="file" name="file" onclick="selectFILE();"/></div>
         <input type="button" value="Cambia" onclick="sendPhotoRequest()" />
+        <input type="button" value="Cancel" onclick="closeFormAvatar()" />
     </form>
     
 </div>

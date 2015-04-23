@@ -10,8 +10,8 @@ if ($user_irregular && $pass_irregular) {
         
         $user = User::getUserByLogin($username, $password);
         $user = Session::set('user', $user);
-//        header("Location: "._HOME_URL_);
-//        die();
+        header("Location: "._HOME_URL_);
+        die();
     }
     else
         Utility::RedMessage ("Account non esistente");
