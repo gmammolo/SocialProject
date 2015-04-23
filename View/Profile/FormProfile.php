@@ -1,8 +1,37 @@
-    <?php $utente = User::getUser() ;?>
+    <?php
+    $id = filter_input(INPUT_GET, 'id');
+        if(is_null($id))
+        $id = User::getUser ()->getId (); 
+    $utente = User::getUserByID($id);
+    if(is_null($utente))
+    {
+        Utility::RedMessage("Utente non disponibile");
+        header("location: " . _HOME_URL_ . "?page=home"  );
+        die();
+    }
+    
+    if(User::getUser() !== $utente && !User::checkAccessLevel(Role::Moderator) )
+    {
+        Utility::RedMessage("Non hai i permessi per visualizzare questo utente");
+        header("location: " . _HOME_URL_ . "?page=home"  );
+        die();
+    }
+    
+    ?>
 <script>
     var profilo = new Profile("<?php echo $utente->getProfile()->getNome(); ?>", "<?php echo $utente->getProfile()->getAvatar(); ?>" ,"<?php echo $utente->getProfile()->getEmail(); ?>", "<?php echo $utente->getProfile()->getResidenza(); ?>", "<?php echo $utente->getProfile()->getData(); ?>" , "<?php echo $utente->getProfile()->getGeneralita(); ?>");
 </script>
-<form method="POST" name="mod-profile">
+
+<div id="change-photo" class="hidden">
+    <form name="change-photo-form" action="?formValidate=FormChangeAvatar&id=<?php echo $utente->getId() ?>">
+        <div class="change-avatar-url"><input type="radio" name="choose" value="url"><input type="url" name="url" placeholder="http://" value="http://" onclick="selectURL();" /></div>
+        <div class="change-avatar-url"><input type="radio" name="choose" value="file"><input type="file" name="file" onclick="selectFILE();"/></div>
+        <input type="button" value="Cambia" onclick="sendPhotoRequest()" />
+    </form>
+    
+</div>
+
+<form method="POST" name="mod-profile" class="mod-profile" action="?formValidate=FormProfile&id=<?php echo $utente->getId() ?>" >
         <div class="tab-profile">
             <div class="mod-avatar" >
                 <img class="avatar" src="<?php echo $utente->getProfile()->getAvatar(); ?>" alt="photo">

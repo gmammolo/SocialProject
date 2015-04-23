@@ -114,3 +114,46 @@ form .name
     width: 20px;
     heith: 15px;
 }
+
+#change-photo
+{
+   position: absolute;
+   float: left;
+   top: 30px;
+   left: 250px;
+   width: 700px;
+   height: 300px;
+   background-color: #1D1717;
+   z-index: 50;
+}
+
+#change-photo div
+{
+    margin: 20px;
+    margin-left: 20px;
+    
+}
+
+#change-photo input[type="radio"]
+{
+    margin-right: 5px;
+}
+
+#change-photo input[type="url"]
+{
+    width: 600px;
+    height: 2em;
+    padding: 0px;
+}
+
+#change-photo input[type="file"]
+{
+     width: 600px;
+     height: 2em;
+     padding: 0px;
+}
+
+#change-photo input[type="button"]
+{
+    margin-left: 20px;
+}

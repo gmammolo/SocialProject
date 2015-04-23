@@ -208,6 +208,8 @@ form label
 form input[type="text"],
 form input[type="email"],
 form input[type="password"],
+form input[type="url"],
+form input[type="file"],
 form select,
 form textarea
 {
@@ -235,6 +237,8 @@ form textarea
 form input[type="text"],
 form input[type="email"],
 form input[type="password"],
+form input[type="url"],
+form input[type="file"],
 form select
 {
     line-height: 1.25em;

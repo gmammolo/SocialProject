@@ -1,4 +1,23 @@
-<?php $utente = User::getUser(); ?>
+<?php 
+    $id = filter_input(INPUT_GET, 'id');
+    if(is_null($id))
+        $id = User::getUser ()->getId (); 
+    $utente = User::getUserByID($id);
+    if(is_null($utente))
+    {
+        Utility::RedMessage("Utente non disponibile");
+        header("location: " . _HOME_URL_ . "?page=home"  );
+        die();
+    }
+    
+    if(User::getUser() !== $utente && !User::checkAccessLevel(Role::Moderator) )
+    {
+        Utility::RedMessage("Non hai i permessi per visualizzare questo utente");
+        header("location: " . _HOME_URL_ . "?page=home"  );
+        die();
+    }
+
+?>
 
 <div id="profile">    
     <div class="tab-profile">

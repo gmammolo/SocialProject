@@ -23,8 +23,7 @@ function addForm(event)
 
 function sendForm(profilo)
 {
-    var update = false;
-    
+    var update = false; 
     var username = document.forms["mod-profile"].Username;
     var email = document.forms["mod-profile"].Email;
     var gender = document.forms["mod-profile"].Gender;
@@ -32,17 +31,17 @@ function sendForm(profilo)
     var data = document.forms["mod-profile"].Data;
     
 //    throw new Error("Something went badly wrong!");
-    if(profilo.username !== username.value || profilo.email !== email.value || profilo.gender != gender.value || profilo.residenza != residenza.value || profilo.data != data.value ) 
+    if(profilo.username !== username.value || profilo.email !== email.value || (gender.value !== "nessuno" && profilo.gender != gender.value ) || profilo.residenza != residenza.value || profilo.data != data.value ) 
         update = true;
     
-    if(!/[^'\x22]+/.test(username.value))
+    if(/['\x22]+/.test(username.value))
     {
         alert("username non accettabile");
         username.focus();
         return false;
     }
     
-    if(!/[^'\x22]+/.test(residenza.value))
+    if(/['\x22]+/.test(residenza.value))
     {
         alert("Residenza non accettabile");
         residenza.focus();
@@ -69,17 +68,17 @@ function sendForm(profilo)
          return false;
     }
     
+    $(".mod-profile").append('<input type="hidden" name="Update" value="'+ update +'"/>');
+    
+    
     if(update)
-    {
-        document.forms["mod-profile"].action = "?formValidate=FormProfile&Update="+update;
         document.forms["mod-profile"].submit();
-    }
 }
 
 
 function changeAvatar()
 {
-    alert("Da implementare");
+    $("#change-photo").removeClass("hidden");
 }
 
 
@@ -90,4 +89,28 @@ function Profile (username , avatar, email, residenza, data, sesso) {
     this.residenza= residenza;
     this.data = data;
     this.sesso = sesso;
+}
+
+function sendPhotoRequest()
+{
+    radio = document.forms["change-photo-form"].choose;
+    if(radio.value == "file")
+    {
+        alert("Sono spiacente, ma questa funzionalità non è attiva in questa versione");
+        return false;
+    }
+    alert("Da implementare");
+}
+
+
+
+function selectURL()
+{
+    console.log($("input[name=change]"));
+    $("input[name=choose]").filter('[value="url"]').prop('checked', true);
+}
+
+function selectFILE()
+{
+    $("input[name=choose]").filter('[value="file"]').prop('checked', true);
 }
