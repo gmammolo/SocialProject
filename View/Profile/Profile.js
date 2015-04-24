@@ -97,12 +97,12 @@ function changeAvatar()
 function sendPhotoRequest()
 {
     radio = document.forms["change-photo-form"].choose;
-    if(radio.value == "file")
+    if(radio.value == "image_file")
     {
         alert("Sono spiacente, ma questa funzionalità non è attiva in questa versione");
         return false;
     }
-    alert("Da implementare");
+     document.forms["change-photo-form"].submit();
 }
 
 
@@ -110,12 +110,12 @@ function sendPhotoRequest()
 function selectURL()
 {
     console.log($("input[name=change]"));
-    $("input[name=choose]").filter('[value="url"]').prop('checked', true);
+    $("input[name=choose]").filter('[value="image_url"]').prop('checked', true);
 }
 
 function selectFILE()
 {
-    $("input[name=choose]").filter('[value="file"]').prop('checked', true);
+    $("input[name=choose]").filter('[value="image_file"]').prop('checked', true);
 }
 
 function closeFormAvatar()
