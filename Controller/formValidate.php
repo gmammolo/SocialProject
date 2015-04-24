@@ -37,7 +37,12 @@ switch($formValidate)
             $modUser->getProfile()->setGeneralita($gender);
           $modUser->getProfile()->setData($data);
           $modUser->getProfile()->Update();
+          Utility::GreenMessage("Aggiornamento profilo effettuato!");
 
+        }
+        else
+        {
+            Utility::RedMessage("Modifiche al profilo fallite!");
         }
         header("location: " . _HOME_URL_ . "?page=profile&id=".$id  );
         break;
@@ -73,6 +78,8 @@ switch($formValidate)
         header("location: " . _HOME_URL_ . "?page=profile&id=".$id  );
         break;
     }
+    
+    
 }
 
 

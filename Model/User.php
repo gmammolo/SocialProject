@@ -198,6 +198,23 @@ class User extends Model{
         return $user->accessLevel >= $levelRequired;
     }
     
+    /**
+     * 
+     * @param type $accLevel
+     * @return \User[]
+     */
+    public static function getAllUserWithAccessLevel($accLevel)
+    {
+        $sql = "SELECT * FROM `User` WHERE `accessLevel` < ?";
+        $lista = array();
+        $ris = Model::ExecuteQuery($sql,array($accLevel));
+        foreach ($ris as $elem)
+        {
+            $lista[] = new User($elem);
+        }
+        return $lista;
+    }
+    
 }
  
 

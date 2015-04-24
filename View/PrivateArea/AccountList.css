@@ -1,0 +1,62 @@
+form 
+{
+    margin: 10px;
+    margin-bottom: 20px;
+}
+
+.cerca_icon
+{
+    background-image: url(../../Template/images/search.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 38px;
+    height: 35px;
+    position: relative;
+    top:7px;
+    display: inline-block;
+}
+
+#accountList .avatar
+{
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+    
+}   
+
+#accountList .accountElement
+{
+    position: relative;
+    border: 1px solid black;
+    margin: 10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 10px;
+}
+
+#accountList .generalita
+{
+    vertical-align: top;
+    position: relative;
+    top: 0px;
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+}
+
+#accountList .name
+{
+    margin: 0px;
+    padding: 0px;
+    font-size: 28px;
+    font-family: Arial, Verdana, sans-serif;
+}
+
+#accountList .username
+{
+    margin: 0px;
+    padding: 0px;
+}
+

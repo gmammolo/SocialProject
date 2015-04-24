@@ -98,8 +98,15 @@ function managePages($page)
            
     if($page=="profile" && $user->getAccessLevel() >= Role::Unverified)
     {
-        MenageTemplate::addContent(_DIR_VIEW_."Profile/Profile.php");
-        MenageTemplate::addCss("View/Profile/Profile.css");
-        MenageTemplate::addJavascript("View/Profile/Profile.js");
+        MenageTemplate::addContent(_DIR_VIEW_."PrivateArea/Profile.php");
+        MenageTemplate::addCss("View/PrivateArea/Profile.css");
+        MenageTemplate::addJavascript("View/PrivateArea/Profile.js");
     }
+    else if($page=="admin" && $user->getAccessLevel() >= Role::Moderator)
+    {
+        MenageTemplate::addContent(_DIR_VIEW_."PrivateArea/AccountList.php");
+        MenageTemplate::addCss("View/PrivateArea/AccountList.css");
+        MenageTemplate::addJavascript("View/PrivateArea/AccountList.js");
+    }
+    
 }
