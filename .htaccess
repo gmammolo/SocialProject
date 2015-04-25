@@ -1,0 +1,11 @@
+Deny From All
+
+<Files "index.php">
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+<Files "">
+    Order Allow,Deny
+    Allow from all
+</Files>

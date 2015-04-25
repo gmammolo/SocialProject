@@ -203,11 +203,12 @@ class User extends Model{
      * @param type $accLevel
      * @return \User[]
      */
-    public static function getAllUserWithAccessLevel($accLevel)
+    public static function getAllUserWithAccessLevel($accLevel, $seach)
     {
-        $sql = "SELECT * FROM `User` WHERE `accessLevel` < ?";
+        $search = "%".$seach."%";
+        $sql = "SELECT User.* FROM `User` JOIN Profile ON `profile` = Profile.id WHERE `accessLevel` < :accLevel AND ( `username` Like :sw OR nome LIKE :sw OR Profile.email Like :sw OR User.email Like :sw ) LIMIT 30 ";
         $lista = array();
-        $ris = Model::ExecuteQuery($sql,array($accLevel));
+        $ris = Model::ExecuteQuery($sql,array( ":accLevel" => $accLevel, ":sw" => $search ));
         foreach ($ris as $elem)
         {
             $lista[] = new User($elem);

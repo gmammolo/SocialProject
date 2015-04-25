@@ -34,6 +34,7 @@ form
     margin-top: 0px;
     margin-bottom: 0px;
     padding: 10px;
+    cursor: pointer;
 }
 
 #accountList .generalita
@@ -44,6 +45,7 @@ form
     display: inline-block;
     margin: 0px;
     padding: 0px;
+    width: inherit;
 }
 
 #accountList .name
@@ -60,3 +62,32 @@ form
     padding: 0px;
 }
 
+
+
+.generalita div, .generalita span
+{
+    display: inline-block;
+}
+
+.generalita .row
+{
+    display: block;
+    position: relative;
+    left: 0px;
+    right: 0px;
+    min-width: 400px;
+}
+
+ .generalita .profile-email, .generalita .user-email
+{
+    position: absolute;
+    top: 0px;
+    left: 17em;
+}
+
+.generalita span
+{
+    position: absolute;
+    top: 0px;
+    left: 10em;
+}

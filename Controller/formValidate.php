@@ -79,6 +79,24 @@ switch($formValidate)
         break;
     }
     
+    case "getAccountList" :
+    {
+        $seach_string = filter_input(INPUT_POST, 'search_cerca_account') ; 
+        if(preg_match("/['\x22]+/", $seach_string))
+                die();
+        $userList = User::getAllUserWithAccessLevel(User::getUser()->getAccessLevel(), $seach_string);
+        for($i=0; $i< count($userList); $i++ ) { ?>
+            <div class="accountElement" onclick="window.location.href = '/SocialProject/index.php?page=profile&id=<?php echo $userList[$i]->getId(); ?>'">
+                <img class="avatar" src="<?php echo $userList[$i]->getProfile()->getAvatar(); ?>" alt="photo">
+                <div class="generalita">
+                    <div class="row"><div class="label-field  name"> <?php echo $userList[$i]->getProfile()->getNome(); ?></div><span> Email Profilo:</span> <div class="profile-email"><?php echo $userList[$i]->getProfile()->getEmail(); ?> </div> </div>
+                    <div class="row"><div class="label-field"><div class="username">@<?php echo $userList[$i]->getUsername(); ?></div><div id="gender" class="gender"></div> </div><span> Email Privata:</span> <div class="user-email"><?php echo $userList[$i]->getEmail(); ?> </div></div>
+                </div>
+            </div>
+        <?php } 
+        die();
+    }
+    
     
 }
 

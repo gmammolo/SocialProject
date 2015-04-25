@@ -16,13 +16,8 @@ MenageTemplate::addJavascript("Template/js/jquery.min.js");
 MenageTemplate::addJavascript("Template/js/jquery.scrolly.min.js");
 MenageTemplate::addJavascript("Template/js/jquery.scrollzer.min.js");
 MenageTemplate::addJavascript("Template/js/scripts.js");
-MenageTemplate::addJavascript("View/SearchBar/search.js");
+MenageTemplate::addJavascript("Public/Javascripts/search.js");
 
-//GestoreTemplate::addJavascript("Template/js/skel.min.js");
-//GestoreTemplate::addJavascript("Template/js/skel-layers.min.js");
-//GestoreTemplate::addJavascript("Template/js/init.js");
-
-//MenageTemplate::addCss("Template/css/skel.css");
 MenageTemplate::addCss("Template/css/style.css");
 MenageTemplate::addCss("Template/css/pure-min.css");
 
@@ -84,8 +79,8 @@ else if(User::checkAccessLevel(Role::Unverified)){
 }
 else {
     //NO LOGIN EFFETTUATO
-    MenageTemplate::addJavascript("View/Account/Login.js");
-    MenageTemplate::addJavascript("View/Account/Join.js");
+    MenageTemplate::addJavascript("Public/Javascripts/Login.js");
+    MenageTemplate::addJavascript("Public/Javascripts/Join.js");
     MenageTemplate::addContent(_DIR_VIEW_."Account/Account.php");
     MenageTemplate::addCss("Template/css/style-login.css");
     require_once  "Template/login-page.php";MenageTemplate::addCss("Template/css/style-login.css");
@@ -99,14 +94,14 @@ function managePages($page)
     if($page=="profile" && $user->getAccessLevel() >= Role::Unverified)
     {
         MenageTemplate::addContent(_DIR_VIEW_."PrivateArea/Profile.php");
-        MenageTemplate::addCss("View/PrivateArea/Profile.css");
-        MenageTemplate::addJavascript("View/PrivateArea/Profile.js");
+        MenageTemplate::addCss("Public/Css/Profile.css");
+        MenageTemplate::addJavascript("Public/Javascripts/Profile.js");
     }
     else if($page=="admin" && $user->getAccessLevel() >= Role::Moderator)
     {
         MenageTemplate::addContent(_DIR_VIEW_."PrivateArea/AccountList.php");
-        MenageTemplate::addCss("View/PrivateArea/AccountList.css");
-        MenageTemplate::addJavascript("View/PrivateArea/AccountList.js");
+        MenageTemplate::addCss("Public/Css/AccountList.css");
+        MenageTemplate::addJavascript("Public/Javascripts/AccountList.js");
     }
     
 }

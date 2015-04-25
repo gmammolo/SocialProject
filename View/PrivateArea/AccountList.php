@@ -5,7 +5,6 @@ if(!User::getUser()->hasAccess(Role::Moderator))
     header("location: " . _HOME_URL_ . ""  );
     die();
 }
-$userList = User::getAllUserWithAccessLevel(User::getUser()->getAccessLevel());
 ?>
 
 <script>
@@ -15,18 +14,13 @@ $userList = User::getAllUserWithAccessLevel(User::getUser()->getAccessLevel());
     } ?>
 </script>
 
-<form name="cerca_account">
-    <input type="search" name="search_cerca_account" onchange="load_search_user(event)" onkeydown="load_search_user(event)"/><span class="cerca_icon" ></span>
+<form name="cerca_account" method="POST" action="?formValidate=getAccountList">
+    <input type="search" name="search_cerca_account" onkeyup="load_search_user(event)"/><span class="cerca_icon" ></span>
 </form>
 
 <div id="accountList">
-<?php for($i=0; $i< count($userList); $i++ ) { ?>
-    <div class="accountElement">
-        <img class="avatar" src="<?php echo $userList[$i]->getProfile()->getAvatar(); ?>" alt="photo">
-        <div class="generalita">
-            <div class="label-field  name"> <?php echo $userList[$i]->getProfile()->getNome(); ?></div>
-            <div class="label-field"><span class="username">@<?php echo $userList[$i]->getUsername(); ?></span><span id="gender" class="gender"></span> </div>
-        </div>
-    </div>
-<?php } ?>
 </div>
+
+<script>
+    loadAccountList();
+</script>
