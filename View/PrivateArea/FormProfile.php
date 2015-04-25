@@ -47,6 +47,6 @@
             <div class="label-field  residenza down-avatar"><div class="label-info">residente:</div><input type="text" name="Residenza" placeholder="Residenza" value="<?php echo $utente->getProfile()->getResidenza();  ?>" pattern="[^'\x22]+"/></div>
                 <div class="label-field  data down-avatar"> <div class="label-info">Data di Nascita:</div><input type="text" name="Data" placeholder="Data di Nascita" value="<?php echo $utente->getProfile()->getData(); ?>" pattern="(0000-00-00)|(((19|20)\d\d)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]))$" title="Inserire la data nel formato aaaa-mm-gg (da 1900-01-01 a 2099-12-31)" /></div>
         </div>
-        <input name="submit" type="submit" value="Invia" onclick="sendForm(profilo)"/>
+        <input name="submit" type="submit" value="Invia" onclick="sendForm(profilo)"/> <input name="retry" type="button" value="retry" onclick="window.location.href = '/SocialProject/index.php?page=profile&id=<?php echo $utente->getId(); ?>'"/>
     </form>
 

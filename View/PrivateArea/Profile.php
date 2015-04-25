@@ -9,17 +9,24 @@
         header("location: " . _HOME_URL_ . "?page=home"  );
         die();
     }
-    
-    if(User::getUser() !== $utente && !User::checkAccessLevel(Role::Moderator) )
-    {
-        Utility::RedMessage("Non hai i permessi per visualizzare questo utente");
-        header("location: " . _HOME_URL_ . "?page=home"  );
-        die();
-    }
+
+// NON più necessario: l'accesso viene bloccato tramite .htaccess
+//    if(User::getUser() !== $utente && !User::checkAccessLevel(Role::Moderator) )
+//    {
+//        Utility::RedMessage("Non hai i permessi per visualizzare questo utente");
+//        header("location: " . _HOME_URL_ . "?page=home"  );
+//        die();
+//    }
 
 ?>
 
-<div id="profile">    
+<div id="profile">  
+    <?php
+    if(User::getUser() !== $utente && User::checkAccessLevel(Role::Moderator) )
+    {
+        echo '<div class="retry" onclick ="window.location.href=\'/SocialProject/index.php?page=admin\' "><img src="Template/images/arrow%202.png"> Torna Indietro</div>';
+    }
+    ?>
     <div class="tab-profile">
     <img class="avatar" src="<?php echo $utente->getProfile()->getAvatar(); ?>" alt="photo">
     <div class="generalita">

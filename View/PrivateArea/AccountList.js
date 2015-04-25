@@ -28,7 +28,7 @@ function load_search_user(event)
     $.ajax({
       type: "POST",
       url: "?formValidate=getAccountList",
-      data: {search_cerca_account : $("input[name='search_cerca_account']").val()},
+      data: {search_cerca_account : $("input[name='search_cerca_account']").val()  },
       dataType: "html",
       success: function(risposta){
         $("#accountList").html(risposta);

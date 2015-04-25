@@ -79,11 +79,11 @@ else if(User::checkAccessLevel(Role::Unverified)){
 }
 else {
     //NO LOGIN EFFETTUATO
-    MenageTemplate::addJavascript("Public/Javascripts/Login.js");
-    MenageTemplate::addJavascript("Public/Javascripts/Join.js");
+    MenageTemplate::addJavascript("View/Account/Login.js");
+    MenageTemplate::addJavascript("View/Account/Join.js");
     MenageTemplate::addContent(_DIR_VIEW_."Account/Account.php");
     MenageTemplate::addCss("Template/css/style-login.css");
-    require_once  "Template/login-page.php";MenageTemplate::addCss("Template/css/style-login.css");
+    require_once  "Template/login-page.php";
 }
 
 
@@ -94,14 +94,14 @@ function managePages($page)
     if($page=="profile" && $user->getAccessLevel() >= Role::Unverified)
     {
         MenageTemplate::addContent(_DIR_VIEW_."PrivateArea/Profile.php");
-        MenageTemplate::addCss("Public/Css/Profile.css");
-        MenageTemplate::addJavascript("Public/Javascripts/Profile.js");
+        MenageTemplate::addCss("View/PrivateArea/Profile.css");
+        MenageTemplate::addJavascript("View/PrivateArea/Profile.js");
     }
     else if($page=="admin" && $user->getAccessLevel() >= Role::Moderator)
     {
         MenageTemplate::addContent(_DIR_VIEW_."PrivateArea/AccountList.php");
-        MenageTemplate::addCss("Public/Css/AccountList.css");
-        MenageTemplate::addJavascript("Public/Javascripts/AccountList.js");
+        MenageTemplate::addCss("View/PrivateArea/AccountList.css");
+        MenageTemplate::addJavascript("View/PrivateArea/AccountList.js");
     }
     
 }
