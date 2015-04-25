@@ -29,9 +29,12 @@ function sendForm(profilo)
     var gender = document.forms["mod-profile"].Gender;
     var residenza = document.forms["mod-profile"].Residenza;
     var data = document.forms["mod-profile"].Data;
+    var oldPass = document.forms["mod-profile"].oldPass;
+    var newPass = document.forms["mod-profile"].newPass;
+    var cNewPass = document.forms["mod-profile"].cNewPass;
     
 //    throw new Error("Something went badly wrong!");
-    if(profilo.username !== username.value || profilo.email !== email.value || (gender.value !== "nessuno" && profilo.gender != gender.value ) || profilo.residenza != residenza.value || profilo.data != data.value ) 
+    if(profilo.username !== username.value || profilo.email !== email.value || (gender.value !== "nessuno" && profilo.gender != gender.value ) || profilo.residenza != residenza.value || profilo.data != data.value || oldPass.value != "" ) 
         update = true;
     
     if(/['\x22]+/.test(username.value))
@@ -66,6 +69,13 @@ function sendForm(profilo)
     {
          alert("Problemi di manipolazione pagina");
          return false;
+    }
+    
+    if(!/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}/.test(oldPass) && !/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}/.test(newPass) && newPass !== cNewPass  )
+    {
+        alert("Password non accettabile");
+        oldPass.focus();
+        return false;
     }
     
     $(".mod-profile").append('<input type="hidden" name="Update" value="'+ update +'"/>');

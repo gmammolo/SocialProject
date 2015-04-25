@@ -10,7 +10,7 @@
         die();
     }
     
-    if(User::getUser() !== $utente && !User::checkAccessLevel(Role::Moderator) )
+    if(User::getUser() != $utente && !User::checkAccessLevel(Role::Moderator) )
     {
         Utility::RedMessage("Non hai i permessi per visualizzare questo utente");
         header("location: " . _HOME_URL_ . "?page=home"  );
@@ -42,6 +42,12 @@
                 <div class="label-field  name"><input type="text" name="Username" value="<?php echo $utente->getProfile()->getNome(); ?>" placeholder="Username" pattern="[^'\x22]+" /></div>
                 <div class="label-field  username"> @<?php echo $utente->getUsername(); ?></div>
             </div>
+            <?php if($utente == User::getUser()) : ?>
+                <div style="border: 1px solid #1D1717; width: 600px;">
+                    <div class="label-field  pass down-avatar"> Cambiare  Password: <input type="password" name="oldPass" placeholder="Vecchia Password" value="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}" title="Deve contenere almeno un carattere Maiuscolo, uno minuscolo e un numero. (4-16 caratteri)." /></div>
+                    <div class="label-field  newpass down-avatar"><input type="password" name="newPass" placeholder="Nuova Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}" title="Deve contenere almeno un carattere Maiuscolo, uno minuscolo e un numero. (4-16 caratteri)."  /><input type="password" name="cNewPass" placeholder="Conferma Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}" title="Deve contenere almeno un carattere Maiuscolo, uno minuscolo e un numero. (4-16 caratteri)."  /></div>
+                </div>
+            <?php endif; ?>
             <div class="label-field  sesso down-avatar"><div class="label-info">sesso:</div> <select name="Gender"> <option value="nessuno">Nessuno</option> <option value="uomo">Uomo</option> <option value="donna">Donna</option> <option value="altro">Altro</option> </select> </div>
             <div class="label-field  email down-avatar"><div class="label-info">email:</div><input type="email" name="Email" placeholder="Email" value="<?php echo $utente->getProfile()->getEmail(); ?>" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"/></div>
             <div class="label-field  residenza down-avatar"><div class="label-info">residente:</div><input type="text" name="Residenza" placeholder="Residenza" value="<?php echo $utente->getProfile()->getResidenza();  ?>" pattern="[^'\x22]+"/></div>

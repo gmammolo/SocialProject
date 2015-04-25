@@ -44,6 +44,15 @@ switch($formValidate)
         {
             Utility::RedMessage("Modifiche al profilo fallite!");
         }
+        $oldPass = filter_input(INPUT_POST, 'Update');
+        $newPass = filter_input(INPUT_POST, 'Update');
+        $cNewPass = filter_input(INPUT_POST, 'Update');
+                
+        if(isset($oldPass) && isset($newPass) && $newPass == $cNewPass &&  User::checkUserValid($modUser->getUsername(), $oldPass))
+        {
+           User::changePassword($modUser->getId(), $newPass);
+        }
+        
         header("location: " . _HOME_URL_ . "?page=profile&id=".$id  );
         break;
     }
@@ -61,10 +70,7 @@ switch($formValidate)
         }
         
         $choose = filter_input(INPUT_POST, 'choose');
-        var_dump($choose);
         $avatar = filter_input(INPUT_POST, $choose);
-        
-        var_dump($avatar);
         if(preg_match('/http(s{0,1})\:\/\/[\w\/\-\.]*\.(jpg|bmp|gif|png|jpeg)/i', $avatar))
         {
             $modUser->getProfile()->setAvatar($avatar);

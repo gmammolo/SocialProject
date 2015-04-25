@@ -237,6 +237,8 @@ nav li img
     right: 0px;
     bottom: 0px;
     background-color: #DAE9E8;
+    min-width: 560px;
+/*    overflow-y: auto;*/
 }
 
 main {
@@ -258,6 +260,7 @@ footer {
     background-color: #1D1717;
     height: 4em;
     max-height: 50px;
+    min-width: 910px;
 }
 
 .copyright {

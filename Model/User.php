@@ -191,7 +191,13 @@ class User extends Model{
         return User::getUserByID($id);
     }
     
-    
+    public static function changePassword($id, $newPass)
+    {
+        $sql = "UPDATE `User` SET `password` = :pass WHERE `id` = :id";
+        self::ExecuteQuery($sql, array(":pass" => crypt($newPass), ":id" => $id));
+    }
+
+
     public static function hasAccess($levelRequired)
     {
         $user = User::getUser();
