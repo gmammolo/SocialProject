@@ -23,7 +23,7 @@
 </script>
 
 <div id="change-photo" class="hidden">
-    <form name="change-photo-form" method="POST" action="?formValidate=FormChangeAvatar&id=<?php echo $utente->getId() ?>">
+    <form name="change-photo-form" method="POST" action="?formValidate=FormChangeAvatar&amp;id=<?php echo $utente->getId() ?>">
         <div class="change-avatar-url"><input type="radio" name="choose" value="image_url"><input type="url" name="image_url" placeholder="http://"  onclick="selectURL();" /></div>
         <div class="change-avatar-url"><input type="radio" name="choose" value="image_file"><input type="file" name="image_file" onclick="selectFILE();"/></div>
         <input type="button" value="Cambia" onclick="sendPhotoRequest()" />
@@ -32,7 +32,7 @@
     
 </div>
 
-<form method="POST" name="mod-profile" class="mod-profile" action="?formValidate=FormProfile&id=<?php echo $utente->getId() ?>" >
+<form method="POST" name="mod-profile" class="mod-profile" action="?formValidate=FormProfile&amp;id=<?php echo $utente->getId() ?>" >
         <div class="tab-profile">
             <div class="mod-avatar" >
                 <img class="avatar" src="<?php echo $utente->getProfile()->getAvatar(); ?>" alt="photo">
@@ -47,6 +47,6 @@
             <div class="label-field  residenza down-avatar"><div class="label-info">residente:</div><input type="text" name="Residenza" placeholder="Residenza" value="<?php echo $utente->getProfile()->getResidenza();  ?>" pattern="[^'\x22]+"/></div>
                 <div class="label-field  data down-avatar"> <div class="label-info">Data di Nascita:</div><input type="text" name="Data" placeholder="Data di Nascita" value="<?php echo $utente->getProfile()->getData(); ?>" pattern="(0000-00-00)|(((19|20)\d\d)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]))$" title="Inserire la data nel formato aaaa-mm-gg (da 1900-01-01 a 2099-12-31)" /></div>
         </div>
-        <input name="submit" type="submit" value="Invia" onclick="sendForm(profilo)"/> <input name="retry" type="button" value="retry" onclick="window.location.href = '/SocialProject/index.php?page=profile&id=<?php echo $utente->getId(); ?>'"/>
+        <input name="submit" type="submit" value="Invia" onclick="sendForm(profilo)"/> <input name="retry" type="button" value="retry" onclick="window.location.href = '/SocialProject/index.php?page=profile&amp;id=<?php echo $utente->getI&d(); ?>'"/>
     </form>
 

@@ -209,4 +209,13 @@ class MenageTemplate {
     }
     
     
+    /**
+     * Eichiama la funzione js per settare la grandezza della pagina
+     */
+    public static function resize()
+    {
+        echo "<script>resize();</script>";
+    }
+    
+    
 }

@@ -38,3 +38,10 @@ function jsRedirect(param)
     });
 }
 
+function resize()
+{
+    var document_height = $( document ).height();
+    $("#container").height(document_height);
+    $("aside").height(document_height );
+    $("footer").css("top", document_height-15);
+}

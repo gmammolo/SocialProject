@@ -7,13 +7,6 @@ if(!User::getUser()->hasAccess(Role::Moderator))
 }
 ?>
 
-<script>
-    var userList = [];
-    <?php foreach($userList as $element ) {
-      echo ('userList[userList.lenght]=new userList("'.$element->getUsername().'", "'.$element->getProfile()->getNome()+'"  ,"'.$element->getProfile()->getAvatar().'","'.$element->getId().'");');
-    } ?>
-</script>
-
 <form name="cerca_account" method="POST" action="?formValidate=getAccountList">
     <input type="search" name="search_cerca_account" onkeyup="load_search_user(event)"/><span class="cerca_icon" ></span>
 </form>

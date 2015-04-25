@@ -24,7 +24,7 @@
     <?php
     if(User::getUser() !== $utente && User::checkAccessLevel(Role::Moderator) )
     {
-        echo '<div class="retry" onclick ="window.location.href=\'/SocialProject/index.php?page=admin\' "><img src="Template/images/arrow%202.png"> Torna Indietro</div>';
+        echo '<div class="retry" onclick ="window.location.href=\'/SocialProject/index.php?page=admin\' "><img src="Template/images/arrow%202.png" alt=" "> Torna Indietro</div>';
     }
     ?>
     <div class="tab-profile">
@@ -48,5 +48,5 @@
   else if(gender === "donna")
         $("#gender").html("<img src=\"http://php.server/SocialProject/Template/images/woman.jpg\" ALT='sesso'/>");
   else
-        $("#gender").html("<img src=\"http://php.server/SocialProject/Template/images/woman.jpg\"  ALT='sesso'/>");
+        $("#gender").html("<img src=\"http://php.server/SocialProject/Template/images/man.jpg\"  ALT='sesso'/>");
 </script>

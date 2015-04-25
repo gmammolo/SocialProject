@@ -85,7 +85,7 @@ switch($formValidate)
         if(preg_match("/['\x22]+/", $seach_string))
                 die();
         $userList = User::getAllUserWithAccessLevel(User::getUser()->getAccessLevel(), $seach_string);
-        for($i=0; $i< count($userList); $i++ ) { ?>
+        for($i=0; $i< count($userList); $i++ ) {  ?>
             <div class="accountElement" onclick="window.location.href = '/SocialProject/index.php?page=profile&id=<?php echo $userList[$i]->getId(); ?>'">
                 <img class="avatar" src="<?php echo $userList[$i]->getProfile()->getAvatar(); ?>" alt="photo">
                 <div class="generalita">
@@ -94,6 +94,7 @@ switch($formValidate)
                 </div>
             </div>
         <?php } 
+        MenageTemplate::resize();
         die();
     }
     

@@ -39,8 +39,8 @@ $user = User::getUser(); ?>
                 </div>
                 
                 <div id="search">
-                    <input id="bar_search" type="text" name="search" pattern="[^'\x22]+" placeholder="Cerca" />
-                    <input id="button_search" type="button" onclick="search()" />
+                    <input id="bar_search" type="text" name="search" pattern="[^'\x22]+" placeholder="Cerca" value=""/>
+                    <input id="button_search" type="button" onclick="search()" value=" " />
                 </div>
 
                 <!-- Nav id="nav"> -->
@@ -134,8 +134,7 @@ $user = User::getUser(); ?>
                 
             </main>
             
-            <script>
-                
+            <script> 
                 $(function(){
                     var $window = $(window).on('resize', function(){
                        var document_height = $( document ).height();

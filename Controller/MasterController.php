@@ -7,7 +7,7 @@ $icon = "Template/images/";
 MenageTemplate::addTabMenu("Home","/SocialProject/index.php",  $icon ."home.png" , Role::Unverified );
 MenageTemplate::addTabMenu("News","/SocialProject/index.php?page=news" ,  $icon . 'file%203.png' , Role::Register);
 MenageTemplate::addTabMenu("Gestione", null , $icon . "engine.png" , Role::Register );
-MenageTemplate::addTabMenu("Profilo", "/SocialProject/index.php?page=profile&id=".User::getUser()->getId() , $icon ."eye.png" , Role::Register ,"Gestione");
+MenageTemplate::addTabMenu("Profilo", "/SocialProject/index.php?page=profile&amp;id=".User::getUser()->getId() , $icon ."eye.png" , Role::Register ,"Gestione");
 MenageTemplate::addTabMenu("Amministrazione","/SocialProject/index.php?page=admin",  $icon ."shield.png" , Role::Administrator , "Gestione");
 MenageTemplate::addTabMenu("Friends","/SocialProject/index.php?page=friend" ,   $icon . 'user.png' , Role::Register);
 MenageTemplate::addTabMenu("Logout", '/SocialProject/index.php?Logout=true', $icon ."display%20down.png" , Role::Unverified);
