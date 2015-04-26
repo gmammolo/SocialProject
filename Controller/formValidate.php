@@ -44,15 +44,7 @@ switch($formValidate)
         {
             Utility::RedMessage("Modifiche al profilo fallite!");
         }
-        $oldPass = filter_input(INPUT_POST, 'Update');
-        $newPass = filter_input(INPUT_POST, 'Update');
-        $cNewPass = filter_input(INPUT_POST, 'Update');
-                
-        if(isset($oldPass) && isset($newPass) && $newPass == $cNewPass &&  User::checkUserValid($modUser->getUsername(), $oldPass))
-        {
-           User::changePassword($modUser->getId(), $newPass);
-        }
-        
+
         header("location: " . _HOME_URL_ . "?page=profile&id=".$id  );
         break;
     }
@@ -84,7 +76,36 @@ switch($formValidate)
         header("location: " . _HOME_URL_ . "?page=profile&id=".$id  );
         break;
     }
-    
+    case "FormChangePwd" :
+    {
+        $id = filter_input(INPUT_GET, 'id');
+        if(!isset($id) || !User::hasAccess(Role::Register))
+        {
+            header("location: " . _HOME_URL_ . "?page=profile"  );
+            die();
+        }
+
+        $modUser = User::getUserByID($id);
+        $oldPass = filter_input(INPUT_POST, 'oldPass');
+        $newPass = filter_input(INPUT_POST, 'newPass');
+        $cNewPass = filter_input(INPUT_POST, 'cNewPass');
+                
+        if(isset($oldPass) && isset($newPass) && $newPass == $cNewPass &&  User::checkUserValid($modUser->getUsername(), $oldPass))
+        {
+            if( User::changePassword($modUser->getId(), $newPass))
+               Utility::GreenMessage ("Password Cambiarta con successo!");
+            else
+                Utility::RedMessage ("Impossibile cambiare la passeword");
+        }
+        else
+        {
+            Utility::RedMessage("Password Errata");
+        }
+        
+        
+        header("location: " . _HOME_URL_ . "?page=profile&id=".$id  );
+        break;
+    }
     case "getAccountList" :
     {
         $seach_string = filter_input(INPUT_POST, 'search_cerca_account') ; 
@@ -92,17 +113,67 @@ switch($formValidate)
                 die();
         $userList = User::getAllUserWithAccessLevel(User::getUser()->getAccessLevel(), $seach_string);
         for($i=0; $i< count($userList); $i++ ) {  ?>
-            <div class="accountElement" onclick="window.location.href = '/SocialProject/index.php?page=profile&id=<?php echo $userList[$i]->getId(); ?>'">
-                <img class="avatar" src="<?php echo $userList[$i]->getProfile()->getAvatar(); ?>" alt="photo">
-                <div class="generalita">
-                    <div class="row"><div class="label-field  name"> <?php echo $userList[$i]->getProfile()->getNome(); ?></div><span> Email Profilo:</span> <div class="profile-email"><?php echo $userList[$i]->getProfile()->getEmail(); ?> </div> </div>
-                    <div class="row"><div class="label-field"><div class="username">@<?php echo $userList[$i]->getUsername(); ?></div><div id="gender" class="gender"></div> </div><span> Email Privata:</span> <div class="user-email"><?php echo $userList[$i]->getEmail(); ?> </div></div>
+            <div class="accountElement" >
+                <div class="option-menu-list">
+                    <div>
+                        <select name="ruolo"> 
+                            <option value="Nessuno" ><?php echo Role::getConstant($userList[$i]->getAccessLevel())  ?></option>
+                            <option disabled="disabled">--------</option>
+                            <option value="Unverified">Unverified</option>
+                            <option value="Register">Register</option>
+                            <option value="Moderator">Moderator</option>
+                            <option value="Administrator">Administrator</option>
+                        </select>
+                    </div>
+                    <div>
+                        <a href="?formValidate=updateAccount&AMP;id=<?php echo $userList[$i]->getId(); ?>"> Update </a>
+                    </div>                   
+                    <div>
+                        <a href="?formValidate=deleteAccount&AMP;id=<?php echo $userList[$i]->getId(); ?>"> Delete </a>
+                    </div>                   
+                </div><!--
+             --><div class="redirectElement"onclick=" window.location.href = '/SocialProject/index.php?page=profile&AMP;id=<?php echo $userList[$i]->getId(); ?>'">
+                    <img class="avatar" src="<?php echo $userList[$i]->getProfile()->getAvatar(); ?>" alt="photo">
+                    <div class="generalita">
+                        <div class="row"><div class="label-field  name"> <?php echo $userList[$i]->getProfile()->getNome(); ?></div><span> Email Profilo:</span> <div class="profile-email"><?php echo $userList[$i]->getProfile()->getEmail(); ?> </div> </div>
+                        <div class="row"><div class="label-field"><div class="username">@<?php echo $userList[$i]->getUsername(); ?></div><div id="gender" class="gender"></div> </div><span> Email Privata:</span> <div class="user-email"><?php echo $userList[$i]->getEmail(); ?> </div></div>
+                    </div>
                 </div>
             </div>
         <?php } 
         MenageTemplate::resize();
         die();
     }
+    case "updateAccount":
+    {
+        $id = filter_input(INPUT_GET, 'id');
+        if(!isset($id) || !User::hasAccess(Role::Register))
+        {
+            header("location: " . _HOME_URL_ . "?page=profile"  );
+            die();
+        }
+        
+         if( User::changeAccessRole($modUser->getId(), $newPass))
+               Utility::GreenMessage ("Password Cambiarta con successo!");
+            else
+                Utility::RedMessage ("Impossibile cambiare la passeword");
+        
+        header("location: " . _HOME_URL_ . "?page=profile&id=".$id  );
+        break;
+    }
+    case "deleteAccount":
+    {
+        $id = filter_input(INPUT_GET, 'id');
+        if(!isset($id) || !User::hasAccess(Role::Register))
+        {
+            header("location: " . _HOME_URL_ . "?page=profile"  );
+            die();
+        }
+        
+        header("location: " . _HOME_URL_ . "?page=profile&id=".$id  );
+        break;
+    }
+        
     
     
 }

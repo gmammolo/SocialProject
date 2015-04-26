@@ -34,7 +34,7 @@ function sendForm(profilo)
     var cNewPass = document.forms["mod-profile"].cNewPass;
     
 //    throw new Error("Something went badly wrong!");
-    if(profilo.username !== username.value || profilo.email !== email.value || (gender.value !== "nessuno" && profilo.gender != gender.value ) || profilo.residenza != residenza.value || profilo.data != data.value || oldPass.value != "" ) 
+    if(profilo.username !== username.value || profilo.email !== email.value || (gender.value !== "nessuno" && profilo.gender != gender.value ) || profilo.residenza != residenza.value || profilo.data != data.value ) 
         update = true;
     
     if(/['\x22]+/.test(username.value))
@@ -71,13 +71,6 @@ function sendForm(profilo)
          return false;
     }
     
-    if(!/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}/.test(oldPass) && !/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}/.test(newPass) && newPass !== cNewPass  )
-    {
-        alert("Password non accettabile");
-        oldPass.focus();
-        return false;
-    }
-    
     $(".mod-profile").append('<input type="hidden" name="Update" value="'+ update +'"/>');
     
     
@@ -101,8 +94,16 @@ function Profile (username , avatar, email, residenza, data, sesso) {
 
 function changeAvatar()
 {
-    $("#change-photo").removeClass("hidden");
+    $("#change-password").hide();
+    $("#change-photo").show();
 }
+
+function changePassword()
+{
+    $("#change-password").show();
+    $("#change-photo").hide();
+}
+
 
 function sendPhotoRequest()
 {
@@ -115,7 +116,33 @@ function sendPhotoRequest()
      document.forms["change-photo-form"].submit();
 }
 
+function sendPwdRequest()
+{
+    oldPwd = document.forms["change-password"].oldPass;
+    newPwd =document.forms["change-password"].newPass;
+    cPwd = document.forms["change-password"].cNewPass;
+    
+    if(!/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}/.test(oldPwd.value))
+    {
+        alert("Password Errata");
+        oldPwd.focus();
+        return false;
+    }
+    if(!/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}/.test(newPwd.value))
+    {
+        alert("Password Non accettabile");
+        newPwd.focus();
+        return false;
+    }
 
+    if(cPwd.value !== newPwd.value)
+    {
+        alert("Le password devono coincidere!");
+        newPwd.focus();
+        return false;
+    }
+    document.forms["change-password"].submit();
+}
 
 function selectURL()
 {
@@ -130,5 +157,10 @@ function selectFILE()
 
 function closeFormAvatar()
 {
-    $("#change-photo").addClass("hidden");
+    $("#change-photo").hide();
+}
+
+function closeFormPwd()
+{
+    $("#change-password").hide();
 }

@@ -38,6 +38,10 @@ class User extends Model{
 
     }
 
+    /**
+     * 
+     * @return \Role
+     */
     function getAccessLevel() {
         return $this->accessLevel;
     }
@@ -194,7 +198,8 @@ class User extends Model{
     public static function changePassword($id, $newPass)
     {
         $sql = "UPDATE `User` SET `password` = :pass WHERE `id` = :id";
-        self::ExecuteQuery($sql, array(":pass" => crypt($newPass), ":id" => $id));
+        return self::ExecuteQuery($sql, array(":pass" => crypt($newPass), ":id" => $id))->rowCount() == 1;
+         
     }
 
 

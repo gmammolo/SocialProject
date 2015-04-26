@@ -3,43 +3,35 @@
 abstract class BasicEnum {
     
     const __default =  NULL;
-    private static $constCacheArray = NULL;
 
     private static function getConstants() {
-        if (self::$constCacheArray == NULL) {
-            self::$constCacheArray = [];
-        }
-        $calledClass = get_called_class();
-        if (!array_key_exists($calledClass, self::$constCacheArray)) {
-            $reflect = new ReflectionClass($calledClass);
-            self::$constCacheArray[$calledClass] = $reflect->getConstants();
-        }
-        return self::$constCacheArray[$calledClass];
+        
+          $reflect = new ReflectionClass ( static::class );
+    	  $list_constants = $reflect->getConstants();
+           
+          $constats = array_keys($list_constants);
+          array_shift($constats);
+          return $constats;
     }
     
     
-    public static function getConstant($value)
+    public static function getConstant($index)
     {
-        var_dump (static::getConstants());
-        if(static::isValidValue($value - 1))
+        if(static::isValidValue($index))
+        {
             
-            return static::getConstants()[$value-1];
-    }
-
-    public static function isValidName($name, $strict = false) {
-        $constants = self::getConstants();
-
-        if ($strict) {
-            return array_key_exists($name, $constants);
+           return static::getConstants()[$index];
         }
-
-        $keys = array_map('strtolower', array_keys($constants));
-        return in_array(strtolower($name), $keys);
+        return "";
+            
+        
+    }
+    public static function isValidName($name) {
+        return in_array($name, static::getConstants());
     }
 
     public static function isValidValue($value) {
-        $values = array_values(self::getConstants());
-        return in_array($value, $values, $strict = true);
+        return $value >= 0 && $value < count(static::getConstants());
     }
 }
 

@@ -238,6 +238,7 @@ nav li img
     bottom: 0px;
     background-color: #DAE9E8;
     min-width: 560px;
+    overflow-x: auto;
 /*    overflow-y: auto;*/
 }
 

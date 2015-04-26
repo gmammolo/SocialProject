@@ -137,10 +137,16 @@ $user = User::getUser(); ?>
             <script> 
                 $(function(){
                     var $window = $(window).on('resize', function(){
+                        //height
                        var document_height = $( document ).height();
                        $("#container").height(document_height);
                        $("aside").height(document_height );
                        $("footer").css("top", document_height-15);
+                       
+//                       //width
+                       var document_width = $( window ).width();
+                       $("#container").width(document_width);
+                       $("footer").width(document_width + $("aside").width() );
                     }).trigger('resize'); //on page load
 
                 });
