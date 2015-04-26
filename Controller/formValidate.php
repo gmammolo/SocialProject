@@ -119,10 +119,12 @@ switch($formValidate)
                         <select name="ruolo"> 
                             <option value="Nessuno" ><?php echo Role::getConstant($userList[$i]->getAccessLevel())  ?></option>
                             <option disabled="disabled">--------</option>
-                            <option value="Unverified">Unverified</option>
-                            <option value="Register">Register</option>
-                            <option value="Moderator">Moderator</option>
-                            <option value="Administrator">Administrator</option>
+                            <?php
+                                for($j = 1; $j < User::getUser()->getAccessLevel(); $j++)
+                                {
+                                    echo '<option value="'.Role::getConstant($j).'">'.Role::getConstant($j).'</option>';
+                                }
+                            ?>
                         </select>
                     </div>
                     <div>
