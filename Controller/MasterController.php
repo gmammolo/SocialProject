@@ -16,6 +16,8 @@ MenageTemplate::addJavascript("Template/js/jquery.min.js");
 MenageTemplate::addJavascript("Template/js/jquery.scrolly.min.js");
 MenageTemplate::addJavascript("Template/js/jquery.scrollzer.min.js");
 MenageTemplate::addJavascript("Template/js/scripts.js");
+//MenageTemplate::addJavascript("Template/js/tinymce/jquery.tinymce.min.js");
+MenageTemplate::addJavascript("//tinymce.cachefly.net/4.1/tinymce.min.js");
 MenageTemplate::addJavascript("Public/Javascripts/search.js");
 
 MenageTemplate::addCss("Template/css/style.css");
@@ -73,8 +75,7 @@ else if(User::checkAccessLevel(Role::Unverified)){
     
     MenageTemplate::addCss("Template/css/style-site.css");
     $page = filter_input(INPUT_GET, 'page');
-    if(isset($page))
-        managePages ($page);
+    managePages ($page);
     require_once  "Template/page.php";
 }
 else {
@@ -95,8 +96,11 @@ function managePages($page)
     {
         Utility::YellowMessage("Attendi che un Moderatore ti abiliti ad avere accesso completo al sito!");
     }
-    
-    if($page=="profile" && $user->getAccessLevel() >= Role::Unverified)
+    if(!isset($page) || $page =="home")
+    {
+        MenageTemplate::addContent(_DIR_VIEW_."Home/Home.php");
+    }
+    else if($page=="profile" && $user->getAccessLevel() >= Role::Unverified)
     {
         MenageTemplate::addContent(_DIR_VIEW_."PrivateArea/Profile.php");
         MenageTemplate::addCss("View/PrivateArea/Profile.css");

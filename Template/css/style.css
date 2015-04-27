@@ -476,10 +476,12 @@ ul li
  }
  
  ·yellowmessage {
-     background-color: yellow;
+     background-color: #ffff66;
+     color: black;
  }
  
  .greenmessage {
      background-color: green;
+     color: black;
  }
  /* </editor-fold> */

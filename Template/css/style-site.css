@@ -21,11 +21,16 @@ header
     
 }
 
-header h1
+#title
 {
-    color: red;
-    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 50px;
+    margin-left: 30px;
+    margin-right: 30px;
+    font-size: 30px;
 }
+
+
 /* </editor-fold> */
 
 /* <editor-fold defaultstate="collapsed" desc=" Menu"> */
@@ -241,6 +246,7 @@ nav li img
     overflow-x: auto;
 /*    overflow-y: auto;*/
 }
+
 
 main {
     position: relative;
