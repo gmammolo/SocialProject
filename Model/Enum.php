@@ -48,3 +48,13 @@ class Role extends BasicEnum
     const Administrator = 4;
     const Founder = 5;
 }
+
+class Privacy extends BasicEnum 
+{
+    const __default =  self::amici;
+    
+    const privato = 0;
+    const amici = 1;
+    const amiciplus = 2;
+    const globale = 3;
+}

@@ -190,7 +190,7 @@ $user = User::getUser(); ?>
 
             <!-- Copyright -->
             <div class="copyright">
-                <p>GPL 2 License - Mammolo Giuseppe</p>
+                <p>Copyright © 2015 Mammolo Giuseppe. Tutti i diritti riservati.</p>
             </div>
 
         </footer>

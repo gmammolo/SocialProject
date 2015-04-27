@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generato il: Apr 27, 2015 alle 13:24
+-- Generato il: Apr 27, 2015 alle 20:18
 -- Versione del server: 5.5.38-0ubuntu0.14.04.1
 -- Versione PHP: 5.5.9-1ubuntu4.3
 
@@ -19,6 +19,24 @@ SET time_zone = "+00:00";
 --
 -- Database: `socialproject`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `Post`
+--
+
+CREATE TABLE IF NOT EXISTS `Post` (
+  `id` int(11) NOT NULL,
+  `author` int(11) NOT NULL,
+  `text` varchar(250) NOT NULL,
+  `image` varchar(250) NOT NULL,
+  `hashtag` varchar(250) NOT NULL,
+  `date` date NOT NULL,
+  `locate` varchar(30) NOT NULL,
+  `privacy` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -43,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `Profile` (
 
 INSERT INTO `Profile` (`id`, `nome`, `generalita`, `avatar`, `residenza`, `data`, `email`) VALUES
 (2, 'amministratore', 'uomo', 'http://www.gopsp.it/uploads/profile/photo-206.png', '', '0000-00-00', 'root@gmail.com'),
-(4, 'Super Pippo', 'nessuno', 'http://www.cartonionline.com/gif/CARTOON/disney/pippo/03_superpippo.jpg', '', '0000-00-00', 'pippo@super.it'),
+(4, 'Pippo', 'nessuno', 'https://scontent-mxp.xx.fbcdn.net/hphotos-xap1/v/t1.0-9/11074295_10205690252111622_7873289294299222000_n.jpg?oh=c0af5564920ff115eed27388ce9c57c7&oe=559F6F9B', '', '0000-00-00', 'pippo@super.it'),
 (6, 'Topolino', 'nessuno', 'http://img4.wikia.nocookie.net/__cb20141220175033/disney/it/images/4/4e/Topolinodisney.jpg', '', '0000-00-00', 'Miki@altro.com');
 
 -- --------------------------------------------------------
@@ -93,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `User` (
 
 INSERT INTO `User` (`id`, `username`, `password`, `accessLevel`, `roles`, `email`, `profile`, `cookie`, `cookie_expire`) VALUES
 (9, 'admin', '$1$3rl9ZBDI$rOfwt7yKy6LXv7PAI3uKJ1', 5, 'a:1:{i:0;i:1;}', 'root@gmail.com', 2, '', '0000-00-00'),
-(11, 'Pippo', '$1$1255aAfg$kCSIvXo11RRGOioC.wAx00', 3, 'a:0:{}', 'pippo@super.it', 4, NULL, '0000-00-00'),
+(11, 'Pippo', '$1$1255aAfg$kCSIvXo11RRGOioC.wAx00', 1, 'a:0:{}', 'pippo@super.it', 4, NULL, '0000-00-00'),
 (13, 'Topolino', '$1$2TDKxkgZ$PE7a0Xt0closwEpOVxrA8/', 4, 'a:0:{}', 'Miki@altro.com', 6, NULL, '0000-00-00');
 
 -- --------------------------------------------------------
