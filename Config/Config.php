@@ -16,6 +16,7 @@ require_once _DIR_MODEL_ . 'Enum.php';
 require_once _DIR_MODEL_.'User.php';
 require_once _DIR_MODEL_.'Profile.php';
 require_once _DIR_MODEL_.'Relationship.php';
+require_once _DIR_MODEL_.'Post.php';
 
 
 require_once _DIR_TEMPLATE_.'MenageTemplate.php';

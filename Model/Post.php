@@ -94,5 +94,21 @@ class Post extends Model {
     public function Update() {
         
     }
+    
+    
+    
+    //###################################
+    
+    
+    public static function createNewPost($author, $text, $image, $locate , $hashtag, $privacy ) {
+        $sql = "INSERT INTO `socialproject`.`Post` (`id`, `author`, `text`, `image`, `hashtag`, `date`, `locate`, `privacy`) VALUES (NULL, :author, :text, :image, :hashtag, :date, :loco, :privacy);";
+        var_dump($author);
+        var_dump($text);
+        var_dump($locate);
+        var_dump($hashtag);
+        var_dump($privacy);
+        
+        return self::ExecuteQuery($sql, array(":author" => $author , ":text" => $text , ":image" => $image , ":hashtag" => serialize($hashtag), ":date" => date("y-m-d G:i:s"), ":loco" => $locate, ":privacy" => $privacy))->rowCount() == 1;
+    }
 
 }

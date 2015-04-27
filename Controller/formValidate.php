@@ -203,12 +203,40 @@ switch($formValidate)
     }   
     case "newComment":
     {
-        $id = filter_input(INPUT_GET, 'id');
-        if(!isset($id) || !User::hasAccess(Role::Register))
+        if(!User::hasAccess(Role::Register))
         {
-            header("location: " . _HOME_URL_ . "?page=profile"  );
+            header("location: " . _HOME_URL_  );
             die();
         }
+        $switchUpload = filter_input(INPUT_POST, 'switchUpload');
+        $image = ( $switchUpload == "p_url" )  ?   filter_input(INPUT_POST, 'p_url') :   filter_input(INPUT_POST, 'p_file') ;
+
+        if($switchUpload == "p_file") {
+            //TODO: caricamento immagine sul server (compresi di controlli)
+            Utility::YellowMessage("Funzione Disabilitata");
+            header("location: " . _HOME_URL_ );
+            die();
+        }
+        
+        if($switchUpload == 'p_url' && $image != "" && !preg_match('/http(s{0,1})\:\/\/[\w\/\-\.]*\.(jpg|bmp|gif|png|jpeg)/i', $image) )
+        {
+            Utility::RedMessage("Immagine non valida!");
+            header("location: " . _HOME_URL_ );
+            die();
+        }
+        
+        $testo = filter_input(INPUT_POST, 'text');
+        $hashtag = array();
+        $locate = "";
+        $privacy = Privacy::amici;
+        if(Post::createNewPost(User::getUser()->getId(),$testo, $image ,$locate , $hashtag, $privacy )) {
+            Utility::GreenMessage("Post inviato correttamente");   
+        }
+        else {
+            Utility::RedMessage("Post non inviato correttamente");
+        }
+            
+        header("location: " . _HOME_URL_ );
         break;
     }
     

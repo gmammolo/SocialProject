@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generato il: Apr 27, 2015 alle 20:18
+-- Generato il: Apr 27, 2015 alle 23:21
 -- Versione del server: 5.5.38-0ubuntu0.14.04.1
 -- Versione PHP: 5.5.9-1ubuntu4.3
 
@@ -27,16 +27,16 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `Post` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `author` int(11) NOT NULL,
   `text` varchar(250) NOT NULL,
   `image` varchar(250) NOT NULL,
   `hashtag` varchar(250) NOT NULL,
-  `date` date NOT NULL,
+  `date` datetime NOT NULL,
   `locate` varchar(30) NOT NULL,
   `privacy` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 

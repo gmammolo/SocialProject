@@ -1,7 +1,7 @@
 <?php 
 if(User::getUser()->hasAccess(Role::Register)) { ?>
 <div id="newComment">
-    <form name="newComment" method="POST" action="?formValidate=newComment&AMP;id=<?php echo User::getUser()->getId(); ?>">
+    <form name="newComment" method="POST" action="?formValidate=newComment">
         <div class="row">
             <span>
                 <select name="switchUpload" onchange="switchUploadFunction()">
@@ -9,11 +9,11 @@ if(User::getUser()->hasAccess(Role::Register)) { ?>
                     <option value="p_file">Immagine</option>
                 </select>
             </span>
-            <span><input type="file" name="p_file"/></span>
-            <span><input type="url" name="p_url"/></span>
+            <span><input type="file" name="p_file" /></span>
+            <span><input type="url" name="p_url" placeholder="http://" /></span>
         </div>
         <div class="row"></div>
-        <div class="row"><textarea placeholder="A cosa stai pensando?"></textarea></div>
+        <div class="row"><textarea name="text" placeholder="A cosa stai pensando?"></textarea></div>
         <div class="row"><input type="button" name="invia" value="Invia" onclick="sendComment()" /></div>
     </form>
     
