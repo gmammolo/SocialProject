@@ -1,0 +1,47 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 27-apr-2015, 18.02.20
+    Author     : Giuseppe
+*/
+
+#newComment {
+    font-size: 14px;
+    line-height: 1.2em;
+}
+
+#newComment .row
+{
+    margin-top: 0px;
+    margin-bottom: 1px;
+    padding: 0px;
+}
+
+#newComment select
+{
+    width: 7em;
+}
+
+#newComment input[type="file"],
+#newComment input[type="url"]
+{
+    width: 20em;
+}
+
+#newComment textarea
+{
+    width: 27em;
+    height: 5em;
+    min-height: 3em;
+    overflow: hidden;
+    line-height: 1.2em;
+    margin: 0px;
+}
+
+#newComment input[type="button"]
+{
+    margin-left: 23em;
+}

@@ -66,8 +66,7 @@ if(isset($logout))
 if( User::checkAccessLevel(Role::Register) ) {
     MenageTemplate::addCss("Template/css/style-site.css");
     $page = filter_input(INPUT_GET, 'page');
-    if(isset($page))
-        managePages ($page);
+    managePages ($page);
     require_once  "Template/page.php";
     
 }
@@ -91,14 +90,15 @@ else {
 function managePages($page)
 {
     $user = User::getUser();
-    
     if($user->getAccessLevel() == Role::Unverified)
     {
         Utility::YellowMessage("Attendi che un Moderatore ti abiliti ad avere accesso completo al sito!");
     }
-    if(!isset($page) || $page =="home")
+    if(!isset($page) || $page =="home" || $page == "")
     {
         MenageTemplate::addContent(_DIR_VIEW_."Home/Home.php");
+        MenageTemplate::addCss("View/Home/Home.css");
+        MenageTemplate::addJavascript("View/Home/Home.js");
     }
     else if($page=="profile" && $user->getAccessLevel() >= Role::Unverified)
     {

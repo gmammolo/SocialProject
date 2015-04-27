@@ -200,9 +200,17 @@ switch($formValidate)
         
         header("location: " . _HOME_URL_ . "?page=admin" );
         break;
+    }   
+    case "newComment":
+    {
+        $id = filter_input(INPUT_GET, 'id');
+        if(!isset($id) || !User::hasAccess(Role::Register))
+        {
+            header("location: " . _HOME_URL_ . "?page=profile"  );
+            die();
+        }
+        break;
     }
-        
-    
     
 }
 
