@@ -90,7 +90,12 @@ else {
 function managePages($page)
 {
     $user = User::getUser();
-           
+    
+    if($user->getAccessLevel() == Role::Unverified)
+    {
+        Utility::YellowMessage("Attendi che un Moderatore ti abiliti ad avere accesso completo al sito!");
+    }
+    
     if($page=="profile" && $user->getAccessLevel() >= Role::Unverified)
     {
         MenageTemplate::addContent(_DIR_VIEW_."PrivateArea/Profile.php");

@@ -116,7 +116,7 @@ switch($formValidate)
             <div class="accountElement" >
                 <div class="option-menu-list">
                     <div>
-                        <select name="ruolo"> 
+                        <select name="ruolo" class="u<?php echo $userList[$i]->getId(); ?>"> 
                             <option value="Nessuno" ><?php echo Role::getConstant($userList[$i]->getAccessLevel())  ?></option>
                             <option disabled="disabled">--------</option>
                             <?php
@@ -128,7 +128,7 @@ switch($formValidate)
                         </select>
                     </div>
                     <div>
-                        <a href="?formValidate=updateAccount&AMP;id=<?php echo $userList[$i]->getId(); ?>"> Update </a>
+                        <a id="updateAcLevel" class="u<?php echo $userList[$i]->getId(); ?>" href="?formValidate=updateAccount&AMP;id=<?php echo $userList[$i]->getId(); ?>" onclick="updateSendAcLevel('<?php echo $userList[$i]->getId(); ?>')"> Update </a>
                     </div>                   
                     <div>
                         <a href="?formValidate=deleteAccount&AMP;id=<?php echo $userList[$i]->getId(); ?>"> Delete </a>
@@ -154,13 +154,26 @@ switch($formValidate)
             header("location: " . _HOME_URL_ . "?page=profile"  );
             die();
         }
-        
-         if( User::changeAccessRole($modUser->getId(), $newPass))
-               Utility::GreenMessage ("Password Cambiarta con successo!");
-            else
-                Utility::RedMessage ("Impossibile cambiare la passeword");
-        
-        header("location: " . _HOME_URL_ . "?page=profile&id=".$id  );
+        $modUser= User::getUserByID($id);
+        $newAccLevel = filter_input(INPUT_GET, 'ruolo');
+        if(!isset($newAccLevel) && !Role::isValidName($newAccLevel)) {
+//            Utility::RedMessage("Nuovo livello di accesso non accettabile");
+            header("location: " . _HOME_URL_ . "?page=admin" );
+            die();
+        }
+        if(isset($modUser)  && User::getUser()!= $modUser && User::getUser()->getAccessLevel() > constant('Role::'. $newAccLevel) ) {
+            $modUser->setAccessLevel(constant('Role::'. $newAccLevel));
+            if($modUser->Update()){
+                Utility::GreenMessage("Aggiornameto Utente effettuato con successo");
+            }
+            else {
+                Utility::YellowMessage("Utente non aggiornato");
+            }
+        }
+        else {
+            Utility::RedMessage("Non hai i permessi per fare questo!");
+        }
+        header("location: " . _HOME_URL_ . "?page=admin" );
         break;
     }
     case "deleteAccount":
@@ -168,11 +181,24 @@ switch($formValidate)
         $id = filter_input(INPUT_GET, 'id');
         if(!isset($id) || !User::hasAccess(Role::Register))
         {
-            header("location: " . _HOME_URL_ . "?page=profile"  );
+            header("location: " . _HOME_URL_ . "?page=admin"  );
             die();
         }
         
-        header("location: " . _HOME_URL_ . "?page=profile&id=".$id  );
+        $modUser= User::getUserByID($id);
+        //se l'accesslevel è minore automaticamente non sta cercando di eliminare se stesso!
+        if(isset($modUser) && $modUser->getAccessLevel() < User::getUser()->getAccessLevel())
+        {
+            if(User::deleteAccount($id)) {
+                Utility::GreenMessage("Account Eliminato con Successo");
+            }
+            else {
+                Utility::RedMessage("Impossibile eliminare questo account");
+            }
+        }
+
+        
+        header("location: " . _HOME_URL_ . "?page=admin" );
         break;
     }
         

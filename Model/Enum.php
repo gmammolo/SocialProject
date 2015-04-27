@@ -22,10 +22,12 @@ abstract class BasicEnum {
             
            return static::getConstants()[$index];
         }
-        return "";
-            
-        
+        return "";  
     }
+    
+    
+    
+    
     public static function isValidName($name) {
         return in_array($name, static::getConstants());
     }

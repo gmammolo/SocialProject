@@ -88,6 +88,11 @@ class Profile extends Model {
         
     }
     
+    /**
+     * 
+     * @param type $id
+     * @return \Profile
+     */
     public static function getProfileByID($id)
     {
         if($id == -1)
@@ -104,7 +109,10 @@ class Profile extends Model {
         
     }
     
-    
+    /**
+     * 
+     * @return \Profile
+     */
     public static function getVisitator()
     {
         $ar = array(
@@ -119,12 +127,25 @@ class Profile extends Model {
         return new Profile($ar);
     }
     
-    
+    /**
+     * 
+     * @param type $nome
+     * @param type $email
+     * @return int
+     */
     public static function createProfile($nome, $email)
     {
         $avatar = "Template/images/avatar.jpg";
         $sql = "INSERT INTO `socialproject`.`Profile` (`id`, `nome`, `avatar`, `residenza`, `email`) VALUES (NULL, ?, ?, '', ?)";
-        return self::InsertQuery($sql, array($nome, $avatar, $email));
+        $id = self::InsertQuery($sql, array($nome, $avatar, $email));
+        $prof = Profile::getProfileByID($id);
+        return (isset($prof)) ? $id : -1 ;
     }
 
+    public static function deleteProfile($id)
+    {
+        $sql = "DELETE FROM `socialproject`.`Profile` WHERE `Profile`.`id` = ?";
+        return self::ExecuteQuery($sql,array($id))->rowCount() == 1;
+    }
+    
 }

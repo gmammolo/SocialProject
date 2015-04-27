@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generato il: Apr 21, 2015 alle 20:01
--- Versione del server: 5.5.41-0ubuntu0.14.04.1
--- Versione PHP: 5.5.9-1ubuntu4.6
+-- Generato il: Apr 27, 2015 alle 13:24
+-- Versione del server: 5.5.38-0ubuntu0.14.04.1
+-- Versione PHP: 5.5.9-1ubuntu4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -35,15 +35,16 @@ CREATE TABLE IF NOT EXISTS `Profile` (
   `data` date NOT NULL,
   `email` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dump dei dati per la tabella `Profile`
 --
 
 INSERT INTO `Profile` (`id`, `nome`, `generalita`, `avatar`, `residenza`, `data`, `email`) VALUES
-(2, 'Amministratore', 'nessuno', 'Template/images/avatar.jpg', '', '0000-00-00', 'root@gmail.com'),
-(3, 'Pippo', 'uomo', 'Template/images/avatar.jpg', '', '0000-00-00', 'pippo@email.com');
+(2, 'amministratore', 'uomo', 'http://www.gopsp.it/uploads/profile/photo-206.png', '', '0000-00-00', 'root@gmail.com'),
+(4, 'Super Pippo', 'nessuno', 'http://www.cartonionline.com/gif/CARTOON/disney/pippo/03_superpippo.jpg', '', '0000-00-00', 'pippo@super.it'),
+(6, 'Topolino', 'nessuno', 'http://img4.wikia.nocookie.net/__cb20141220175033/disney/it/images/4/4e/Topolinodisney.jpg', '', '0000-00-00', 'Miki@altro.com');
 
 -- --------------------------------------------------------
 
@@ -81,42 +82,27 @@ CREATE TABLE IF NOT EXISTS `User` (
   `roles` varchar(250) NOT NULL,
   `email` varchar(32) NOT NULL,
   `profile` int(11) NOT NULL,
-  `cache` varchar(33) DEFAULT NULL,
-  `cache_expire` date NOT NULL,
+  `cookie` varchar(33) DEFAULT NULL,
+  `cookie_expire` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dump dei dati per la tabella `User`
 --
 
-INSERT INTO `User` (`id`, `username`, `password`, `accessLevel`, `roles`, `email`, `profile`, `cache`, `cache_expire`) VALUES
-(9, 'admin', '$1$0HpBTyzg$mM0v2TBKJFdRNbjEDoK67/', 5, 'a:1:{i:0;i:1;}', 'root@gmail.com', 2, '', '0000-00-00'),
-(10, 'Pippo', '$1$I3dde./R$u03B8gTOk0OqjUPBlFNby0', 2, 'a:0:{}', 'pippo@email.com', 3, NULL, '0000-00-00');
+INSERT INTO `User` (`id`, `username`, `password`, `accessLevel`, `roles`, `email`, `profile`, `cookie`, `cookie_expire`) VALUES
+(9, 'admin', '$1$3rl9ZBDI$rOfwt7yKy6LXv7PAI3uKJ1', 5, 'a:1:{i:0;i:1;}', 'root@gmail.com', 2, '', '0000-00-00'),
+(11, 'Pippo', '$1$1255aAfg$kCSIvXo11RRGOioC.wAx00', 3, 'a:0:{}', 'pippo@super.it', 4, NULL, '0000-00-00'),
+(13, 'Topolino', '$1$2TDKxkgZ$PE7a0Xt0closwEpOVxrA8/', 4, 'a:0:{}', 'Miki@altro.com', 6, NULL, '0000-00-00');
 
 -- --------------------------------------------------------
 
 --
--- Struttura stand-in per le viste `V_UserRegistred`
+-- Struttura della tabella `V_UserRegistred`
 --
-CREATE TABLE IF NOT EXISTS `V_UserRegistred` (
-`id` int(11)
-,`username` varchar(32)
-,`accessLevel` int(11)
-,`roles` varchar(250)
-,`email` varchar(32)
-,`profile` int(11)
-,`cache` varchar(33)
-,`cache_expire` date
-);
--- --------------------------------------------------------
-
---
--- Struttura per la vista `V_UserRegistred`
---
-DROP TABLE IF EXISTS `V_UserRegistred`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `V_UserRegistred` AS select `User`.`id` AS `id`,`User`.`username` AS `username`,`User`.`accessLevel` AS `accessLevel`,`User`.`roles` AS `roles`,`User`.`email` AS `email`,`User`.`profile` AS `profile`,`User`.`cache` AS `cache`,`User`.`cache_expire` AS `cache_expire` from `User` where (`User`.`accessLevel` > 1);
+-- in uso(#1356 - View 'socialproject.V_UserRegistred' references invalid table(s) or column(s) or function(s) or definer/invoker of view lack rights to use them)
+-- Si è verificato un errore durante la lettura dei dati: (#1356 - View 'socialproject.V_UserRegistred' references invalid table(s) or column(s) or function(s) or definer/invoker of view lack rights to use them)
 
 --
 -- Limiti per le tabelle scaricate

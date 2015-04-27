@@ -22,7 +22,8 @@ class User extends Model{
     protected $accessLevel;
     protected $email;
     protected $profile;
-    
+    protected $cookie;
+    protected $cookieExpire;
     
     
     
@@ -35,6 +36,10 @@ class User extends Model{
             $this->email = $ar['email'];
             $this->profile = Profile::getProfileByID($ar['profile']);
             $this->accessLevel = $ar['accessLevel'];
+            if(isset($ar['cookie'])) 
+                $this->cookie =  $ar['cookie'];
+            if(isset($ar['$cookie_expire'])) 
+                $this->cookieExpire =  $ar['$cookie_expire'];  
 
     }
 
@@ -93,10 +98,33 @@ class User extends Model{
     public function setProfile($profile) {
         $this->profile = $profile;
     }
+    
+    function getCookieExpire() {
+        return $this->cookieExpire;
+    }
 
+    function setCookieExpire($cookieExpire) {
+        $this->cookieExpire = $cookieExpire;
+    }
+
+    function getCookie() {
+        return $this->cookie;
+    }
+
+    function setCookie($cookie) {
+        $this->cookie = $cookie;
+    }
+
+    
+    /**
+     * Aggiorna l'user salvando nel db le modifiche alle variabili <br>
+     * Nota 1: non modifica la password e gli id <br>
+     * Nota 2: il false indica che non ci sono state modifiche 
+     */
     public function Update() {
-        //TODO: serialize(role);
-        throw new Exception("Not Implement Yet!");
+        $sql = "UPDATE `User` SET `username` = :user , `accessLevel` = :ac, `roles` = :role , `email` = :email , `cookie` = :cookie, `cookie_expire` = :cookesp WHERE `User`.`id` = :id ;";
+        return self::ExecuteQuery($sql, array(":user" => $this->getUsername(), ":ac" => $this->getAccessLevel(), ":role" => serialize($this->getRoles()), ":email" => $this->getEmail(), ":cookie" => $this->getCookie(), ":cookesp" => $this->getCookieExpire(), ":id" => $this->getId()))->rowCount() == 1;
+        
     }
     
     
@@ -180,17 +208,31 @@ class User extends Model{
                 
     }
     
+    /**
+     * 
+     * @param type $id
+     * @return \User or null
+     */
     public static function getUserByID($id) {
         $sql = "SELECT * FROM User WHERE id = ? ";
-        $ris = self::ExecuteQuery($sql, array($id ));
+        $ris = self::ExecuteQuery($sql, array( $id ));
         if ( $ris->rowCount() == 0 )
             return null;
         return new User($ris->fetch());
     }
-    
+    /**
+     * Crea l'Account
+     * @param type $user
+     * @param type $pass
+     * @param type $email
+     * @return /User in caso di successo, null, nel caso fallisca la creazione account, -1 se fallisce la creazione del profilo
+     */
     public static function createAccount($user, $pass, $email) {
         $idprofile= Profile::createProfile($user, $email); 
-        $sql = "INSERT INTO `socialproject`.`User` (`id`, `username`, `password`, accessLevel, `roles`, `email`, `profile`) VALUES (NULL, :user, :pass, :al , :role, :email, :profile );";
+        if($idprofile < 0) {
+            return $idprofile;
+        }
+        $sql = "INSERT INTO `User` (`id`, `username`, `password`, accessLevel, `roles`, `email`, `profile`) VALUES (NULL, :user, :pass, :al , :role, :email, :profile );";
         $id =  self::InsertQuery($sql, array(":user" => $user, ":pass" => crypt($pass), ":al" => Role::Unverified, ":role" => serialize(array()) , ":email" => $email, ":profile" => $idprofile ));
         return User::getUserByID($id);
     }
@@ -227,6 +269,16 @@ class User extends Model{
         return $lista;
     }
     
+    public static function deleteAccount($id)
+    {
+        $sql =  "DELETE FROM `socialproject`.`User` WHERE `User`.`id` = ?";
+        $user = User::getUserByID($id);
+        if(!isset($user))
+            return false;
+        return (Profile::deleteProfile($user->getProfile()->getId())) ? self::ExecuteQuery($sql, array($id))->rowCount() == 1 : false;
+    }
+    
+        
 }
  
 

@@ -45,3 +45,14 @@ function user_vista(username, name , icon, id )
     this.icon=icon;
     this.id=id;
 }
+
+
+function updateSendAcLevel(id)
+{
+    
+    ac = $("select[name='ruolo'].u"+id).val();
+    if(ac == "Nessuno")
+        return false;
+    href =  $("#updateAcLevel.u"+id).attr('href');
+    $("#updateAcLevel.u"+id).attr('href', href + "&ruolo="+ac);
+}

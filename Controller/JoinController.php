@@ -17,12 +17,17 @@ if(!preg_match("/['\x22]/", $username ) &&
     {
         Utility::GreenMessage("Registrazione in corso");
         $user = User::createAccount($username, $password, $email);
-        if(!$user)
+        if(!$user){
             Utility::RedMessage ("Errore nella creazione Account. Si prega di contattare un amministratore");
+        }
+        else if(is_numeric ($user) && $user == -1) {
+            Utility::RedMessage ("Errore nella creazione del profilo. Si prega di contattare un amministratore");
+        }
         else
         {
            Session::set('user', $user);
-           header("Location: "._HOME_URL_);
+           Utility::GreenMessage("Registrazione Completata con Successo. Benvenuto!");
+           header("Location: " . _HOME_URL_ . "?page=profile" );
            die();
         }
     }
