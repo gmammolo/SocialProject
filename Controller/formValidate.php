@@ -286,12 +286,30 @@ switch($formValidate)
                 <div class="row">
                     <div class="luogo"><?php echo $showcasePost->getPost()->getLocate(); ?></div>
                     <div class="data"><?php echo $showcasePost->getPost()->getDate(); ?></div>
-                    <div class="privacy"><?php echo $showcasePost->getPost()->getPrivacy(); ?></div>
+                    <div class="privacy">
+                        <?php 
+                            $pri = $showcasePost->getPost()->getPrivacy(); 
+                            switch ($pri) {
+                                case Privacy::privato :
+                                    echo '<img src="/SocialProject/Template/images/private_fb.png" alt=" "/>';
+                                    break;
+                                case Privacy::amici :
+                                    echo '<img src="/SocialProject/Template/images/friend_fb2.png" alt=" "/>';
+                                    break;
+                                case Privacy::amiciplus :
+                                    echo '<img src="/SocialProject/Template/images/friend_fb2.png" alt=" "/>';
+                                    break;
+                                case Privacy::globale :
+                                    echo '<img src="/SocialProject/Template/images/global_fb.png" alt=" "/>';
+                                    break;
+                            }
+                        ?>
+                    </div>
                 </div>
                 
             </div>
-        <?php }
-        MenageTemplate::resize();
+  
+        <?php } MenageTemplate::resize();
         die();
     }
     

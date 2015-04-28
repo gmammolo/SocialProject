@@ -150,7 +150,12 @@ and open the template in the editor.
     right: 0px;
     width: 20px;
     height: 20px;
-    border: 1px solid #222729;
+}
+
+#Showcase-div .post img
+{
+    width: 20px;
+    height: 20px;
 }
 
 #Showcase-other
@@ -171,3 +176,4 @@ and open the template in the editor.
     max-height: 800px !important;
     max-width: 800px !important;
 }
+
