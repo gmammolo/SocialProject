@@ -41,6 +41,19 @@ and open the template in the editor.
     margin: 0px;
 }
 
+#newComment .help_input
+{
+    position: absolute;
+    width: 27em; 
+    margin: 0px;
+    line-height: 1em;
+    font-size: 13px;
+    z-index: 20;
+    background-color: #8CD8E4;
+    color: #000;
+    margin-left: 10px;
+}
+
 #newComment input[name="luogo"]
 {
     width: 27em;
@@ -152,7 +165,7 @@ and open the template in the editor.
     height: 20px;
 }
 
-#Showcase-div .post img
+#Showcase-div .post .privacy img
 {
     width: 20px;
     height: 20px;

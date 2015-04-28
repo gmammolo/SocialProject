@@ -13,7 +13,8 @@ if(User::getUser()->hasAccess(Role::Register)) { ?>
             <span><input type="url" name="p_url" placeholder="http://" /></span>
         </div>
         <div class="row"></div>
-        <div class="row"><textarea name="text" placeholder="A cosa stai pensando?"></textarea></div>
+        <div class="row"><textarea name="text" placeholder="A cosa stai pensando?" onKeyPress="abilityHelpUser(event)" onkeyup="ricercaUtenti(event)"></textarea></div>
+        <div class="help_input"></div>
         <div class="row"><input type="text" name="luogo" title="Luogo dove è stata scattata" placeholder="Dove sei?" pattern="/[^'\x22]+/" /> </div>
         <div class="row">
             <span class="finalRow">
@@ -41,6 +42,8 @@ if(User::getUser()->hasAccess(Role::Register)) { ?>
     <div id="Showcase-other" onclick="showOther()">Altro..</div>
 </div>
 <script>
+    var ascolto= false;
+    var search ="";
     showOther();
 </script>
 

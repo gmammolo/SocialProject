@@ -346,7 +346,12 @@ switch($formValidate)
         die();
     }
     
+    case "UserList":
+    {
+        $seach =  filter_input(INPUT_GET, 'seach');
+        $art = User::getAllUserWithAccessLevel(Role::Moderator, $seach);
+        echo json_encode($art);
+        die();
+    }
+        
 }
-
-
-

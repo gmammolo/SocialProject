@@ -13,7 +13,7 @@ require_once 'Model.php';
  *
  * @author giuseppe
  */
-class Profile extends Model {
+class Profile extends Model implements \JsonSerializable{
     //put your code here
     protected $id;
     protected $nome;
@@ -103,6 +103,13 @@ class Profile extends Model {
         
     }
 
+    public function jsonSerialize() {
+        $vars = get_object_vars($this);
+
+        return $vars;
+    }
+    
+    
     public function Update() {
         $sql = "UPDATE `socialproject`.`Profile` SET `nome` = :nome, `generalita` = :gen, `residenza` = :res, `data` = :data, `email` = :email, avatar = :avatar WHERE `Profile`.`id` = :id;";
         $ris = Model::ExecuteQuery($sql,array(":nome" => $this->getNome(), ":gen" => $this->getGeneralita() , ":res" => $this->getResidenza(), ":data" => $this->getData(), ":email" => $this->getEmail(), ":avatar"=> $this->getAvatar() , ":id" => $this->getId() ));

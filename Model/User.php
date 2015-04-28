@@ -13,7 +13,7 @@ require_once 'Model.php';
  *
  * @author giuseppe
  */
-class User extends Model{
+class User extends Model implements \JsonSerializable{
     //put your code here
     
     protected $username;
@@ -115,6 +115,13 @@ class User extends Model{
         $this->cookie = $cookie;
     }
 
+    public function jsonSerialize() {
+        $vars = get_object_vars($this);
+
+        return $vars;
+    }
+    
+    
     
     /**
      * Aggiorna l'user salvando nel db le modifiche alle variabili <br>
@@ -287,8 +294,9 @@ class User extends Model{
             return false;
         return (Profile::deleteProfile($user->getProfile()->getId())) ? self::ExecuteQuery($sql, array($id))->rowCount() == 1 : false;
     }
-    
-        
+
+
+
 }
  
 
