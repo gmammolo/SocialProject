@@ -200,6 +200,16 @@ class User extends Model{
         return $ris["NUM"]== 1;
     }
     
+    /**
+     * 
+     * @param type $username
+     * @return \User
+     */
+    public static function getUserByUsername($username) {
+        $sql = "SELECT * FROM User WHERE username = ? ";
+        $ris = self::ExecuteQuery($sql, array($user ));
+        return ($ris->rowCount()== 1) ? new User($ris->fetch()) : null;
+    }
     
     public static function getUserByLogin($user, $pass) {
         $sql = "SELECT * FROM User WHERE username = ?";

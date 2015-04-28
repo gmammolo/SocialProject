@@ -12,3 +12,12 @@
 
 Notifiche: Ogni volta che un utente inserisce un
 nuovo contenuto e/o effettua un commento, gliamici ricevono una notifica
+
+Notify:
+PK idAutore
+PK idRicevente
+PK Date datetime
+idPost
+idCommento
+
+

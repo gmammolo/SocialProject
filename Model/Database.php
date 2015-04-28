@@ -18,6 +18,10 @@ class Database
     protected static    $dbuser     = "root";
     protected static    $dbpass     = "password";
 
+    /**
+     *
+     * @var \PDO
+     */
     protected $conn; 
     
     protected static $instance = null;
@@ -25,8 +29,11 @@ class Database
     protected function __construct() {
         $this->conn = new PDO("mysql:host=".static::$dbhost.";dbname=".static::$dbname,static::$dbuser,static::$dbpass);
     }
-    
-    /**
+    function getConn() {
+        return $this->conn;
+    }
+
+        /**
      * Esegue una query senza ritorno
      * @param type $sql
      * @param type $attr

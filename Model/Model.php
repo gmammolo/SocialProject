@@ -50,11 +50,18 @@ abstract class Model {
      * 
      * @param type $sql
      * @param array $attr
+     * @param array $limit array con valore inf e sup
      * @return PDOStatement
      */
-    public static function ExecuteQuery($sql , $attr = array() )
+    public static function ExecuteQuery($sql , $attr = array() , $limit = array() )
     {        
-        $ris = Database::getInstance()->query($sql, $attr);
+        
+        foreach ($limit as  $key => $val )
+        {
+           $sql = str_replace($key,$val ,$sql);
+        }
+        $ris = Database::getInstance()->getConn()->prepare($sql, $attr);
+        $ris->execute($attr);
         return $ris;
     }
     
@@ -66,12 +73,10 @@ abstract class Model {
      */
     public static function InsertQuery($sql , $attr = array() )
     {        
-        Database::getInstance()->execute($sql, $attr);
-        $id = Database::getInstance()->lastInsertId();
-        //TODO: sarebbe opportuno inserire controlli sull' ID in futuro, in quanto:
-        //This method may not return a meaningful or consistent result across different PDO drivers,
+        $ris = Database::getInstance()->query($sql, $attr);
+        //NOTE: This method may not return a meaningful or consistent result across different PDO drivers,
         // because the underlying database may not even support the notion of auto-increment fields or sequences.
-        return $id;
+        return($ris->rowCount() > 0) ? Database::getInstance()->lastInsertId() : -1;
     }
     
     

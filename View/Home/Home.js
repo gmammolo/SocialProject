@@ -28,6 +28,56 @@ function sendComment() {
         return false;
     }
     
+    if(/['\x22]+/.test($("input[name='luogo']").val()))
+    {
+         alert("Luogo non valido");
+         $("input[name='luogo']").focus();
+         return false;
+    }
+    
     //TODO: valutare la necessità di mettere controlli per il textarea
     $("form[name='newComment']").submit();
+}
+
+
+
+
+function showOther() {
+    numrow = $(".post").size();
+    rangeLimit= 30;
+    infLimit = numrow; 
+    supLimit = numrow + rangeLimit;
+     $.ajax({
+      type: "POST",
+      url: "?formValidate=getShowcase",
+      data: {"infLimit" : infLimit , "supLimit" : supLimit },
+      dataType: "html",
+      success: function(risposta){
+        old =  $("#Showcase-div").html();
+        $("#Showcase-div").html(old+risposta);
+      }
+    });
+}
+
+function zoomPhoto(event)
+{
+    var image = event.target;
+    var divParent = image.parentElement;
+    if ($(divParent).hasClass("zoomed")) {
+        $(divParent).removeClass("zoomed");
+        $(image).removeClass("zoomed");
+    }
+    else {
+        $(divParent).addClass("zoomed");
+        $(image).addClass("zoomed");
+    }
+    resize();
+        
+}
+
+function deletePost(event) {
+    var pseudoID = event.target.parentElement.id;
+    var id = pseudoID.replace("idpost","");
+    window.location.href= "?formValidate=deletePost&idpost="+id;
+    
 }

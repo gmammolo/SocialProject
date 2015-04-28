@@ -226,22 +226,109 @@ switch($formValidate)
         }
         
         $testo = filter_input(INPUT_POST, 'text');
-        $hashtag = array();
-        $locate = "";
-        $privacy = Privacy::amici;
-        if(Post::createNewPost(User::getUser()->getId(),$testo, $image ,$locate , $hashtag, $privacy )) {
-            Utility::GreenMessage("Post inviato correttamente");   
+        preg_match_all('/#[A-Za-z0-9]+/', $testo, $hashtag);
+        $hashtag = $hashtag[0];
+        $locate = filter_input(INPUT_POST, 'luogo');
+        $privacy = constant("Privacy::" . filter_input(INPUT_POST, 'privacy') );
+        
+        preg_match_all('/(?<=@)[A-Za-z0-9]+/', $testo,$other);
+        $other = $other[0];
+
+        if(preg_match("/['\x22]+/", $locate))
+        {
+            Utility::RedMessage("Dati non ammissibili");
+            header("location: " . _HOME_URL_ );
+            die();
+        }
+        $post = Post::createNewPost(User::getUser()->getId(),$testo, $image ,$locate , $hashtag, $privacy );
+        if(isset($post)) {
+            Utility::GreenMessage("Post inviato correttamente");
+            Showcase::insertPost(User::getUser()->getId(), $post->getId());
+            foreach($other as $user_name) {
+                $user_taggato = User::getUserByUsername($user_name);
+                if(isset($user_taggato)) {
+                    Showcase::insertPost($user_taggato->getId(), $post->getId());
+                }
+                    
+            }
+            
         }
         else {
             Utility::RedMessage("Post non inviato correttamente");
         }
-            
         header("location: " . _HOME_URL_ );
         break;
     }
     
+    case "getShowcase":
+    {
+    
+        $infLimit = filter_input(INPUT_POST, 'infLimit');
+        $supLimit = filter_input(INPUT_POST, 'supLimit');
+        $showcase = Showcase::getLimitShowcase(User::getUser()->getId(),$infLimit, $supLimit ); 
+        foreach($showcase as $showcasePost ) { ?>
+            <div class="post" id="idpost<?php echo $showcasePost->getPost()->getId(); ?>">
+                <div class="Author">Postato da : <span class="AuthorName"><?php echo $showcasePost->getUser()->getProfile()->getNome(); ?></span></div>
+                <div class="delete" onclick="deletePost(event)"> X </div>
+                <?php $image = $showcasePost->getPost()->getImage(); 
+                if($image != "") { ?>
+                <div class="Image" onclick="zoomPhoto(event)"><img class="Image" src="<?php echo $image; ?>" alt=""/></div>
+                <?php } ?>
+                <div class="Testo"> 
+                    <?php
+                        $text = $showcasePost->getPost()->getText();
+                        foreach($showcasePost->getPost()->getHashtag() as $hash){
+                           $text =  str_replace($hash, "<a href = '?hashtag=$hash'>".$hash."</a>", $text);
+                        }
+                        echo  $text;   
+                    ?>
+                </div>
+                <div class="row">
+                    <div class="luogo"><?php echo $showcasePost->getPost()->getLocate(); ?></div>
+                    <div class="data"><?php echo $showcasePost->getPost()->getDate(); ?></div>
+                    <div class="privacy"><?php echo $showcasePost->getPost()->getPrivacy(); ?></div>
+                </div>
+                
+            </div>
+        <?php }
+        MenageTemplate::resize();
+        die();
+    }
+    
+    case "deletePost" : 
+    {
+        $id = filter_input(INPUT_GET, 'idpost');
+        $post = Post::getPostByID($id);
+        if(!isset($post))
+        {
+            Utility::RedMessage("Errore nell' eliminazione del post");
+            header("location: " . _HOME_URL_ );
+            die();
+        }
+        if($post->getAuthor() == User::getUser() || User::hasAccess(Role::Moderator)) {
+            //Rimozione POST
+            if(Post::delete($id)) {
+                Utility::GreenMessage("Post Eliminato Correttamente");
+            }
+            else {
+                Utility::RedMessage("Impossibile rimuovere il post");
+            }
+        }
+        else {
+            //Rimozione Dalla Bacheca
+            if(Showcase::delete(User::getUser()->getId(), $post->getId() )) {
+                Utility::GreenMessage("Non Visualizzerai più questo contenuto");
+            }
+            else {
+                Utility::RedMessage("Impossibile rimuovere il post dalla bacheca");
+            }
+        }
+        
+        header("location: " . _HOME_URL_ );
+        die();
+    }
+    
 }
-
 
 
 

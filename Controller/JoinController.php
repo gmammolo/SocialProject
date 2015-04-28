@@ -11,6 +11,7 @@ if(!preg_match("/['\x22]/", $username ) &&
         $password == $cpassword &&
         preg_match('/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(.){4,16}/', $password))
 {
+    $username = preg_replace("/ /", "-", $username);
     if(User::checkUser($username, $password))
         Utility::RedMessage("Account Già esistente");
     else

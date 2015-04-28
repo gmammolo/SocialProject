@@ -14,13 +14,41 @@ if(User::getUser()->hasAccess(Role::Register)) { ?>
         </div>
         <div class="row"></div>
         <div class="row"><textarea name="text" placeholder="A cosa stai pensando?"></textarea></div>
-        <div class="row"><input type="button" name="invia" value="Invia" onclick="sendComment()" /></div>
+        <div class="row"><input type="text" name="luogo" title="Luogo dove è stata scattata" placeholder="Dove sei?" pattern="/[^'\x22]+/" /> </div>
+        <div class="row">
+            <span class="finalRow">
+                Privacy:
+                <select name="privacy">
+                    <option value="privato">Privato</option>
+                    <option value="amici" selected="selected">Amici</option>
+                    <option value="amiciplus">Amici +</option>
+                    <option value="globale">Pubblico</option>
+                </select>
+            </span>
+            <input type="button" name="invia" value="Invia" onclick="sendComment()" />
+        </div>
     </form>
     
     <script>
         $("input[name='p_file']").hide();
     </script>
 </div>
+
+
+<div id="Showcase" >
+    <div id="Showcase-div">
+    </div>
+    <div id="Showcase-other" onclick="showOther()">Altro..</div>
+</div>
+<script>
+    showOther();
+</script>
+
+
+
+
+
+
 <?php } else { ?>
     
 <h3> Qui andrebbe scritto qualcosa di elegante, ed efficace per far capire che bisogna attendere 

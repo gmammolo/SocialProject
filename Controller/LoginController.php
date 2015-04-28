@@ -2,9 +2,10 @@
 $username = filter_input(INPUT_POST, 'Username');
 $password = filter_input(INPUT_POST, 'Password');
 
-$user_irregular = preg_match("/[^'\x22]+/", $username);
-$pass_irregular = preg_match('/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(.){4,16}/', $password);
-if ($user_irregular && $pass_irregular) {
+$user_regular = preg_match("/[^'\x22]+/", $username);
+$pass_regular = preg_match('/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(.){4,16}/', $password);
+if ($user_regular && $pass_regular) {
+    $username = preg_replace("/ /", "-", $username);
     if(User::checkUserValid($username, $password))
     {
         
