@@ -268,7 +268,7 @@ switch($formValidate)
         $showcase = Showcase::getLimitShowcase(User::getUser()->getId(),$infLimit, $supLimit ); 
         foreach($showcase as $showcasePost ) { ?>
             <div class="post" id="idpost<?php echo $showcasePost->getPost()->getId(); ?>">
-                <div class="Author">Postato da : <span class="AuthorName"><?php echo $showcasePost->getUser()->getProfile()->getNome(); ?></span></div>
+                <div class="Author">Postato da : <span class="AuthorName"><a href="?page=profile&AMP;id=<?php echo $showcasePost->getAuthor()->getId(); ?>"><?php echo $showcasePost->getUser()->getProfile()->getNome(); ?></a></span></div>
                 <div class="delete" onclick="deletePost(event)"> X </div>
                 <?php $image = $showcasePost->getPost()->getImage(); 
                 if($image != "") { ?>
