@@ -233,7 +233,6 @@ switch($formValidate)
         
         preg_match_all('/(?<=@)[A-Za-z0-9]+/', $testo,$other);
         $other = $other[0];
-
         if(preg_match("/['\x22]+/", $locate))
         {
             Utility::RedMessage("Dati non ammissibili");
@@ -251,7 +250,6 @@ switch($formValidate)
                 }
                     
             }
-            
         }
         else {
             Utility::RedMessage("Post non inviato correttamente");
@@ -268,7 +266,7 @@ switch($formValidate)
         $showcase = Showcase::getLimitShowcase(User::getUser()->getId(),$infLimit, $supLimit ); 
         foreach($showcase as $showcasePost ) { ?>
             <div class="post" id="idpost<?php echo $showcasePost->getPost()->getId(); ?>">
-                <div class="Author">Postato da : <span class="AuthorName"><a href="?page=profile&AMP;id=<?php echo $showcasePost->getAuthor()->getId(); ?>"><?php echo $showcasePost->getUser()->getProfile()->getNome(); ?></a></span></div>
+                <div class="Author">Postato da : <span class="AuthorName"><a href="?page=profile&AMP;id=<?php echo $showcasePost->getPost()->getAuthor()->getId(); ?>"><?php echo $showcasePost->getPost()->getAuthor()->getProfile()->getNome(); ?></a></span></div>
                 <div class="delete" onclick="deletePost(event)"> X </div>
                 <?php $image = $showcasePost->getPost()->getImage(); 
                 if($image != "") { ?>
@@ -353,5 +351,69 @@ switch($formValidate)
         echo json_encode($art);
         die();
     }
+     
+    case "getFriends":
+    {
+        if(!User::hasAccess(Role::Register))
+        {
+            header("location: " . _HOME_URL_  );
+            die();
+        }
         
+        $friend = Friendship::getRandomFriendship(User::getUser());
+        var_dump($friend);
+        
+        die();
+    }
+    
+    case "getPossibleFriends" : 
+    {
+        if(!User::hasAccess(Role::Register))
+        {
+            header("location: " . _HOME_URL_  );
+            die();
+        }
+        
+        $possFriends = Friendship::getRandomNotFriends(User::getUser());
+        foreach($possFriends as $pf) {
+        ?>
+            <div class="pfriend">
+                <div class="row image"><img src="<?php echo $pf->getProfile()->getAvatar(); ?>" alt="" /></div>
+                <div class="row nome"><?php echo $pf->getProfile()->getNome(); ?></div>
+                <div class="row">
+                    <div class="username"><?php echo $pf->getUsername(); ?></div>
+                    <div class="sesso">
+                        <?php 
+                            $sesso = $pf->getProfile()->getGeneralita();
+                            switch ($sesso) {
+                                case "uomo" :
+                                    echo "<img src=\"/SocialProject/Template/images/man.jpg\" ALT='sesso' />";
+                                    break;
+                                case "donna":
+                                    echo "<img src=\"/SocialProject/Template/images/woman.jpg\" ALT='sesso'/>";
+                                default:
+                                    echo "<img src=\"/SocialProject/Template/images/man.jpg\"  ALT='sesso'/>";
+                            }
+                        ?>
+                    </div>
+                </div>
+                <div class="row buttonRequest pid<?php echo $pf->getId(); ?>"><input type="button" value="Invia Richiesta" onclick="sendRequestFriend(<?php echo $pf->getId(); ?>)" /></div>
+            </div>
+        <?php
+        }
+        die();
+        
+    }
+    
+    case "sendFriendRequest" :
+    {
+        $idf =  filter_input(INPUT_GET, 'friendId');
+        $pf = User::getUserByID($idf);
+        if(User::hasAccess(Role::Register) && isset($pf))
+        {
+            //TODO: add request
+        }
+        die();
+    }
+    
 }

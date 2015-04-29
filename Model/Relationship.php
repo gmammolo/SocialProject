@@ -132,19 +132,24 @@ class Relationship extends Model {
 
     
     
-    public static function getRandomNotFriend($userID)
+    public static function getRandomNotFriends($userID)
     {
         $sql = "SELECT * FROM `User`\n"
                 . "WHERE id <> :userID AND accessLevel > 1 AND id NOT IN (\n"
                 . " SELECT applicant From Relationship Where 1\n"
                 . " UNION\n"
                 . " SELECT requested From Relationship Where 1\n"
-                . " ) ORDER BY RAND() LIMIT 0, 30 ";
+                . " ) ORDER BY RAND() LIMIT 30 ";
         $u = Model::ExecuteQuery($sql, array(":userID" => $userID));
-        return ($u->rowCount() > 0) ? new User($u->fetch()) : null;
+        $ris = array();
+        while($row =  $u->fetch()) {
+            $ris []= new User($row);
+        }
+        return $ris;    
             
         
     }
+    
     
     public static function getRandomRelationship($userID)
     {
@@ -156,6 +161,12 @@ class Relationship extends Model {
                 . " ) ORDER BY RAND() LIMIT 0, 30 ";
         $u = Model::ExecuteQuery($sql, array(":userID" => $userID));
         return ($u->rowCount() > 0) ? new Relationship($u->fetch()) : null;
+    }
+    
+    public static function getRandomFriend($userID) {
+        $sql = "SELECT * FROM `Relationship` WHERE `applicant` = :id OR `requested` = :id AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE ORDER BY RAND() LIMIT 1";
+        $ris = self::ExecuteQuery($sql, array(":id"=>$userID));
+        return ($ris->rowCount()==1) ? new Relationship($ris->fetch()) : NULL; 
     }
 }
 
@@ -243,9 +254,9 @@ class Friendship {
         * @param type $user
         * @return \User
         */
-    public static function getRandomNotFriend($user)
+    public static function getRandomNotFriends($user)
     {
-        return Relationship::getRandomNotFriend($user->getID());
+        return Relationship::getRandomNotFriends($user->getID());
     }
     
     /**
@@ -255,7 +266,8 @@ class Friendship {
      */
     public static function getRandomFriendship($user)
     {
-        return new Friendship(Relationship::getRandomFriend($user->getID()));
+        $relation = Relationship::getRandomFriend($user->getID());
+        return (isset($relation)) ?  new Friendship($relation) : NULL  ;
     }
     
 }

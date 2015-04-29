@@ -214,7 +214,7 @@ class User extends Model implements \JsonSerializable{
      */
     public static function getUserByUsername($username) {
         $sql = "SELECT * FROM User WHERE username = ? ";
-        $ris = self::ExecuteQuery($sql, array($user ));
+        $ris = self::ExecuteQuery($sql, array($username ));
         return ($ris->rowCount()== 1) ? new User($ris->fetch()) : null;
     }
     
