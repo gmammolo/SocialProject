@@ -105,6 +105,8 @@ function managePages($page)
         MenageTemplate::addContent(_DIR_VIEW_."PrivateArea/Profile.php");
         MenageTemplate::addCss("View/PrivateArea/Profile.css");
         MenageTemplate::addJavascript("View/PrivateArea/Profile.js");
+        MenageTemplate::addCss("View/Home/Home.css");
+        MenageTemplate::addJavascript("View/Home/Home.js");
     }
     else if($page=="admin" && $user->getAccessLevel() >= Role::Moderator)
     {

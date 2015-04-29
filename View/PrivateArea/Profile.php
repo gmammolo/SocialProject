@@ -9,8 +9,7 @@
         header("location: " . _HOME_URL_ . "?page=home"  );
         die();
     }
-
-    if(User::getUser() != $utente && !User::checkAccessLevel(Role::Moderator) )
+    if(User::getUser() != $utente && !Friendship::IsFriend($utente) && !User::checkAccessLevel(Role::Moderator) )
     {
         Utility::RedMessage("Non hai i permessi per visualizzare questo utente");
         header("location: " . _HOME_URL_ . "?page=home"  );
@@ -36,7 +35,9 @@
     <div class="label-field  residenza down-avatar"><div class="label-info">residente:</div> <?php echo $utente->getProfile()->getResidenza(); ?></div>
         <div class="label-field  data down-avatar"> <div class="label-info">Data di Nascita:</div> <?php echo $utente->getProfile()->getData(); ?></div>
     </div>
-    <input name="buttom" type="button" value="Modifica" onclick="addForm(event)"/>
+    <?php  if(User::getUser() == $utente || User::checkAccessLevel(Role::Moderator) ) { ?>
+        <input name="buttom" type="button" value="Modifica" onclick="addForm(event)"/>
+    <?php } ?>
 </div>
 
 <script>
@@ -48,4 +49,15 @@
         $("#gender").html("<img src=\"http://php.server/SocialProject/Template/images/woman.jpg\" ALT='sesso'/>");
   else
         $("#gender").html("<img src=\"http://php.server/SocialProject/Template/images/man.jpg\"  ALT='sesso'/>");
+</script>
+
+
+
+<div id="Showcase" >
+    <div id="Showcase-div">
+    </div>
+    <div id="Showcase-other" onclick="showOther()">Altro..</div>
+</div>
+<script>
+    showOther();
 </script>

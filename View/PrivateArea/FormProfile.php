@@ -13,7 +13,8 @@
     if(User::getUser() != $utente && !User::checkAccessLevel(Role::Moderator) )
     {
         Utility::RedMessage("Non hai i permessi per visualizzare questo utente");
-        header("location: " . _HOME_URL_ . "?page=home"  );
+        echo "<script>window.location.href=\"" . _HOME_URL_ . "?page=home\"; </script>";
+//        header("location: " . _HOME_URL_ . "?page=home"  );
         die();
     }
     

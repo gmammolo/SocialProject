@@ -134,14 +134,7 @@ class User extends Model implements \JsonSerializable{
         
     }
     
-    
-    /**
-     * ritorna un utente non amico da proporre come tale
-     */
-    public function GetRandomNotFriend()
-    {
-        throw new Exception("Not Implement Yet!");
-    }
+ 
     
     
    

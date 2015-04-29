@@ -22,7 +22,7 @@ function acceptRequestFriend(id) {
       dataType: "json",
       success: function(risposta){
         if(risposta)
-            $(".pid"+id).html('<input type="button" value="Richiesta Inviata" disabled="true"/>');
+            $(".pid"+id).html('');
       }
     });
 }

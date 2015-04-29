@@ -108,9 +108,8 @@ function ricercaUtenti(event) {
 //        if(event.key.match(/^[A-Za-z0-9]$/) )
 //            search+= event.key;
         search = search.substr(1);
-        console.log(search);
         
-        
+//        window.location.href="?formValidate=UserList&seach="+search;
         $.ajax({
             type: "POST",
             dataType: "json",
