@@ -7,12 +7,22 @@
 
 function  sendRequestFriend(id) {
     $.ajax({
-      type: "POST",
-      url: "?formValidate=sendFriendRequest",
-      data: {"friendId" : id},
-      dataType: "html",
+      url: "?formValidate=sendFriendRequest&friendId="+id,
+      dataType: "json",
       success: function(risposta){
-        $(".pid"+id).html('<input type="button" value="Richiesta Inviata" disabled="true"/>');
+        if(risposta)
+            $(".pid"+id).html('<input type="button" value="Richiesta Inviata" disabled="true"/>');
+      }
+    });
+}
+
+function acceptRequestFriend(id) {
+    $.ajax({
+      url: "?formValidate=acceptRequest&friendId="+id,
+      dataType: "json",
+      success: function(risposta){
+        if(risposta)
+            $(".pid"+id).html('<input type="button" value="Richiesta Inviata" disabled="true"/>');
       }
     });
 }

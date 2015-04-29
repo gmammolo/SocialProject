@@ -359,10 +359,60 @@ switch($formValidate)
             header("location: " . _HOME_URL_  );
             die();
         }
-        
-        $friend = Friendship::getRandomFriendship(User::getUser());
-        var_dump($friend);
-        
+        $inf = filter_input(INPUT_POST, "infLimit");
+        $sup = filter_input(INPUT_POST, "supLimit");
+        $friendRequestList = Friendship::getFriendshipRequest(User::getUser(), $inf, $sup); 
+        foreach($friendRequestList as $friendship) { 
+            $pf = $friendship->getFriend();?>
+            <div class="rfriend">
+                <div class="row image"><img src="<?php echo $pf->getProfile()->getAvatar(); ?>" alt="" /></div>
+                <div class="row nome"><?php echo $pf->getProfile()->getNome(); ?></div>
+                <div class="row">
+                    <div class="username"><?php echo $pf->getUsername(); ?></div>
+                    <div class="sesso">
+                        <?php 
+                            $sesso = $pf->getProfile()->getGeneralita();
+                            switch ($sesso) {
+                                case "uomo" :
+                                    echo "<img src=\"/SocialProject/Template/images/man.jpg\" ALT='sesso' />";
+                                    break;
+                                case "donna":
+                                    echo "<img src=\"/SocialProject/Template/images/woman.jpg\" ALT='sesso'/>";
+                                default:
+                                    echo "<img src=\"/SocialProject/Template/images/man.jpg\"  ALT='sesso'/>";
+                            }
+                        ?>
+                    </div>
+                </div>
+                <div class="row buttonRequest pid<?php echo $pf->getId(); ?>"><input type="button" value="Accetta Richiesta" onclick="acceptRequestFriend(<?php echo $pf->getId(); ?>)" /></div>
+            </div>
+        <?php }
+        $friendList = Friendship::getFriendsList(User::getUser(), $inf, $sup);
+        foreach($friendList as $friendship) { 
+            $pf = $friendship->getFriend();?>
+            <div class="friend">
+                <div class="row image"><img src="<?php echo $pf->getProfile()->getAvatar(); ?>" alt="" /></div>
+                <div class="row nome"><?php echo $pf->getProfile()->getNome(); ?></div>
+                <div class="row">
+                    <div class="username"><?php echo $pf->getUsername(); ?></div>
+                    <div class="sesso">
+                        <?php 
+                            $sesso = $pf->getProfile()->getGeneralita();
+                            switch ($sesso) {
+                                case "uomo" :
+                                    echo "<img src=\"/SocialProject/Template/images/man.jpg\" ALT='sesso' />";
+                                    break;
+                                case "donna":
+                                    echo "<img src=\"/SocialProject/Template/images/woman.jpg\" ALT='sesso'/>";
+                                default:
+                                    echo "<img src=\"/SocialProject/Template/images/man.jpg\"  ALT='sesso'/>";
+                            }
+                        ?>
+                    </div>
+                </div>
+                
+            </div>
+        <?php }
         die();
     }
     
@@ -411,7 +461,22 @@ switch($formValidate)
         $pf = User::getUserByID($idf);
         if(User::hasAccess(Role::Register) && isset($pf))
         {
-            //TODO: add request
+            $ris =Relationship::addFriendRequest(User::getUser()->getId(), $pf->getId());
+            echo json_encode($ris);
+            
+            
+        }
+         
+        die();
+    }
+    case "acceptRequest" : 
+    {
+        $idf =  filter_input(INPUT_GET, 'friendId');
+        $friendship = Friendship::getFriendship(User::getUser()->getId(), $idf);
+        if(isset($friendship) && $friendship->getFriend()->getId() == $idf){
+            $friendship->acceptFriendship();
+            
+            
         }
         die();
     }

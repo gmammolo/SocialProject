@@ -9,6 +9,107 @@ and open the template in the editor.
 */
 
 
+.rfriend
+{
+    position: relative;
+    font-size: 14px;
+    border: 1px solid #222629;
+    margin: 5px;
+    padding: 5px;
+    display: inline-block;
+    min-height: 100px;
+    min-width: 100px;
+    line-height: 1em;
+    
+}
+
+.rfriend div
+{
+    display: inline-block;
+}
+
+.rfriend .row
+{
+    display: block;
+}
+
+.rfriend .image, .rfriend .image img
+{
+    max-width: 80px;
+    max-height: 80px;
+}
+
+.rfriend .nome
+{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.rfriend .buttonRequest 
+{
+    text-align: center;
+}
+
+.rfriend .buttonRequest input[type="button"]
+{
+    font-size: 16px;
+    padding: 5px;
+    margin-top: 5px;
+    line-height: 1em;
+}
+
+
+
+
+.friend
+{
+    position: relative;
+    font-size: 14px;
+    border: 1px solid #222629;
+    margin: 5px;
+    padding: 5px;
+    display: inline-block;
+    min-height: 100px;
+    min-width: 100px;
+    line-height: 1em;
+    
+}
+
+.friend div
+{
+    display: inline-block;
+}
+
+.friend .row
+{
+    display: block;
+}
+
+.friend .image, .friend .image img
+{
+    max-width: 80px;
+    max-height: 80px;
+}
+
+.friend .nome
+{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.friend .buttonRequest 
+{
+    text-align: center;
+}
+
+.friend .buttonRequest input[type="button"]
+{
+    font-size: 16px;
+    padding: 5px;
+    margin-top: 5px;
+    line-height: 1em;
+}
+
 .pfriend
 {
     position: relative;

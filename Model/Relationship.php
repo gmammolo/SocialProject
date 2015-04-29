@@ -17,7 +17,15 @@ class Relationship extends Model {
     //put your code here
 
 
+    /**
+     *
+     * @var \User
+     */
     protected $applicant;
+    /**
+     *
+     * @var \User
+     */
     protected $requested;
     protected $ablocked;
     protected $rblocked;
@@ -35,15 +43,16 @@ class Relationship extends Model {
     protected $rblockedDate;
 
     public function __construct($ar = array()) {
-        parent::__construct();
-//        $this->applicant = GetUserByID($ar["applicant"]);
-//        $this->requested = GetUserByID($ar["requested"]);
-//        $this->blocked = $ar['blocked'];
-//        $this->accepted = $ar['accepted'];
-//        $this->requestDate= $ar['requestDate'];
-//        $this->acceptedDate = $ar['acceptedDate'];
-//        $this->ablockedDate = $ar['blockedDateapllicant'];
-//        $this->rblockedDate = $ar['blockedDaterequested'];
+        $this->id = $ar['id'];
+        $this->applicant = User::GetUserByID($ar["applicant"]);
+        $this->requested = User::GetUserByID($ar["requested"]);
+        $this->ablocked = $ar['ablocked'];
+        $this->rblocked = $ar['rblocked'];
+        $this->accepted = $ar['accepted'];
+        $this->requestDate= $ar['requestDate'];
+        $this->acceptedDate = $ar['acceptedDate'];
+        $this->ablockedDate = $ar['ablockedDate'];
+        $this->rblockedDate = $ar['rblockedDate'];
     }
 
     /**
@@ -127,10 +136,18 @@ class Relationship extends Model {
     }
 
     public function Update() {
-        throw new Exception("Not Implement Yet!");
+        $sql = "UPDATE `socialproject`.`Relationship` SET `ablocked` = :ablocked, `rblocked` = :rblocked, `accepted` = :accepted, `acceptedDate` = :acceptedDate, `requestDate` = :requestDate, `ablockedDate` = :ablockedDate , `rblockedDate` = :rblockedDate WHERE `Relationship`.`id` = :id";
+        $ris= self::ExecuteQuery($sql, array( ":ablocked" => $this->getAblocked() ,":rblocked" => $this->getRblocked(), ":accepted" => $this->getAccepted(),  ":acceptedDate" => $this->getAcceptedDate() , ":requestDate" => $this->getRequestDate(), ":ablockedDate" => $this->getAblockedDate(), ":rblockedDate" => $this->getRblockedDate(), ":id" => $this->getId()  ));
+        return ($ris->rowCount() == 1);
     }
 
     
+    
+    public static function addFriendRequest($idr, $ida) {
+        $sql = "INSERT INTO `Relationship` (`applicant`, `requested`, `requestDate`) VALUES ( :applicant , :requested, :date );";
+        $ris = self::ExecuteQuery($sql, array(":applicant" => $idr, ":requested"=>$ida, ":date" => date("y-m-d G:i:s") ));
+        return ($ris->rowCount() > 0);
+    }
     
     public static function getRandomNotFriends($userID)
     {
@@ -150,11 +167,13 @@ class Relationship extends Model {
         
     }
     
+   
+    
     
     public static function getRandomRelationship($userID)
     {
         $sql = "SELECT * FROM `User`\n"
-                . "WHERE id <> :userID AND accessLevel > 1 AND id IN (\n"
+                . "WHERE id <> :userID AND accessLevel > 1 AND accessLevel <= 3 AND id IN (\n"
                 . " SELECT applicant From Relationship Where 1\n"
                 . " UNION\n"
                 . " SELECT requested From Relationship Where 1\n"
@@ -163,12 +182,41 @@ class Relationship extends Model {
         return ($u->rowCount() > 0) ? new Relationship($u->fetch()) : null;
     }
     
+    public static function getFriendshipRequest($userID, $inf, $sup) {
+        $sql = "SELECT * FROM `Relationship` WHERE ( `applicant` = :ida OR `requested` = :idr ) AND `accepted`= FALSE AND `ablocked`=FALSE AND `rblocked`= FALSE ORDER BY requestDate DESC LIMIT :inf , :sup";
+        $ris = self::ExecuteQuery($sql, array(":ida" => $userID, ":idr" => $userID), array(":inf"=>$inf, ":sup"=>$sup));
+        $acp = array();
+        while($row=$ris->fetch()) {
+            $acp[] = new Relationship($row);
+        }
+        return $acp;
+    }
+    
+    
+    public static function getFriendsList($userID, $inf, $sup) {
+        $sql = "SELECT * FROM `Relationship` WHERE ( `applicant` = :id OR `requested` = :id ) AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE ORDER BY id LIMIT :inf , :sup";
+        $ris = self::ExecuteQuery($sql, array(":id"=>$userID), array(":inf"=>$inf, ":sup"=>$sup));
+        $acp = array();
+        while($row=$ris->fetch()) {
+            $acp[] = new Relationship($row);
+        }
+        return $acp;
+    }
+    
     public static function getRandomFriend($userID) {
         $sql = "SELECT * FROM `Relationship` WHERE `applicant` = :id OR `requested` = :id AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE ORDER BY RAND() LIMIT 1";
         $ris = self::ExecuteQuery($sql, array(":id"=>$userID));
         return ($ris->rowCount()==1) ? new Relationship($ris->fetch()) : NULL; 
     }
+    
+    
+    public static function getRelationship($id1, $id2) {
+        $sql = "SELECT * FROM `Relationship` WHERE ( `applicant` = :id1 OR applicant = :id2 ) AND ( `requested` = :id1 OR requested = :id2) ;";
+        $ris= self::ExecuteQuery($sql, array(":id1"=>$id1 , ":id2"=>$id2 ));
+        return ($ris->rowCount()==1) ? new Relationship($ris->fetch()) : NULL; 
+    }
 }
+
 
 /**
  * Maschera della classe Relationship: Serve per gestire velocemente le relazioni, in  quanto 
@@ -210,7 +258,7 @@ class Friendship {
 
     /**
      * 
-     * @param Relationship $relationship
+     * @param \Relationship $relationship
      */
     public function __construct($relationship) {
         $this->relationship = $relationship;
@@ -249,6 +297,17 @@ class Friendship {
     }
 
 
+    public function acceptFriendship() {
+        $this->getRelationship()->setAccepted(TRUE);
+        $this->getRelationship()->setAcceptedDate(date("y-m-d G:i:s"));
+        $this->Update();
+    }
+    
+    public function Update() {
+        $this->getRelationship()->Update();
+    }
+    
+    
    /**
         * 
         * @param type $user
@@ -264,10 +323,36 @@ class Friendship {
      * @param type $user
      * @return \Friendship
      */
-    public static function getRandomFriendship($user)
-    {
+    public static function getRandomFriendship($user)  {
         $relation = Relationship::getRandomFriend($user->getID());
+
         return (isset($relation)) ?  new Friendship($relation) : NULL  ;
     }
+    
+    public static function getFriendshipRequest($user, $inf, $sup) {
+        $relationes = Relationship::getFriendshipRequest($user->getID(), $inf, $sup);
+        $ris=array();
+        foreach($relationes as $relation) {
+            $ris[]=  new Friendship($relation) ;
+        }
+            
+        return $ris;
+    }
+    
+        public static function getFriendsList($user, $inf, $sup) {
+        $relationes = Relationship::getFriendsList($user->getID(), $inf, $sup);
+        $ris=array();
+        foreach($relationes as $relation) {
+            $ris[]=  new Friendship($relation) ;
+        }
+            
+        return $ris;
+    }
+    
+    public static function getFriendship($id1, $id2) {
+        $relation = Relationship::getRelationship($id1, $id2);
+        return (isset($relation)) ? new Friendship($relation) : null;
+    }
+    
     
 }
