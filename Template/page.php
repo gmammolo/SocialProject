@@ -39,10 +39,12 @@ $user = User::getUser(); ?>
                 </div>
                 
                 <div id="search">
-                    <input id="bar_search" type="search" name="search" pattern="[^'\x22]+" placeholder="Cerca" value="" onkeyup="searchRequest(event)"/>
+                    <input id="bar_search" type="search" name="search" pattern="[^'\x22]+" placeholder="Cerca" value="" onkeyup="Search.searchRequest(event)"/>
                     <input id="button_search" type="button" onclick="search()" value=" " />
+                    <div id="search-result"></div>
+                    <script>$("#search-result").hide();</script>
                 </div>
-                <div id="search-result"></div>
+                
 
                 <!-- Nav id="nav"> -->
                 <nav> 

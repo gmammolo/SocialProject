@@ -10,4 +10,41 @@
     width: 300px;
     max-height: 400px;
     overflow-y: auto;
+    background-color: #8EBEBC;
+    z-index: 30;
+    padding: 10px;
+    font-size: 12px;
+    line-height: 1em;
+    top: 50px;
+    margin-left: 10px;
+}
+
+#search-result .title 
+{
+    text-align: right;
+    font-weight: bold;
+}
+
+#search-result .cliccabile
+{
+    cursor: pointer;
+}
+
+
+#search-result .user-row img
+{
+    max-width: 30px;
+    max-height: 30px;
+    vertical-align: top;
+}
+
+#search-result .nome 
+{
+    font-weight: bold;
+}
+
+#search-result .multi_row
+{
+    display: inline-block;
+    position: relative;
 }

@@ -22,13 +22,13 @@ class Friendship {
 
     /**
      *
-     * @var User 
+     * @var \User 
      */
     private $user;
 
     /**
         *
-        * @var User
+        * @var \User
         */
     private $friend;
 
@@ -53,10 +53,18 @@ class Friendship {
         }
     }
 
+    /**
+     * 
+     * @return \User
+     */
     public function getUser() {
         return ( $this->user == "A") ? $this->relationship->getApplicant() : $this->relationship->getRequested();
     }
 
+    /**
+     * 
+     * @return \User
+     */
     public function getFriend() {
         return ( $this->friend == "A") ? $this->relationship->getApplicant() : $this->relationship->getRequested();
     }

@@ -236,6 +236,12 @@ class Relationship extends Model {
         return ($ris->rowCount()==1) ? new Relationship($ris->fetch()) : NULL; 
     }
     
+    /**
+     * 
+     * @param type $iduser
+     * @param string $search
+     * @return \User
+     */
     public static function getFriendsListWithSearch($iduser, $search){
         $search = "%".$search."%";
 //        $sql = "SELECT Relationship.* FROM `Relationship` JOIN (User JOIN Profile ON Profile.id = User.profile) ON User.id = applicant OR User.id = requested   WHERE ( ( `applicant` = :id AND ( username LIKE :search OR nome LIKE :search ) )  OR (`requested` = :id AND ( username LIKE :search OR nome LIKE :search ) ) ) AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE";

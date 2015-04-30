@@ -31,7 +31,7 @@ if(isset($formValidate))
     die();
 }
 
-$ajaxRequest = filter_input(INPUT_GET, 'ajaxRequest');
+$ajaxRequest = filter_input(INPUT_POST, 'ajaxRequest');
 if(isset($ajaxRequest))
 {
     require_once _DIR_CONTROLLER_ . 'ajaxRequest.php';

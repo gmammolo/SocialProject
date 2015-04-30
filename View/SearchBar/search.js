@@ -5,18 +5,24 @@
  */
 
 
-function searchRequest() {
-    if(/['\x22]+/.test($("input[name='search']").val()))
-        return null;
-    window.location.href = "?ajaxRequest=search";
-//    $.ajax({
-//      type: "POST",
-//      url: "?ajaxRequest=search",
-//      data: {search : $("input[name='search']").val()  },
-//      dataType: "html",
-//      success: function(risposta){
-//        console.log(risposta);
-//      },
-//      error: alert("fallito")
-//    });
-}
+function Search() {}
+
+    Search.searchRequest = function () {
+        var srch = $("input[name='search']").val();
+        if(/['\x22]+/.test(srch))
+            return null;
+        $.ajax({
+          type: "POST",
+          url: "",
+          data: {"ajaxRequest" : "search" , "search" : srch  },
+          dataType: "html",
+          success: function(risposta){
+            $("#search-result").html(risposta);
+            $("#search-result").show();
+          }
+        });
+    };  
+
+    Search.redirectUser = function(id) {
+        window.location.href="?page=profile&id="+id;
+    };
