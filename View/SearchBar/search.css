@@ -1,0 +1,13 @@
+
+/* 
+    Created on : 30-apr-2015, 11.21.12
+    Author     : Giuseppe
+*/
+
+
+#search-result {
+    position: absolute;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+}

@@ -16,16 +16,13 @@ MenageTemplate::addJavascript("Template/js/jquery.min.js");
 MenageTemplate::addJavascript("Template/js/jquery.scrolly.min.js");
 MenageTemplate::addJavascript("Template/js/jquery.scrollzer.min.js");
 MenageTemplate::addJavascript("Template/js/scripts.js");
-//MenageTemplate::addJavascript("Template/js/tinymce/jquery.tinymce.min.js");
 MenageTemplate::addJavascript("//tinymce.cachefly.net/4.1/tinymce.min.js");
-MenageTemplate::addJavascript("Public/Javascripts/search.js");
+MenageTemplate::addJavascript("View/SearchBar/search.js");
 
 MenageTemplate::addCss("Template/css/style.css");
 MenageTemplate::addCss("Template/css/pure-min.css");
+MenageTemplate::addCss("View/SearchBar/search.css");
 
-
-//if(!Session::check('user'))
-//    Session::set ('user', User::getVisitator());
 
 $formValidate = filter_input(INPUT_GET, 'formValidate');
 if(isset($formValidate))
@@ -34,13 +31,12 @@ if(isset($formValidate))
     die();
 }
 
-$ajaxRequest = filter_input(INPUT_POST, 'ajaxRequest');
+$ajaxRequest = filter_input(INPUT_GET, 'ajaxRequest');
 if(isset($ajaxRequest))
 {
     require_once _DIR_CONTROLLER_ . 'ajaxRequest.php';
     die();
 }
-
 $login = filter_input(INPUT_GET, 'Login');
 if(isset($login) && !User::hasAccess(Role::Unverified) )
 {

@@ -5,3 +5,18 @@
  */
 
 
+function searchRequest() {
+    if(/['\x22]+/.test($("input[name='search']").val()))
+        return null;
+    window.location.href = "?ajaxRequest=search";
+//    $.ajax({
+//      type: "POST",
+//      url: "?ajaxRequest=search",
+//      data: {search : $("input[name='search']").val()  },
+//      dataType: "html",
+//      success: function(risposta){
+//        console.log(risposta);
+//      },
+//      error: alert("fallito")
+//    });
+}

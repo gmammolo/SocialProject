@@ -129,4 +129,23 @@ class Post extends Model {
         return self::ExecuteQuery($sql, array($id))->rowCount()==1; 
     }
     
+    public static function getPostByHashTag($hashtag) {
+        $hashtag = "%$hashtag%";
+        $sql = "SELECT Distinct Post.* FROM `Post`\n"
+            . "WHERE hashtag like :ht AND privacy = 3\n"
+            . "UNION\n"
+            . "SELECT Distinct Post.* FROM `Relationship` JOIN (Post JOIN Showcase ON id_post = Post.id ) ON id_user = requested WHERE `applicant` = :id AND accepted = TRUE AND ablocked = FALSE AND hashtag like :ht AND privacy >= 1\n"
+            . "UNION \n"
+            . "SELECT Distinct Post.* FROM `Relationship` JOIN (Post JOIN Showcase ON id_post = Post.id ) ON id_user = applicant WHERE `requested` = :id AND accepted = TRUE AND rblocked = FALSE AND hashtag like :ht AND privacy >= 1\n"
+            . "UNION\n"
+            . "SELECT Distinct Post.* FROM `Post` JOIN Showcase ON id_post = Post.id \n"
+            . "WHERE hashtag like :ht ";
+        $ris = self::ExecuteQuery($sql, array(":id" => User::getUser()->getId(),":ht" => $hashtag ) );
+        $list= array();
+        while($row = $ris->fetch()) {
+            $list[] = new Post($row);
+        }
+        return $list;
+        
+    }
 }

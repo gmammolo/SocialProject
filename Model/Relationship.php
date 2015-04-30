@@ -250,6 +250,25 @@ class Relationship extends Model {
         return $acp;
         
     }
+    
+    public static function getNotFriendListWithSearch($iduser, $search) {
+        $search = "%".$search."%";
+        $sql = "SELECT User.* FROM User JOIN Profile ON User.profile = Profile.id WHERE User.id <> :id AND accessLevel >= 2 AND accessLevel < :accLevel \n"
+    . "AND ( `username` Like :sw OR nome LIKE :sw OR Profile.email Like :sw OR User.email Like :sw )\n"
+    . "AND User.id NOT IN (SELECT requested FROM `Relationship` WHERE `applicant` = :id AND accepted = TRUE AND ablocked = FALSE\n"
+    . "UNION \n"
+    . " SELECT applicant FROM `Relationship` WHERE `requested` = :id AND accepted = TRUE AND rblocked = FALSE )";
+        
+        $ris = self::ExecuteQuery($sql, array(":id" => $iduser, ":sw" => $search, ":accLevel" => User::getUser()->getAccessLevel()));
+        $acp = array();
+        while($row=$ris->fetch()) {
+            $acp[] = new User($row);
+        }
+        return $acp;
+        
+    }
+    
+    
 }
 
 
