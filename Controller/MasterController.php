@@ -6,10 +6,10 @@ $icon = "Template/images/";
 
 MenageTemplate::addTabMenu("Home","/SocialProject/index.php",  $icon ."home.png" , Role::Unverified );
 MenageTemplate::addTabMenu("News","/SocialProject/index.php?page=news" ,  $icon . 'file%203.png' , Role::Register);
+MenageTemplate::addTabMenu("Friends","/SocialProject/index.php?page=friends" ,   $icon . 'user.png' , Role::Register);
 MenageTemplate::addTabMenu("Gestione", null , $icon . "engine.png" , Role::Register );
 MenageTemplate::addTabMenu("Profilo", "/SocialProject/index.php?page=profile&amp;id=".User::getUser()->getId() , $icon ."eye.png" , Role::Register ,"Gestione");
 MenageTemplate::addTabMenu("Amministrazione","/SocialProject/index.php?page=admin",  $icon ."shield.png" , Role::Administrator , "Gestione");
-MenageTemplate::addTabMenu("Friends","/SocialProject/index.php?page=friends" ,   $icon . 'user.png' , Role::Register);
 MenageTemplate::addTabMenu("Logout", '/SocialProject/index.php?Logout=true', $icon ."display%20down.png" , Role::Unverified);
 
 MenageTemplate::addJavascript("Template/js/jquery.min.js");
@@ -115,6 +115,12 @@ function managePages($page)
         MenageTemplate::addContent(_DIR_VIEW_."Friends/Friends.php");
         MenageTemplate::addCss("View/Friends/Friends.css");
         MenageTemplate::addJavascript("View/Friends/Friends.js");
+    }
+    else if($page=="news" && $user->getAccessLevel() >= Role::Register)
+    {
+        MenageTemplate::addContent(_DIR_VIEW_."News/News.php");
+        MenageTemplate::addCss("View/News/News.css");
+        MenageTemplate::addJavascript("View/News/News.js");
     }
     
 }

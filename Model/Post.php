@@ -146,6 +146,17 @@ class Post extends Model {
             $list[] = new Post($row);
         }
         return $list;
-        
+    }
+    
+    
+            
+    public static function getFriendPostList($infl, $supl) {
+        $sql = "SELECT Post.* FROM (Post JOIN Relationship ON author = applicant) Where requested = :id And privacy >= 1 UNION SELECT Post.* FROM (Post JOIN Relationship ON author = requested ) Where applicant = :id And privacy >= 1 ORDER BY date DESC LIMIT :inf, :sup ";
+        $ris = self::ExecuteQuery($sql, array(":id" => User::getUser()->getId()) , array(":inf" => $infl, ":sup" => $supl) );
+        $list= array();
+        while($row = $ris->fetch()) {
+            $list[] = new Post($row);
+        }
+        return $list;
     }
 }

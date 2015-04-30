@@ -56,8 +56,8 @@
 <div id="Showcase" >
     <div id="Showcase-div">
     </div>
-    <div id="Showcase-other" onclick="showOther()">Altro..</div>
+    <div id="Showcase-other" onclick="Home.showOther()">Altro..</div>
 </div>
 <script>
-    showOther();
+    Home.showOther();
 </script>

@@ -4,7 +4,7 @@ if(User::getUser()->hasAccess(Role::Register)) { ?>
     <form name="newComment" method="POST" action="?formValidate=newComment">
         <div class="row">
             <span>
-                <select name="switchUpload" onchange="switchUploadFunction()">
+                <select name="switchUpload" onchange="Home.switchUploadFunction()">
                     <option value="p_url">URL</option>
                     <option value="p_file">Immagine</option>
                 </select>
@@ -13,7 +13,7 @@ if(User::getUser()->hasAccess(Role::Register)) { ?>
             <span><input type="url" name="p_url" placeholder="http://" /></span>
         </div>
         <div class="row"></div>
-        <div class="row"><textarea name="text" placeholder="A cosa stai pensando?" onKeyPress="abilityHelpUser(event)" onkeyup="ricercaUtenti(event)"></textarea></div>
+        <div class="row"><textarea name="text" placeholder="A cosa stai pensando?" onKeyPress="Home.abilityHelpUser(event)" onkeyup="Home.ricercaUtenti(event)"></textarea></div>
         <div class="help_input"></div>
         <div class="row"><input type="text" name="luogo" title="Luogo dove è stata scattata" placeholder="Dove sei?" pattern="/[^'\x22]+/" /> </div>
         <div class="row">
@@ -26,7 +26,7 @@ if(User::getUser()->hasAccess(Role::Register)) { ?>
                     <option value="globale">Pubblico</option>
                 </select>
             </span>
-            <input type="button" name="invia" value="Invia" onclick="sendComment()" />
+            <input type="button" name="invia" value="Invia" onclick="Home.sendComment()" />
         </div>
     </form>
     
@@ -39,12 +39,12 @@ if(User::getUser()->hasAccess(Role::Register)) { ?>
 <div id="Showcase" >
     <div id="Showcase-div">
     </div>
-    <div id="Showcase-other" onclick="showOther()">Altro..</div>
+    <div id="Showcase-other" onclick="Home.showOther()">Altro..</div>
 </div>
 <script>
     var ascolto= false;
     var search ="";
-    showOther();
+    Home.showOther();
 </script>
 
 
