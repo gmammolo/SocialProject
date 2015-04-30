@@ -17,7 +17,7 @@ class Post extends Model {
     protected $hashtag;
     protected $date;
     protected $locate;
-
+    protected $likeit;
     /**
      *
      * @var \Privacy  
@@ -33,6 +33,7 @@ class Post extends Model {
         $this->date = $ar['date'];
         $this->locate = $ar['locate'];
         $this->privacy = $ar['privacy'];
+        $this->likeit = $ar["likeit"];
     }
 
     function getAuthor() {
@@ -89,6 +90,18 @@ class Post extends Model {
 
     function setPrivacy($privacy) {
         $this->privacy = $privacy;
+    }
+    function getLikeit() {
+        return $this->likeit;
+    }
+
+    function setLikeit($likeit) {
+        $this->likeit = $likeit;
+    }
+    
+    function addLike() {
+        $this->likeit++;
+        $this->Update();
     }
 
     public function Update() {

@@ -6,16 +6,16 @@
 
         <div class="post" id="idpost<?php echo $showcasePost->getId(); ?>">
             <div class="Author">Postato da : <span class="AuthorName"><a href="?page=profile&AMP;id=<?php echo $showcasePost->getAuthor()->getId(); ?>"><?php echo $showcasePost->getAuthor()->getProfile()->getNome(); ?></a></span></div>
-            <div class="delete" onclick="Home.deletePost(event)"> X </div>
+            <div class="delete" onclick="News.deletePost(event)"> X </div>
             <?php $image = $showcasePost->getImage(); 
             if($image != "") { ?>
-            <div class="Image" onclick="Home.zoomPhoto(event)"><img class="Image" src="<?php echo $image; ?>" alt=""/></div>
+            <div class="Image" onclick="News.zoomPhoto(event)"><img class="Image" src="<?php echo $image; ?>" alt=""/></div>
             <?php } ?>
             <div class="Testo"> 
                 <?php
                     $text = $showcasePost->getText();
                     foreach($showcasePost->getHashtag() as $hash){
-                       $text =  str_replace($hash, "<a href = '?hashtag=$hash'>".$hash."</a>", $text);
+                       $text =  str_replace($hash, "<a href = '?page=hashtag&amp;hashtag=$hash'>".$hash."</a>", $text);
                     }
                     echo  $text;   
                 ?>

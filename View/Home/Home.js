@@ -15,7 +15,7 @@ function Home() {}
     };
 
 
-    Home.sendComment = function () {
+    Home.sendPost = function () {
     
         if($("select[name='switchUpload']").val() === "p_url"  && $("input[name='p_url']").val() != "" && !/http(s{0,1})\:\/\/[\w\/\-\.]*\.(jpg|bmp|gif|png|jpeg)/i.test($("input[name='p_url']").val()))
         {
