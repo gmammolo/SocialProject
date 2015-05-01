@@ -30,8 +30,16 @@ class Comment extends Model {
         $this->post=Post::getPostByID( $a["idpost"] );
     }
     
-    public function Update() {
+    function addLike() {
+        $this->likeit++;
+        return $this->Update();  
+    }
 
+    
+    
+    public function Update() {
+        $sql = "UPDATE `Comment` SET `text` = :text, `likeit` = :lk, `date` = :date WHERE `Comment`.`id` = :id ;";
+        return self::ExecuteQuery($sql, array(":text" => $this->getText(), ":lk" => $this->getLikeit(), ":date" => $this->getDate(), ":id" => $this->getId()  ) )->rowCount() > 0;
     }
     
     function getPost() {

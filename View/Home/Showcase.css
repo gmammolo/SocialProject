@@ -93,9 +93,9 @@
 #Showcase-div  .luogo
 {
     display: inline-block;
-    position: relative;
+    position: absolute;
     top: 0px;
-    left: 0px;
+    right: 250px;
     font-style: oblique;
     font-weight: bold;
 }
@@ -185,6 +185,35 @@
 {
     font-size: 12px;
 }
+
+
+#Showcase-div .counter-like
+{
+    display: inline-block;
+    position: relative;
+    margin-left: 10px;
+     font-size: 14px;
+    
+}
+
+#Showcase-div form[name="addLike"]
+{
+    display: inline-block;
+    position: relative;
+    margin-left: 2px;
+}
+
+#Showcase-div input[name="addLike"]
+{
+    
+    display: inline-block;
+    padding: 2px;
+    line-height: 1em;
+    font-size: 13px;
+    width: 30px;
+    height: auto;
+}
+
 
 .zoomed {
     max-height: 800px !important;

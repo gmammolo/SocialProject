@@ -63,4 +63,34 @@ function Showcase () {}
 
         form.action = getHome() + "?formValidate=addComment";
         form.submit();
-    }
+    };
+    
+    
+    Showcase.addlikePost = function (bottone){
+        var form =  $(bottone).parent();
+        var id= form.children("input[name='postid']").val();
+        var url = form[0].baseURI;
+        $.ajax({
+          type: "POST",
+          data: { "ajaxRequest" : "addLikePost" , "postid" : id },
+          dataType: "html",
+          success: function(risposta){
+            form.children("div.counter-like").html(risposta);
+          }
+        });
+    };
+            
+    Showcase.addlikeComment = function (bottone){
+        var form =  $(bottone).parent();
+        var id= form.children("input[name='commentid']").val();
+        var url = form[0].baseURI;
+        $.ajax({
+          type: "POST",
+          data: { "ajaxRequest" : "addLikeComment" , "commentid" : id },
+          dataType: "html",
+          success: function(risposta){
+            form.children("div.counter-like").html(risposta);
+          }
+        });   
+        
+    };

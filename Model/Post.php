@@ -101,11 +101,12 @@ class Post extends Model {
     
     function addLike() {
         $this->likeit++;
-        $this->Update();
+        return $this->Update();  
     }
 
     public function Update() {
-        
+        $sql = "UPDATE `Post` SET `text` = :text, `image` = :image, `hashtag` = :hashtag , `date` = :date , `locate` = :loc, `privacy` = :priv , `likeit` = :lk  WHERE `id` = :id ;";
+        return self::ExecuteQuery($sql,array( ":text" => $this->getText(), ":image" => $this->getImage(), ":hashtag" => serialize($this->getHashtag() ), ":date" => $this->getDate(), ":loc" => $this->getLocate(), ":priv" => $this->getPrivacy(), ":lk" => $this->getLikeit(),   ":id" => $this->getId() ))->rowCount() == 1;
     }
     
     

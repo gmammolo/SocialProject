@@ -64,3 +64,26 @@ else if( $ajaxRequest == "getFriendNews" && User::hasAccess(Role::Register) ) {
         MenageTemplate::resize();
         die();
 }
+
+else if ( $ajaxRequest ==  "addLikePost" )
+{
+    $id = filter_input(INPUT_POST, 'postid');
+    $post = Post::getPostByID($id);
+    if(isset($post)) {
+        $post->addLike();
+    }
+    echo $post->getLikeit();
+    die();
+}
+
+
+else if ( $ajaxRequest ==  "addLikeComment" )
+{
+    $id = filter_input(INPUT_POST, 'commentid');
+    $comment = Comment::getCommentByID($id);
+    if(isset($comment)) {
+        $comment->addLike();
+    }
+    echo $comment->getLikeit();
+    die();
+}

@@ -24,7 +24,11 @@
                 ?>
             </div>
             <div class="row">
-                
+                <div class="like">
+                    <div class="counter-like"><?php echo $showcasePost->getPost()->getLikeit() ?></div>
+                    <input type="button" name="addLike" value="like!" onclick="Showcase.addlikePost(this)" />
+                    <input type="hidden" name="postid" value="<?php echo $showcasePost->getPost()->getId(); ?>" />
+                </div>
                 <div class="luogo"><?php echo $showcasePost->getPost()->getLocate(); ?></div>
                 <div class="data"><?php echo $showcasePost->getPost()->getDate(); ?></div>
                 <div class="privacy">
@@ -64,6 +68,11 @@
                         <input type="hidden" name="id" value="<?php echo $comment->getId(); ?>" />
                     </form>  
                     <div class="data"><?php echo $comment->getDate() ?> </div>
+                    <div class="like">
+                        <div class="counter-like"><?php echo $comment->getLikeit() ?></div>
+                        <input type="button" name="addLike" value="like!" onclick="Showcase.addlikeComment(this)" />
+                        <input type="hidden" name="commentid" value="<?php echo $comment->getId(); ?>" />
+                    </div>
                     <?php }   ?>
                 </div>    
             <?php } ?>

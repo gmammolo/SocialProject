@@ -194,7 +194,7 @@ switch($formValidate)
         
         preg_match_all('/(?<=@)[A-Za-z0-9]+/', $testo,$other);
         $other = $other[0];
-        if(preg_match("/['\x22]+/", $locate))
+        if(preg_match("/['\x22]+/", $locate) || preg_match("/['\x22]+/", $testo) )
         {
             Utility::RedMessage("Dati non ammissibili");
             header("location: " . _HOME_URL_ );
@@ -451,4 +451,7 @@ switch($formValidate)
         header("location: " . _HOME_URL_ .$page  );
         die();
     }
+
+    
+    
 }
