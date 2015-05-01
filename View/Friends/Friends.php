@@ -14,8 +14,7 @@
     supLimit = num + range;
     $.ajax({
       type: "POST",
-      url: "?formValidate=getFriends",
-      data: {"infLimit" : infLimit , "supLimit" : supLimit },
+      data: {"ajaxRequest" : "getFriends" , "infLimit" : infLimit , "supLimit" : supLimit },
       dataType: "html",
       success: function(risposta){
         $("#friend_list").html(risposta);
@@ -24,7 +23,7 @@
     
     $.ajax({
       type: "POST",
-      url: "?formValidate=getPossibleFriends",
+      data: {"ajaxRequest" : "getPossibleFriends"},
       dataType: "html",
       success: function(risposta){
         $("#possible_friend_list").html(risposta);

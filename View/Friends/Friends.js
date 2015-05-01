@@ -4,25 +4,26 @@
  * and open the template in the editor.
  */
 
+function FriendRequest() {}
 
-function  sendRequestFriend(id) {
-    $.ajax({
-      url: "?formValidate=sendFriendRequest&friendId="+id,
-      dataType: "json",
-      success: function(risposta){
-        if(risposta)
-            $(".pid"+id).html('<input type="button" value="Richiesta Inviata" disabled="true"/>');
-      }
-    });
-}
+    FriendRequest.sendRequestFriend = function  (id) {
+        $.ajax({
+          url: "?formValidate=sendFriendRequest&friendId="+id,
+          dataType: "json",
+          success: function(risposta){
+            if(risposta)
+                $(".pid"+id).html('<input type="button" value="Richiesta Inviata" disabled="true"/>');
+          }
+        });
+    }
 
-function acceptRequestFriend(id) {
-    $.ajax({
-      url: "?formValidate=acceptRequest&friendId="+id,
-      dataType: "json",
-      success: function(risposta){
-        if(risposta)
-            $(".pid"+id).html('');
-      }
-    });
-}
+    FriendRequest.acceptRequestFriend = function (id) {
+        $.ajax({
+          url: "?formValidate=acceptRequest&friendId="+id,
+          dataType: "json",
+          success: function(risposta){
+            if(risposta)
+                $(".pid"+id).html('');
+          }
+        });
+    }

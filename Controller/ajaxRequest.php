@@ -92,3 +92,35 @@ else if ( $ajaxRequest ==  "addLikeComment" )
     echo $comment->getLikeit();
     die();
 }
+
+
+else if ( $ajaxRequest ==  "getPossibleFriends" && User::hasAccess(Role::Register)) 
+{
+        
+        $possFriends = Relationship::getRandomNotRelated(User::getUser()->getId());
+        $type = "pfriend";
+        foreach($possFriends as $pf) {
+            require _DIR_VIEW_ . 'Friends/FriendTip.php';
+        }
+        die();
+        
+}
+
+else if ( $ajaxRequest ==  "getFriends" && User::hasAccess(Role::Register)) 
+{
+    $inf = filter_input(INPUT_POST, "infLimit");
+    $sup = filter_input(INPUT_POST, "supLimit");
+    $friendRequestList = Relationship::getFriendshipRequest(User::getUser()->getId(), $inf, $sup); 
+    $type = "rfriend";
+    foreach($friendRequestList as $friendship) { 
+        $pf = $friendship->getApplicant();
+        require _DIR_VIEW_ . 'Friends/FriendTip.php';
+    }
+    $friendList = Friendship::getFriendsList(User::getUser(), $inf, $sup);
+    $type = "ffriend";
+    foreach($friendList as $friendship) { 
+        $pf = $friendship->getFriend();
+        require _DIR_VIEW_ . 'Friends/FriendTip.php';
+    }
+    die();
+}
