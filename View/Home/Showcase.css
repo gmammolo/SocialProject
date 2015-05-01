@@ -40,21 +40,32 @@
 
 #Showcase-div  .Author
 {
-     font-style: oblique;
+    position: relative;
+    font-style: oblique;
     font-size: 16px;
+
+    
 }
 
 #Showcase-div  .Author .AuthorName
 {
-     font-size: 18px;
-     font-weight:bold;
+    font-size: 18px;
+    font-weight:bold;
 }
+
+#Showcase-div  .Author .Avatar
+{
+    position: relative;
+    top: 15px;
+}
+
 
 #Showcase-div  .Avatar 
 {
     margin: 5px;
     max-width: 30px;
     max-height: 30px;
+
     
 }
 
@@ -69,6 +80,7 @@
 #Showcase-div  .Testo
 {
     margin: 10px;
+    vertical-align: top;
 }
 
 #Showcase-div .post .row

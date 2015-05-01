@@ -4,7 +4,7 @@
     $showcase = Showcase::getLimitShowcase(User::getUser()->getId(),$infLimit, $supLimit ); 
     foreach($showcase as $showcasePost ) { ?>
         <div class="post">
-            <div class="Author">Postato da : <span class="AuthorName"><a href="?page=profile&AMP;id=<?php echo $showcasePost->getPost()->getAuthor()->getId(); ?>"><?php echo $showcasePost->getPost()->getAuthor()->getProfile()->getNome(); ?></a></span></div>
+            <div class="Author">Postato da : <img class="Avatar" src="<?php echo $showcasePost->getPost()->getAuthor()->getProfile()->getAvatar();  ?>" alt="" ><span class="AuthorName"><a href="?page=profile&AMP;id=<?php echo $showcasePost->getPost()->getAuthor()->getId(); ?>"><?php echo $showcasePost->getPost()->getAuthor()->getProfile()->getNome(); ?></a></span></div>
             <form name ="removePost" method="POST" action="?formValidate=deletePost">
                 <div class="delete" onclick="Showcase.deletePost(this)"> X </div>
                 <input type="hidden" name="baseuri" value="" />
@@ -67,13 +67,13 @@
                         <input type="hidden" name="baseuri" value="" />
                         <input type="hidden" name="id" value="<?php echo $comment->getId(); ?>" />
                     </form>  
+                    <?php }   ?>
                     <div class="data"><?php echo $comment->getDate() ?> </div>
                     <div class="like">
                         <div class="counter-like"><?php echo $comment->getLikeit() ?></div>
                         <input type="button" name="addLike" value="like!" onclick="Showcase.addlikeComment(this)" />
                         <input type="hidden" name="commentid" value="<?php echo $comment->getId(); ?>" />
                     </div>
-                    <?php }   ?>
                 </div>    
             <?php } ?>
             <form name="sendComment" method="POST" action="?formValidate=addComment">

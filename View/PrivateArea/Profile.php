@@ -9,12 +9,12 @@
         header("location: " . _HOME_URL_ . "?page=home"  );
         die();
     }
-    if(User::getUser() != $utente && !Friendship::IsFriend($utente) && !User::checkAccessLevel(Role::Moderator) )
-    {
-        Utility::RedMessage("Non hai i permessi per visualizzare questo utente");
-        header("location: " . _HOME_URL_ . "?page=home"  );
-        die();
-    }
+//    if(User::getUser() != $utente && !Friendship::IsFriend($utente) && !User::checkAccessLevel(Role::Moderator) )
+//    {
+//        Utility::RedMessage("Non hai i permessi per visualizzare questo utente");
+//        header("location: " . _HOME_URL_ . "?page=home"  );
+//        die();
+//    }
 
 ?>
 
@@ -31,15 +31,20 @@
         <div class="label-field  name"> <?php echo $utente->getProfile()->getNome(); ?></div>
         <div class="label-field"><span class="username">@<?php echo $utente->getUsername(); ?></span><span id="gender" class="gender"></span> </div>
     </div>
+    <?php if($utente == User::getUser() ||  Friendship::IsFriend($utente) || User::hasAccess(Role::Moderator)) { ?>
     <div class="label-field  email down-avatar"><div class="label-info">email:</div> <?php echo $utente->getProfile()->getEmail(); ?></div>
     <div class="label-field  residenza down-avatar"><div class="label-info">residente:</div> <?php echo $utente->getProfile()->getResidenza(); ?></div>
         <div class="label-field  data down-avatar"> <div class="label-info">Data di Nascita:</div> <?php echo $utente->getProfile()->getData(); ?></div>
     </div>
     <?php  if(User::getUser() == $utente || User::checkAccessLevel(Role::Moderator) ) { ?>
         <input name="buttom" type="button" value="Modifica" onclick="addForm(event)"/>
-    <?php } ?>
+    <?php }
+    } ?>
+        
 </div>
-
+<?php  if(User::getUser() != $utente && !Friendship::IsFriend($utente)  )  { ?>
+    <input name="addFriend" type="button" value="Aggiungi Amico" onclick="addFriend(event)"/>
+<?php  } ?>
 <script>
   //get gender
   var gender = "<?php echo $utente->getProfile()->getGeneralita(); ?>";
@@ -49,15 +54,4 @@
         $("#gender").html("<img src=\"http://php.server/SocialProject/Template/images/woman.jpg\" ALT='sesso'/>");
   else
         $("#gender").html("<img src=\"http://php.server/SocialProject/Template/images/man.jpg\"  ALT='sesso'/>");
-</script>
-
-
-
-<div id="Showcase" >
-    <div id="Showcase-div">
-    </div>
-    <div id="Showcase-other" onclick="Home.showOther()">Altro..</div>
-</div>
-<script>
-    Home.showOther();
 </script>
