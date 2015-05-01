@@ -69,7 +69,7 @@ abstract class Model {
      * Effettua una query di inserimento
      * @param type $sql
      * @param type $attr
-     * @return int ritorna l'iD nel caso si utilizzi un auto_increment
+     * @return int ritorna l'iD nel caso si utilizzi un auto_increment (e -1 in caso di fallimento)
      */
     public static function InsertQuery($sql , $attr = array() )
     {        

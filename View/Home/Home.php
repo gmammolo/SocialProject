@@ -26,7 +26,7 @@ if(User::getUser()->hasAccess(Role::Register)) { ?>
                     <option value="globale">Pubblico</option>
                 </select>
             </span>
-            <input type="button" name="invia" value="Invia" onclick="Home.sendComment()" />
+            <input type="button" name="invia" value="Invia" onclick="Home.sendPost()" />
         </div>
     </form>
     
@@ -39,12 +39,12 @@ if(User::getUser()->hasAccess(Role::Register)) { ?>
 <div id="Showcase" >
     <div id="Showcase-div">
     </div>
-    <div id="Showcase-other" onclick="Home.showOther()">Altro..</div>
+    <div id="Showcase-other" onclick="Showcase.showOther()">Altro..</div>
 </div>
 <script>
     var ascolto= false;
     var search ="";
-    Home.showOther();
+    Showcase.showOther();
 </script>
 
 

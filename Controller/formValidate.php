@@ -221,12 +221,17 @@ switch($formValidate)
     
     case "deletePost" : 
     {
-        $id = filter_input(INPUT_GET, 'idpost');
+        $id = filter_input(INPUT_POST, 'id');
         $post = Post::getPostByID($id);
+        $baseurl = filter_input(INPUT_POST, 'baseurl');
+        $ris = preg_match( '/(?<=page=)[^&]*/' , $baseurl , $pages  );
+        $page="";
+        if($ris)
+            $page="?page=" . $pages[0];
         if(!isset($post))
         {
             Utility::RedMessage("Errore nell' eliminazione del post");
-            header("location: " . _HOME_URL_ );
+            header("location: " . _HOME_URL_ .$page );
             die();
         }
         if($post->getAuthor() == User::getUser() || User::hasAccess(Role::Moderator)) {
@@ -248,7 +253,7 @@ switch($formValidate)
             }
         }
         
-        header("location: " . _HOME_URL_ );
+        header("location: " . _HOME_URL_ .$page);
         die();
     }
     
@@ -399,4 +404,51 @@ switch($formValidate)
         die();
     }
     
+    case "addComment" :
+    {
+        $idpost = filter_input(INPUT_POST, 'postid');
+        $baseurl = filter_input(INPUT_POST, 'baseurl');
+        $ris = preg_match( '/(?<=page=)[^&]*/' , $baseurl , $pages  );
+        $page="";
+        if($ris)
+            $page="?page=" . $pages[0];
+        $commentText = filter_input(INPUT_POST, 'commentText');
+        
+        if(is_numeric($idpost) && !preg_match("/['\x22]/", $commentText)) {
+            Comment::addComment($idpost, User::getUser()->getId(), $commentText);
+        }
+        
+        header("location: " . _HOME_URL_ .$page );
+        die();
+    }
+    case "deleteComment" : 
+    {
+        $id = filter_input(INPUT_POST, 'id');
+        $baseurl = filter_input(INPUT_POST, 'baseurl');
+        $ris = preg_match( '/(?<=page=)[^&]*/' , $baseurl , $pages  );
+        $page="";
+        if($ris)
+              $page="?page=" . $pages[0];
+            
+        $comment = Comment::getCommentByID($id);
+        if(!isset($comment))
+        {
+            Utility::RedMessage("Errore nell' eliminazione del commento");
+            header("location: " . _HOME_URL_ .$page  );
+            die();
+        }
+       if(User::getUser()==$comment->getAuthor() || User::getUser() == $comment->getPost()->getAuthor()   || User::hasAccess(Role::Moderator) ) {
+            //Rimozione POST
+            if(Comment::delete($id)) {
+                Utility::GreenMessage("Commento Eliminato Correttamente");
+            }
+            else {
+                Utility::RedMessage("Impossibile rimuovere il Commento");
+            }
+        }
+
+        
+        header("location: " . _HOME_URL_ .$page  );
+        die();
+    }
 }

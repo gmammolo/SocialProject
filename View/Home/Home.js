@@ -42,52 +42,6 @@ function Home() {}
         $("form[name='newComment']").submit();
     };
 
-
-
-
-    Home.showOther =function () {
-        numrow = $(".post").size();
-        rangeLimit= 30;
-        infLimit = numrow; 
-        supLimit = numrow + rangeLimit;
-         $.ajax({
-          type: "POST",
-          data: { "ajaxRequest" : "getShowcase" , "infLimit" : infLimit , "supLimit" : supLimit },
-          dataType: "html",
-          success: function(risposta){
-            old =  $("#Showcase-div").html();
-            var oldNum= $(".post").size();
-            $("#Showcase-div").html(old+risposta);
-            if(oldNum == $(".post").size() )
-                $("#Showcase-other").hide();
-          }
-        });
-    };
-
-    Home.zoomPhoto = function (event)
-    {
-        var image = event.target;
-        var divParent = image.parentElement;
-        if ($(divParent).hasClass("zoomed")) {
-            $(divParent).removeClass("zoomed");
-            $(image).removeClass("zoomed");
-        }
-        else {
-            $(divParent).addClass("zoomed");
-            $(image).addClass("zoomed");
-        }
-        resize();
-
-    };
-
-    Home.deletePost = function (event) {
-        var pseudoID = event.target.parentElement.id;
-        var id = pseudoID.replace("idpost","");
-        window.location.href= "?formValidate=deletePost&idpost="+id;
-
-    };
-
-
     Home.abilityHelpUser = function (event)
     {
         if(event.charCode === 64) { //@

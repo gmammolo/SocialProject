@@ -3,12 +3,16 @@
     $supLimit = filter_input(INPUT_POST, 'supLimit');
     $showcase = Showcase::getLimitShowcase(User::getUser()->getId(),$infLimit, $supLimit ); 
     foreach($showcase as $showcasePost ) { ?>
-        <div class="post" id="idpost<?php echo $showcasePost->getPost()->getId(); ?>">
+        <div class="post">
             <div class="Author">Postato da : <span class="AuthorName"><a href="?page=profile&AMP;id=<?php echo $showcasePost->getPost()->getAuthor()->getId(); ?>"><?php echo $showcasePost->getPost()->getAuthor()->getProfile()->getNome(); ?></a></span></div>
-            <div class="delete" onclick="Home.deletePost(event)"> X </div>
+            <form name ="removePost" method="POST" action="?formValidate=deletePost">
+                <div class="delete" onclick="Showcase.deletePost(this)"> X </div>
+                <input type="hidden" name="baseuri" value="" />
+                <input type="hidden" name="id" value="<?php echo $showcasePost->getPost()->getId(); ?>" />
+            </form>
             <?php $image = $showcasePost->getPost()->getImage(); 
             if($image != "") { ?>
-            <div class="Image" onclick="Home.zoomPhoto(event)"><img class="Image" src="<?php echo $image; ?>" alt=""/></div>
+            <div class="Image" onclick="Showcase.zoomPhoto(event)"><img class="Image" src="<?php echo $image; ?>" alt=""/></div>
             <?php } ?>
             <div class="Testo"> 
                 <?php
@@ -45,19 +49,30 @@
             </div>
         </div>
         <div class="comments">
-                <?php $comments = Comment::getCommentsByPostID($showcasePost->getId());
-                foreach ($comments as $comment) {  ?>
-                    <div class="comment">
-                        <img src="<?php echo $comment->getAuthor()->getProfile()->getAvatar();  ?>" alt="" >
-                        <span class="Author"><?php echo $comment->getAuthor()->getProfile()->getNome(); ?></span>
+            <?php $comments = Comment::getCommentsByPostID($showcasePost->getPost()->getId());
+            foreach ($comments as $comment) {  ?>
+                <div class="comment">
+                    <div>
+                        <img class="Avatar" src="<?php echo $comment->getAuthor()->getProfile()->getAvatar();  ?>" alt="" >
+                        <span class="Author"><?php echo $comment->getAuthor()->getProfile()->getNome(); ?>:</span>
                         <p><?php echo $comment->getText(); ?><p>
-                    </div>    
-                <?php } ?>
-                <form name="sendComment">
-                    <textarea name="commentText"  value="" draggable="false" />
-                    <input type="button" name="Invia" value="Invia" onclick="Home.sendComment()" />
-                    <input type="hidden" name="postid" value="<?php echo $showcasePost->getPost()->getId(); ?>" />
-                </form>
+                    </div>
+                    <?php if(User::getUser()==$comment->getAuthor() || User::getUser() == $showcasePost->getPost()->getAuthor()   || User::hasAccess(Role::Moderator) ) { ?>
+                    <form name="deleteComment" method="POST" action="?formValidate=deleteComment">    
+                        <div class="delete" onclick="Showcase.deleteComment(this)"> X </div>
+                        <input type="hidden" name="baseuri" value="" />
+                        <input type="hidden" name="id" value="<?php echo $comment->getId(); ?>" />
+                    </form>  
+                    <div class="data"><?php echo $comment->getDate() ?> </div>
+                    <?php }   ?>
+                </div>    
+            <?php } ?>
+            <form name="sendComment" method="POST" action="?formValidate=addComment">
+               <textarea name="commentText"  value="" draggable="false" />
+                <input type="button" name="Invia" value="Invia" onclick="Showcase.sendComment(this)" />
+                <input type="hidden" name="postid" value="<?php echo $showcasePost->getPost()->getId(); ?>" />
+               <input type="hidden" name="baseurl" value="" />
+            </form>
         </div>
 
     <?php } ?>

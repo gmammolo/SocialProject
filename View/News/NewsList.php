@@ -6,10 +6,10 @@
 
         <div class="post" id="idpost<?php echo $showcasePost->getId(); ?>">
             <div class="Author">Postato da : <span class="AuthorName"><a href="?page=profile&AMP;id=<?php echo $showcasePost->getAuthor()->getId(); ?>"><?php echo $showcasePost->getAuthor()->getProfile()->getNome(); ?></a></span></div>
-            <div class="delete" onclick="News.deletePost(event)"> X </div>
+            <div class="delete" onclick="Showcase.deletePost(event)"> X </div>
             <?php $image = $showcasePost->getImage(); 
             if($image != "") { ?>
-            <div class="Image" onclick="News.zoomPhoto(event)"><img class="Image" src="<?php echo $image; ?>" alt=""/></div>
+            <div class="Image" onclick="Showcase.zoomPhoto(event)"><img class="Image" src="<?php echo $image; ?>" alt=""/></div>
             <?php } ?>
             <div class="Testo"> 
                 <?php
@@ -43,6 +43,26 @@
                     ?>
                 </div>
             </div>
-
         </div>
+        <div class="comments">
+                <?php $comments = Comment::getCommentsByPostID($showcasePost->getId());
+                foreach ($comments as $comment) {  ?>
+                    <div class="comment">
+                        <img class="Avatar" src="<?php echo $comment->getAuthor()->getProfile()->getAvatar();  ?>" alt="" >
+                        <span class="Author"><?php echo $comment->getAuthor()->getProfile()->getNome(); ?></span>
+                        <p>:<?php echo $comment->getText(); ?><p>
+                        <?php
+                            if(User::getUser()==$comment->getAuthor() || User::hasAccess(Role::Moderator) );
+                                echo '<div class="delete" onclick="Showcase.deleteComment(event)"> X </div>';
+                        ?>
+                    </div>    
+                <?php } ?>
+                <form name="sendComment" method="POST" action="?formValidate=addComment">
+                    <textarea name="commentText"  value="" draggable="false" />
+                    <input type="button" name="Invia" value="Invia" onclick="Showcase.sendComment(this)" />
+                    <input type="hidden" name="postid" value="<?php echo $showcasePost->getPost()->getId(); ?>" />
+                   <input type="hidden" name="baseurl" value="" />
+                </form>
+        </div>
+
     <?php } ?>

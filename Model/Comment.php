@@ -68,19 +68,39 @@ class Comment extends Model {
     }
 
     
+    public static function getCommentByID($id) {
+        $sql = "SELECT * FROM Comment Where id = :id ";
+        $ris = self::ExecuteQuery($sql, array(":id" => $id) );
+        return ($ris->rowCount() > 0) ? new Comment($ris->fetch()) : null;
+    }
+    
+    
     /**
      * 
-     * @param type $id
+     * @param type $postId
      * @return \Comment[]
      */
-    public static function  getCommentsByPostID($id) {
+    public static function  getCommentsByPostID($postId) {
         $sql = "SELECT * FROM Comment Where idpost = :id ";
-        $ris = self::ExecuteQuery($sql, array(":id" => $id) );
+        $ris = self::ExecuteQuery($sql, array(":id" => $postId) );
         $list= array();
         while($row = $ris->fetch()) {
-            $list[] = new Post($row);
+            $list[] = new Comment($row);
         }
         return $list;
     }
 
+    
+    public static function addComment($idpost, $idauthor, $text) {
+        
+        $sql = "INSERT INTO `socialproject`.`Comment` ( `idpost`, `text`, `author`, `date`) VALUES (:idp , :text,  :author, :date);";
+        return  self::InsertQuery($sql, array(":idp" => $idpost, ":author" => $idauthor, ":text" => $text, ":date" => date("y-m-d G:i:s"))) > 0;
+        
+    }
+    
+    public static function delete($id) {
+        $sql ="DELETE FROM `Comment` WHERE `id` = ?";
+        return self::ExecuteQuery($sql, array($id))->rowCount()==1; 
+    }
+    
 }
