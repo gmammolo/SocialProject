@@ -1,7 +1,5 @@
-<?php       
-    $infLimit = filter_input(INPUT_POST, 'infLimit');
-    $supLimit = filter_input(INPUT_POST, 'supLimit');
-    $showcase = Showcase::getLimitShowcase(User::getUser()->getId(),$infLimit, $supLimit ); 
+<?php
+    
     foreach($showcase as $showcasePost ) { ?>
         <div class="post">
             <div class="Author">Postato da : <img class="Avatar" src="<?php echo $showcasePost->getPost()->getAuthor()->getProfile()->getAvatar();  ?>" alt="" ><span class="AuthorName"><a href="?page=profile&AMP;id=<?php echo $showcasePost->getPost()->getAuthor()->getId(); ?>"><?php echo $showcasePost->getPost()->getAuthor()->getProfile()->getNome(); ?></a></span></div>

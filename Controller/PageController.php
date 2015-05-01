@@ -8,21 +8,22 @@ function managePages($page)
     {
         Utility::YellowMessage("Attendi che un Moderatore ti abiliti ad avere accesso completo al sito!");
     }
-    if(!isset($page) || $page =="home" || $page == "")
-    {
-        MenageTemplate::addContent(_DIR_VIEW_."Home/Home.php");
-        MenageTemplate::addCss("View/Home/Home.css");
-        MenageTemplate::addJavascript("View/Home/Home.js");
-        MenageTemplate::addCss("View/Home/Showcase.css");
-        MenageTemplate::addJavascript("View/Home/Showcase.js");
-    }
-    else if($page=="profile" && $user->getAccessLevel() >= Role::Unverified)
+//    if(!isset($page) || $page =="home" || $page == "")
+//    {
+//        //DEPRECATA: reindirizza al profilo
+//        MenageTemplate::addContent(_DIR_VIEW_."Home/Home.php");
+//        MenageTemplate::addCss("View/Home/Home.css");
+//        MenageTemplate::addJavascript("View/Home/Home.js");
+//
+//    }
+    else if( ( !isset($page) || $page =="home" || $page == "" || $page=="profile" ) && $user->getAccessLevel() >= Role::Unverified)
     {
         MenageTemplate::addContent(_DIR_VIEW_."PrivateArea/Profile.php");
         MenageTemplate::addCss("View/PrivateArea/Profile.css");
         MenageTemplate::addJavascript("View/PrivateArea/Profile.js");
-        MenageTemplate::addCss("View/Home/Home.css");
-        MenageTemplate::addJavascript("View/Home/Home.js");
+        MenageTemplate::addCss("View/Showcase/Showcase.css");
+        MenageTemplate::addJavascript("View/Showcase/Showcase.js");
+
     }
     else if($page=="admin" && $user->getAccessLevel() >= Role::Moderator)
     {
@@ -41,8 +42,10 @@ function managePages($page)
         MenageTemplate::addContent(_DIR_VIEW_."News/News.php");
         MenageTemplate::addCss("View/News/News.css");
         MenageTemplate::addJavascript("View/News/News.js");
-        MenageTemplate::addCss("View/Home/Showcase.css");
-        MenageTemplate::addJavascript("View/Home/Showcase.js");
+        MenageTemplate::addCss("View/News/WriteComment.css");
+        MenageTemplate::addJavascript("View/News/WriteComment.js");
+        MenageTemplate::addCss("View/Showcase/Showcase.css");
+        MenageTemplate::addJavascript("View/Showcase/Showcase.js");
     }
     
 }

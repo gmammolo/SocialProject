@@ -162,11 +162,11 @@ switch($formValidate)
         header("location: " . _HOME_URL_ . "?page=admin" );
         break;
     }   
-    case "newComment":
+    case "addPost":
     {
         if(!User::hasAccess(Role::Register))
         {
-            header("location: " . _HOME_URL_  );
+            header("location: " . _HOME_URL_ ."?page=news"  );
             die();
         }
         $switchUpload = filter_input(INPUT_POST, 'switchUpload');
@@ -175,14 +175,14 @@ switch($formValidate)
         if($switchUpload == "p_file") {
             //TODO: caricamento immagine sul server (compresi di controlli)
             Utility::YellowMessage("Funzione Disabilitata");
-            header("location: " . _HOME_URL_ );
+            header("location: " . _HOME_URL_."?page=news"   );
             die();
         }
         
         if($switchUpload == 'p_url' && $image != "" && !preg_match('/http(s{0,1})\:\/\/[\w\/\-\.]*\.(jpg|bmp|gif|png|jpeg)/i', $image) )
         {
             Utility::RedMessage("Immagine non valida!");
-            header("location: " . _HOME_URL_ );
+            header("location: " . _HOME_URL_."?page=news"   );
             die();
         }
         
@@ -215,7 +215,7 @@ switch($formValidate)
         else {
             Utility::RedMessage("Post non inviato correttamente");
         }
-        header("location: " . _HOME_URL_ );
+        header("location: " . _HOME_URL_."?page=news"   );
         break;
     }
     

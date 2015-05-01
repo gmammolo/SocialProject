@@ -1,7 +1,5 @@
 <?php
-    $infLimit = filter_input(INPUT_POST, 'infLimit');
-    $supLimit = filter_input(INPUT_POST, 'supLimit');
-    $showcase = Post::getFriendPostList($infLimit, $supLimit ); 
+
     foreach($showcase as $showcasePost ) {  ?>
 
         <div class="post" id="idpost<?php echo $showcasePost->getId(); ?>">

@@ -9,12 +9,6 @@
         header("location: " . _HOME_URL_ . "?page=home"  );
         die();
     }
-//    if(User::getUser() != $utente && !Friendship::IsFriend($utente) && !User::checkAccessLevel(Role::Moderator) )
-//    {
-//        Utility::RedMessage("Non hai i permessi per visualizzare questo utente");
-//        header("location: " . _HOME_URL_ . "?page=home"  );
-//        die();
-//    }
 
 ?>
 
@@ -37,7 +31,7 @@
         <div class="label-field  data down-avatar"> <div class="label-info">Data di Nascita:</div> <?php echo $utente->getProfile()->getData(); ?></div>
     </div>
     <?php  if(User::getUser() == $utente || User::checkAccessLevel(Role::Moderator) ) { ?>
-        <input name="buttom" type="button" value="Modifica" onclick="addForm(event)"/>
+        <input name="buttom" type="button" value="Modifica" onclick="ProfileClass.addForm(event)"/>
     <?php }
     } ?>
         
@@ -55,3 +49,19 @@
   else
         $("#gender").html("<img src=\"http://php.server/SocialProject/Template/images/man.jpg\"  ALT='sesso'/>");
 </script>
+
+
+
+<div id="Showcase" >
+    <div id="Showcase-div">
+    </div>
+    <div id="Showcase-other" onclick="Showcase.showOther()">Altro..</div>
+</div>
+<script>
+    var ascolto= false;
+    var search ="";
+    Showcase.showOther();
+</script>
+
+
+

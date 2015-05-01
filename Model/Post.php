@@ -165,11 +165,13 @@ class Post extends Model {
     
             
     public static function getFriendPostList($infl, $supl) {
-        $sql = "SELECT Post.* FROM (Post JOIN Relationship ON author = applicant) Where requested = :id And privacy >= 1 UNION SELECT Post.* FROM (Post JOIN Relationship ON author = requested ) Where applicant = :id And privacy >= 1 ORDER BY date DESC LIMIT :inf, :sup ";
+        $sqlFrienList = "SELECT requested FROM `Relationship` WHERE `applicant` = :id AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE UNION SELECT applicant FROM `Relationship` WHERE `requested` = :id AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE\n";
+        
+        $sql = "SELECT Showcase.* FROM Showcase JOIN Post ON id_post = Post.id Where privacy >= 1 AND  author in ( $sqlFrienList ) ORDER BY date DESC LIMIT :inf, :sup";
         $ris = self::ExecuteQuery($sql, array(":id" => User::getUser()->getId()) , array(":inf" => $infl, ":sup" => $supl) );
         $list= array();
         while($row = $ris->fetch()) {
-            $list[] = new Post($row);
+            $list[] = new Showcase($row);
         }
         return $list;
     }

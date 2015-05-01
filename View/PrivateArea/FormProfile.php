@@ -25,10 +25,10 @@
 
 <div id="change-photo">
     <form name="change-photo-form" method="POST" action="?formValidate=FormChangeAvatar&amp;id=<?php echo $utente->getId() ?>">
-        <div class="change-avatar-url"><input type="radio" name="choose" value="image_url"><input type="url" name="image_url" placeholder="http://"  onclick="selectURL();" /></div>
-        <div class="change-avatar-url"><input type="radio" name="choose" value="image_file"><input type="file" name="image_file" onclick="selectFILE();"/></div>
-        <input type="button" value="Cambia" onclick="sendPhotoRequest()" />
-        <input type="button" value="Cancel" onclick="closeFormAvatar()" />
+        <div class="change-avatar-url"><input type="radio" name="choose" value="image_url"><input type="url" name="image_url" placeholder="http://"  onclick="ProfileClass.selectURL();" /></div>
+        <div class="change-avatar-url"><input type="radio" name="choose" value="image_file"><input type="file" name="image_file" onclick="ProfileClass.selectFILE();"/></div>
+        <input type="button" value="Cambia" onclick="ProfileClass.sendPhotoRequest()" />
+        <input type="button" value="Cancel" onclick="ProfileClass.closeFormAvatar()" />
     </form>
     
 </div>
@@ -37,8 +37,8 @@
     <form name="change-password" method="POST" action="?formValidate=FormChangePwd&amp;id=<?php echo $utente->getId() ?>">
             <div class="label-field  pass down-avatar"> Cambiare  Password: <input type="password" name="oldPass" placeholder="Vecchia Password" value="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}" title="Deve contenere almeno un carattere Maiuscolo, uno minuscolo e un numero. (4-16 caratteri)." /></div>
             <div class="label-field  newpass down-avatar"><input type="password" name="newPass" placeholder="Nuova Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}" title="Deve contenere almeno un carattere Maiuscolo, uno minuscolo e un numero. (4-16 caratteri)."  /><input type="password" name="cNewPass" placeholder="Conferma Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}" title="Deve contenere almeno un carattere Maiuscolo, uno minuscolo e un numero. (4-16 caratteri)."  /></div>
-            <input type="button" value="Cambia" onclick="sendPwdRequest()" />
-            <input type="button" value="Cancel" onclick="closeFormPwd()" />
+            <input type="button" value="Cambia" onclick="ProfileClass.sendPwdRequest()" />
+            <input type="button" value="Cancel" onclick="ProfileClass.closeFormPwd()" />
         </form>
     <?php endif; ?>
 </div>
@@ -52,13 +52,13 @@
         <div class="tab-profile">
             <div class="mod-avatar" >
                 <img class="avatar" src="<?php echo $utente->getProfile()->getAvatar(); ?>" alt="photo">
-                <input type="button" name="avatar" value="cambia Avatar" onclick="changeAvatar()" />
+                <input type="button" name="avatar" value="cambia Avatar" onclick="ProfileClass.changeAvatar()" />
                
             </div>
             <div class="generalita">
                 <div class="label-field  name"><input type="text" name="Username" value="<?php echo $utente->getProfile()->getNome(); ?>" placeholder="Username" pattern="[^'\x22]+" /></div>
                 <div class="label-field  username"> @<?php echo $utente->getUsername(); ?></div>
-                <div class="label-field  pwd"> <?php if($utente == User::getUser()) { ?> <input type="button" value="Cambia Password" name="change-password" onclick="changePassword()"/> <?php } ?></div>
+                <div class="label-field  pwd"> <?php if($utente == User::getUser()) { ?> <input type="button" value="Cambia Password" name="change-password" onclick="ProfileClass.changePassword()"/> <?php } ?></div>
             </div>
             
             <div class="label-field  sesso down-avatar"><div class="label-info">sesso:</div> <select name="Gender"> <option value="nessuno">Nessuno</option> <option value="uomo">Uomo</option> <option value="donna">Donna</option> <option value="altro">Altro</option> </select> </div>
@@ -66,6 +66,6 @@
             <div class="label-field  residenza down-avatar"><div class="label-info">residente:</div><input type="text" name="Residenza" placeholder="Residenza" value="<?php echo $utente->getProfile()->getResidenza();  ?>" pattern="[^'\x22]+"/></div>
                 <div class="label-field  data down-avatar"> <div class="label-info">Data di Nascita:</div><input type="text" name="Data" placeholder="Data di Nascita" value="<?php echo $utente->getProfile()->getData(); ?>" pattern="(0000-00-00)|(((19|20)\d\d)-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]))$" title="Inserire la data nel formato aaaa-mm-gg (da 1900-01-01 a 2099-12-31)" /></div>
         </div>
-        <input name="submit" type="submit" value="Invia" onclick="sendForm(profilo)"/> <input name="retry" type="button" value="retry" onclick="window.location.href = '/SocialProject/index.php?page=profile&amp;id=<?php echo $utente->getI&d(); ?>'"/>
+        <input name="submit" type="submit" value="Invia" onclick="ProfileClass.sendForm(profilo)"/> <input name="retry" type="button" value="retry" onclick="window.location.href = '/SocialProject/index.php?page=profile&amp;id=<?php echo $utente->getI&d(); ?>'"/>
     </form>
 
