@@ -144,7 +144,7 @@ class Post extends Model {
     }
     
     public static function getPostByHashTag($hashtag) {
-        $hashtag = "%$hashtag%";
+        $hashtag = "%\"$hashtag\"%";
         $sql = "SELECT Distinct Post.* FROM `Post`\n"
             . "WHERE hashtag like :ht AND privacy = 3\n"
             . "UNION\n"

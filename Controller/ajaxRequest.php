@@ -93,19 +93,6 @@ else if ( $ajaxRequest ==  "addLikeComment" )
     die();
 }
 
-
-else if ( $ajaxRequest ==  "getPossibleFriends" && User::hasAccess(Role::Register)) 
-{
-        
-        $possFriends = Relationship::getRandomNotRelated(User::getUser()->getId());
-        $type = "pfriend";
-        foreach($possFriends as $pf) {
-            require _DIR_VIEW_ . 'Friends/FriendTip.php';
-        }
-        die();
-        
-}
-
 else if ( $ajaxRequest ==  "getFriends" && User::hasAccess(Role::Register)) 
 {
     $inf = filter_input(INPUT_POST, "infLimit");
@@ -123,4 +110,17 @@ else if ( $ajaxRequest ==  "getFriends" && User::hasAccess(Role::Register))
         require _DIR_VIEW_ . 'Friends/FriendTip.php';
     }
     die();
+}
+
+
+else if ( $ajaxRequest ==  "getPossibleFriends" && User::hasAccess(Role::Register)) 
+{
+        
+        $possFriends = Relationship::getRandomNotRelated(User::getUser()->getId());
+        $type = "pfriend";
+        foreach($possFriends as $pf) {
+            require _DIR_VIEW_ . 'Friends/FriendTip.php';
+        }
+        die();
+        
 }

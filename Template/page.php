@@ -40,7 +40,7 @@ $user = User::getUser(); ?>
                 
                 <div id="search">
                     <input id="bar_search" type="search" name="search" pattern="[^'\x22]+" placeholder="Cerca" value="" onkeyup="Search.searchRequest(event)"/>
-                    <input id="button_search" type="button" onclick="search()" value=" " />
+                    <input id="button_search" type="button" onclick="search()" value=" " onclick="Search.goAdvancedSearch()" />
                     <div id="search-result"></div>
                     <script>$("#search-result").hide();</script>
                 </div>
@@ -53,8 +53,9 @@ $user = User::getUser(); ?>
                     <?php
                     echo "<ul>";
                     foreach (MenageTemplate::getMenu() as $key => $submenues) {
+                        if(User::hasAccess($submenues->getAccessLevel())) {
                             $chiave = $key;
-                            if (is_a($submenues, "Menu") && !is_null($submenues->getHtml() && User::hasAccess($submenues->getAccessLevel()))) {
+                            if (is_a($submenues, "Menu") && !is_null($submenues->getHtml() )) {
                                 $chiave = '<a href="'.$submenues->getHtml().'" target="_self">'.$submenues->getIcon(). $key.' </a> ';
                                 echo "<li class = \"menutab \">$chiave</li>" . PHP_EOL;   
                             }
@@ -70,6 +71,7 @@ $user = User::getUser(); ?>
                                 }
                                 echo"</ol></li>" . PHP_EOL;
                             endif;
+                        }
                     }
                     echo("</ul>");
                     ?>

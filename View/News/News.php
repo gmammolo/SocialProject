@@ -4,7 +4,7 @@ if(User::getUser()->hasAccess(Role::Register)) { ?>
     <form name="newComment" method="POST" action="?formValidate=addPost">
         <div class="row">
             <span>
-                <select name="switchUpload" onchange="Home.switchUploadFunction()">
+                <select name="switchUpload" onchange="WriteComment.switchUploadFunction()">
                     <option value="p_url">URL</option>
                     <option value="p_file">Immagine</option>
                 </select>
@@ -26,7 +26,7 @@ if(User::getUser()->hasAccess(Role::Register)) { ?>
                     <option value="globale">Pubblico</option>
                 </select>
             </span>
-            <input type="button" name="invia" value="Invia" onclick="Showcase.sendPost()" />
+            <input type="button" name="invia" value="Invia" onclick="WriteComment.sendPost()" />
         </div>
     </form>
     

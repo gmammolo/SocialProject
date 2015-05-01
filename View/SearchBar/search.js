@@ -9,6 +9,12 @@ function Search() {}
 
     Search.searchRequest = function () {
         var srch = $("input[name='search']").val();
+        console.log(srch);
+        if(srch === "")
+        {
+            $("#search-result").hide();
+            return false;
+        }
         if(/['\x22]+/.test(srch))
             return null;
         $.ajax({
@@ -25,4 +31,8 @@ function Search() {}
 
     Search.redirectUser = function(id) {
         window.location.href="?page=profile&id="+id;
+    };
+
+    Search.goAdvancedSearch = function ()  {
+        window.location.href="?page=advancedSearch";
     };

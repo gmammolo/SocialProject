@@ -1,5 +1,4 @@
 <?php
-$search= "t";
     $Amicizie = Relationship::getFriendsListWithSearch(User::getUser()->getId(), $search);
     $notFriend = Relationship::getNotFriendListWithSearch(User::getUser()->getId(), $search);
     $postList = Post::getPostByHashTag($search);

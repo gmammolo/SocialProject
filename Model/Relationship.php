@@ -244,14 +244,12 @@ class Relationship extends Model {
      */
     public static function getFriendsListWithSearch($iduser, $search){
         $search = "%".$search."%";
-//        $sql = "SELECT Relationship.* FROM `Relationship` JOIN (User JOIN Profile ON Profile.id = User.profile) ON User.id = applicant OR User.id = requested   WHERE ( ( `applicant` = :id AND ( username LIKE :search OR nome LIKE :search ) )  OR (`requested` = :id AND ( username LIKE :search OR nome LIKE :search ) ) ) AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE";
-        $sql = "SELECT  DISTINCT  Relationship.* FROM `Relationship` JOIN (User JOIN Profile ON Profile.id = User.profile) ON User.id = applicant OR User.id = requested WHERE ( ( `applicant` = :id AND ( username LIKE :search OR nome LIKE :search ) ) OR (`requested` = :id AND ( username LIKE :search OR nome LIKE :search ) ) ) AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE";
-        
+        $sqlFrienList = "SELECT requested FROM `Relationship` WHERE `applicant` = :id AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE UNION SELECT applicant FROM `Relationship` WHERE `requested` = :id AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE";
+        $sql = "SELECT  DISTINCT  User.* FROM User JOIN Profile ON Profile.id = User.profile WHERE User.id IN ( $sqlFrienList )  AND ( username LIKE :search OR nome LIKE :search ) ";
         $ris = self::ExecuteQuery($sql, array(":id" => $iduser, ":search" => $search));
         $acp = array();
         while($row=$ris->fetch()) {
-            $rel = new Friendship( new Relationship($row));
-            $acp[] = $rel->getFriend();
+            $acp[] = new User($row);
         }
         return $acp;
         

@@ -8,58 +8,15 @@ and open the template in the editor.
     Author     : giuseppe
 */
 
-
-.rfriend
+#friend_list
 {
     position: relative;
-    font-size: 14px;
-    border: 1px solid #222629;
-    margin: 5px;
-    padding: 5px;
-    display: inline-block;
-    min-height: 100px;
-    min-width: 100px;
-    line-height: 1em;
-    
 }
 
-.rfriend div
+#possible_friend 
 {
-    display: inline-block;
+       
 }
-
-.rfriend .row
-{
-    display: block;
-}
-
-.rfriend .image, .rfriend .image img
-{
-    max-width: 80px;
-    max-height: 80px;
-}
-
-.rfriend .nome
-{
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.rfriend .buttonRequest 
-{
-    text-align: center;
-}
-
-.rfriend .buttonRequest input[type="button"]
-{
-    font-size: 16px;
-    padding: 5px;
-    margin-top: 5px;
-    line-height: 1em;
-}
-
-
-
 
 .friend
 {
@@ -69,9 +26,10 @@ and open the template in the editor.
     margin: 5px;
     padding: 5px;
     display: inline-block;
-    min-height: 100px;
-    min-width: 100px;
+    height: 150px;
+    width: 150px;
     line-height: 1em;
+    vertical-align: top;
     
 }
 
@@ -110,51 +68,16 @@ and open the template in the editor.
     line-height: 1em;
 }
 
-.pfriend
-{
-    position: relative;
-    font-size: 14px;
-    border: 1px solid #222629;
-    margin: 5px;
-    padding: 5px;
-    display: inline-block;
-    min-height: 100px;
-    min-width: 100px;
-    line-height: 1em;
-    
-}
-
-.pfriend div
-{
-    display: inline-block;
-}
-
-.pfriend .row
-{
-    display: block;
-}
-
-.pfriend .image, .pfriend .image img
-{
-    max-width: 80px;
-    max-height: 80px;
-}
-
-.pfriend .nome
-{
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.pfriend .buttonRequest 
+.friend .buttonRequest 
 {
     text-align: center;
 }
 
-.pfriend .buttonRequest input[type="button"]
+.friend .buttonRequest input[type="button"]
 {
     font-size: 16px;
     padding: 5px;
     margin-top: 5px;
     line-height: 1em;
 }
+
