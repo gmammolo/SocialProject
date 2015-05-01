@@ -9,7 +9,6 @@ function Search() {}
 
     Search.searchRequest = function () {
         var srch = $("input[name='search']").val();
-        console.log(srch);
         if(srch === "")
         {
             $("#search-result").hide();
@@ -36,3 +35,10 @@ function Search() {}
     Search.goAdvancedSearch = function ()  {
         window.location.href="?page=advancedSearch";
     };
+    
+    Search.goHashTag =function() 
+    {
+        var srch = $("input[name='search']").val();
+        srch= srch.slice( 1 );
+        window.location.href="?page=hashtag&hashtag="+srch;
+    }

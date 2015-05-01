@@ -48,3 +48,15 @@
     display: inline-block;
     position: relative;
 }
+
+#search-result .post-row .name
+{
+    font-weight: bold;
+    font-size: 13px;
+}
+
+#search-result .post-row .text
+{
+    font-style: italic;
+    font-size: 13px;
+}

@@ -16,7 +16,9 @@
                 <?php
                     $text = $singlePost->getText();
                     foreach($singlePost->getHashtag() as $hash){
-                       $text =  str_replace($hash, "<a href = '?page=hashtag&amp;hashtag=$hash'>".$hash."</a>", $text);
+                       preg_match("/(?<=#).*$/", $hash, $out);
+                       $str_hash=$out[0];
+                       $text =  str_replace($hash, "<a href = '?page=hashtag&amp;hashtag=$str_hash'>".$hash."</a>", $text);
                     }
                     echo  $text;   
                 ?>

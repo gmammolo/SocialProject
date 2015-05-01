@@ -179,4 +179,18 @@ class Post extends Model {
         }
         return $list;
     }
+    
+    public static function getHashtagPost($hashtag, $infl, $supl) {
+        var_dump($hashtag);
+        $hashtag = "%$hashtag%";
+        $sqlFrienList = "SELECT requested FROM `Relationship` WHERE `applicant` = :id AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE UNION SELECT applicant FROM `Relationship` WHERE `requested` = :id AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE";
+        $sql = "SELECT DISTINCT * FROM Post Where  ( ( privacy >= 1 AND  author in ( $sqlFrienList ) ) OR  author = :id OR  privacy > 2  ) AND hashtag LIKE :hash "
+                . "ORDER BY date DESC LIMIT :inf, :sup";
+        $ris = self::ExecuteQuery($sql, array(":id" => User::getUser()->getId(), ":hash" => $hashtag) , array(":inf" => $infl, ":sup" => $supl) );
+        $list= array();
+        while($row = $ris->fetch()) {
+            $list[] = new Post($row);
+        }
+        return $list;
+    }
 }

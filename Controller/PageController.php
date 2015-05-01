@@ -47,5 +47,12 @@ function managePages($page)
         MenageTemplate::addCss("View/Showcase/Showcase.css");
         MenageTemplate::addJavascript("View/Showcase/Showcase.js");
     }
+    else if($page=="hashtag" && $user->getAccessLevel() >= Role::Register)
+    {
+        MenageTemplate::addContent(_DIR_VIEW_."Hashtag/Hashtag.php");
+        MenageTemplate::addCss("View/Showcase/Showcase.css");
+        MenageTemplate::addJavascript("View/Showcase/Showcase.js");
+        MenageTemplate::addJavascript("View/Hashtag/Hashtag.js");
+    }
     
 }

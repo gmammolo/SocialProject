@@ -30,9 +30,9 @@
 <div class="search_HashTag">
      <?php if(count($postList) > 0) echo '<div class="row title">Altri</div>';
      foreach($postList as $post) { ?>
-        <div class="row post-row cliccabile">
+    <div class="row post-row cliccabile" onclick="Search.goHashTag()">
             <img class="image" src="<?php echo $post->getAuthor()->getProfile()->getAvatar(); ?>" alt="" /><span class="name"><?php echo $post->getAuthor()->getProfile()->getNome(); ?></span>
-            ha scritto <span class="text">
+            ha scritto: <span class="text">
             <?php 
                 echo $text = substr( $post->getText(), 0, 20 );
                 if(strlen($post->getText())>20) echo "...";

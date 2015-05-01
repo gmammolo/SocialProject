@@ -124,3 +124,16 @@ else if ( $ajaxRequest ==  "getPossibleFriends" && User::hasAccess(Role::Registe
         die();
         
 }
+
+
+else if( $ajaxRequest ==  "getHashPost" && User::hasAccess(Role::Register))  {
+    $infLimit = filter_input(INPUT_POST, 'infLimit');
+    $supLimit = filter_input(INPUT_POST, 'supLimit');
+    $hashtag = filter_input(INPUT_POST, 'hashtag');
+    if(preg_match('/#[A-Za-z0-9]*$/', $hashtag)) {
+        $postList = Post::getHashtagPost($hashtag, $infLimit, $supLimit ); 
+        require_once _DIR_VIEW_ .  'Showcase/Showcase.php';
+        MenageTemplate::resize();
+    }
+    die();
+}
