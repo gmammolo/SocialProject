@@ -163,15 +163,19 @@ class Post extends Model {
     }
     
     
-            
-    public static function getFriendPostList($infl, $supl) {
+    /**
+     * Restituisce la bacheca con i post degli amici e quelli personali
+     * @param type $infl
+     * @param type $supl
+     * @return \Showcase
+     */
+    public static function getNewPost($infl, $supl) {
         $sqlFrienList = "SELECT requested FROM `Relationship` WHERE `applicant` = :id AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE UNION SELECT applicant FROM `Relationship` WHERE `requested` = :id AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE\n";
-        
-        $sql = "SELECT Showcase.* FROM Showcase JOIN Post ON id_post = Post.id Where privacy >= 1 AND  author in ( $sqlFrienList ) ORDER BY date DESC LIMIT :inf, :sup";
+        $sql = "SELECT DISTINCT * FROM Post Where privacy >= 1 AND  author in ( $sqlFrienList ) OR  author = :id ORDER BY date DESC LIMIT :inf, :sup";
         $ris = self::ExecuteQuery($sql, array(":id" => User::getUser()->getId()) , array(":inf" => $infl, ":sup" => $supl) );
         $list= array();
         while($row = $ris->fetch()) {
-            $list[] = new Showcase($row);
+            $list[] = new Post($row);
         }
         return $list;
     }

@@ -1,21 +1,21 @@
 <?php
     
-    foreach($showcase as $showcasePost ) { ?>
+    foreach($postList as $singlePost ) { ?>
         <div class="post">
-            <div class="Author">Postato da : <img class="Avatar" src="<?php echo $showcasePost->getPost()->getAuthor()->getProfile()->getAvatar();  ?>" alt="" ><span class="AuthorName"><a href="?page=profile&AMP;id=<?php echo $showcasePost->getPost()->getAuthor()->getId(); ?>"><?php echo $showcasePost->getPost()->getAuthor()->getProfile()->getNome(); ?></a></span></div>
+            <div class="Author">Postato da : <img class="Avatar" src="<?php echo $singlePost->getAuthor()->getProfile()->getAvatar();  ?>" alt="" ><span class="AuthorName"><a href="?page=profile&AMP;id=<?php echo $singlePost->getAuthor()->getId(); ?>"><?php echo $singlePost->getAuthor()->getProfile()->getNome(); ?></a></span></div>
             <form name ="removePost" method="POST" action="?formValidate=deletePost">
                 <div class="delete" onclick="Showcase.deletePost(this)"> X </div>
                 <input type="hidden" name="baseuri" value="" />
-                <input type="hidden" name="id" value="<?php echo $showcasePost->getPost()->getId(); ?>" />
+                <input type="hidden" name="id" value="<?php echo $singlePost->getId(); ?>" />
             </form>
-            <?php $image = $showcasePost->getPost()->getImage(); 
+            <?php $image = $singlePost->getImage(); 
             if($image != "") { ?>
             <div class="Image" onclick="Showcase.zoomPhoto(event)"><img class="Image" src="<?php echo $image; ?>" alt=""/></div>
             <?php } ?>
             <div class="Testo"> 
                 <?php
-                    $text = $showcasePost->getPost()->getText();
-                    foreach($showcasePost->getPost()->getHashtag() as $hash){
+                    $text = $singlePost->getText();
+                    foreach($singlePost->getHashtag() as $hash){
                        $text =  str_replace($hash, "<a href = '?page=hashtag&amp;hashtag=$hash'>".$hash."</a>", $text);
                     }
                     echo  $text;   
@@ -23,15 +23,15 @@
             </div>
             <div class="row">
                 <div class="like">
-                    <div class="counter-like"><?php echo $showcasePost->getPost()->getLikeit() ?></div>
+                    <div class="counter-like"><?php echo $singlePost->getLikeit() ?></div>
                     <input type="button" name="addLike" value="like!" onclick="Showcase.addlikePost(this)" />
-                    <input type="hidden" name="postid" value="<?php echo $showcasePost->getPost()->getId(); ?>" />
+                    <input type="hidden" name="postid" value="<?php echo $singlePost->getId(); ?>" />
                 </div>
-                <div class="luogo"><?php echo $showcasePost->getPost()->getLocate(); ?></div>
-                <div class="data"><?php echo $showcasePost->getPost()->getDate(); ?></div>
+                <div class="luogo"><?php echo $singlePost->getLocate(); ?></div>
+                <div class="data"><?php echo $singlePost->getDate(); ?></div>
                 <div class="privacy">
                     <?php 
-                        $pri = $showcasePost->getPost()->getPrivacy(); 
+                        $pri = $singlePost->getPrivacy(); 
                         switch ($pri) {
                             case Privacy::privato :
                                 echo '<img src="/SocialProject/Template/images/private_fb.png" alt=" "/>';
@@ -51,7 +51,7 @@
             </div>
         </div>
         <div class="comments">
-            <?php $comments = Comment::getCommentsByPostID($showcasePost->getPost()->getId());
+            <?php $comments = Comment::getCommentsByPostID($singlePost->getId());
             foreach ($comments as $comment) {  ?>
                 <div class="comment">
                     <div>
@@ -59,7 +59,7 @@
                         <span class="Author"><?php echo $comment->getAuthor()->getProfile()->getNome(); ?>:</span>
                         <p><?php echo $comment->getText(); ?><p>
                     </div>
-                    <?php if(User::getUser()==$comment->getAuthor() || User::getUser() == $showcasePost->getPost()->getAuthor()   || User::hasAccess(Role::Moderator) ) { ?>
+                    <?php if(User::getUser()==$comment->getAuthor() || User::getUser() == $singlePost->getAuthor()   || User::hasAccess(Role::Moderator) ) { ?>
                     <form name="deleteComment" method="POST" action="?formValidate=deleteComment">    
                         <div class="delete" onclick="Showcase.deleteComment(this)"> X </div>
                         <input type="hidden" name="baseuri" value="" />
@@ -77,7 +77,7 @@
             <form name="sendComment" method="POST" action="?formValidate=addComment">
                <textarea name="commentText"  value="" draggable="false" />
                 <input type="button" name="Invia" value="Invia" onclick="Showcase.sendComment(this)" />
-                <input type="hidden" name="postid" value="<?php echo $showcasePost->getPost()->getId(); ?>" />
+                <input type="hidden" name="postid" value="<?php echo $singlePost->getId(); ?>" />
                <input type="hidden" name="baseurl" value="" />
             </form>
         </div>

@@ -55,7 +55,7 @@ else if($ajaxRequest == "getAccountList" && User::hasAccess(Role::Register)  ) {
 else if( $ajaxRequest == "getShowcase" && User::hasAccess(Role::Register) ) {
     $infLimit = filter_input(INPUT_POST, 'infLimit');
     $supLimit = filter_input(INPUT_POST, 'supLimit');
-    $showcase = Showcase::getLimitShowcase(User::getUser()->getId(),$infLimit, $supLimit ); 
+    $postList = Showcase::getShowcasePost(User::getUser()->getId(),$infLimit, $supLimit ); 
     require_once _DIR_VIEW_ .  'Showcase/Showcase.php';
     MenageTemplate::resize();
     die();
@@ -64,7 +64,7 @@ else if( $ajaxRequest == "getShowcase" && User::hasAccess(Role::Register) ) {
 else if( $ajaxRequest == "getFriendNews" && User::hasAccess(Role::Register) ) {
     $infLimit = filter_input(INPUT_POST, 'infLimit');
     $supLimit = filter_input(INPUT_POST, 'supLimit');
-    $showcase = Post::getFriendPostList($infLimit, $supLimit ); 
+    $postList = Post::getNewPost($infLimit, $supLimit ); 
     require_once _DIR_VIEW_ .  'Showcase/Showcase.php';
     MenageTemplate::resize();
     die();

@@ -1,29 +1,29 @@
 <?php
 
-    foreach($showcase as $showcasePost ) {  ?>
+    foreach($postList as $singlePost ) {  ?>
 
-        <div class="post" id="idpost<?php echo $showcasePost->getId(); ?>">
-            <div class="Author">Postato da : <span class="AuthorName"><a href="?page=profile&AMP;id=<?php echo $showcasePost->getAuthor()->getId(); ?>"><?php echo $showcasePost->getAuthor()->getProfile()->getNome(); ?></a></span></div>
+        <div class="post" id="idpost<?php echo $singlePost->getId(); ?>">
+            <div class="Author">Postato da : <span class="AuthorName"><a href="?page=profile&AMP;id=<?php echo $singlePost->getAuthor()->getId(); ?>"><?php echo $singlePost->getAuthor()->getProfile()->getNome(); ?></a></span></div>
             <div class="delete" onclick="Showcase.deletePost(event)"> X </div>
-            <?php $image = $showcasePost->getImage(); 
+            <?php $image = $singlePost->getImage(); 
             if($image != "") { ?>
             <div class="Image" onclick="Showcase.zoomPhoto(event)"><img class="Image" src="<?php echo $image; ?>" alt=""/></div>
             <?php } ?>
             <div class="Testo"> 
                 <?php
-                    $text = $showcasePost->getText();
-                    foreach($showcasePost->getHashtag() as $hash){
+                    $text = $singlePost->getText();
+                    foreach($singlePost->getHashtag() as $hash){
                        $text =  str_replace($hash, "<a href = '?page=hashtag&amp;hashtag=$hash'>".$hash."</a>", $text);
                     }
                     echo  $text;   
                 ?>
             </div>
             <div class="row">
-                <div class="luogo"><?php echo $showcasePost->getLocate(); ?></div>
-                <div class="data"><?php echo $showcasePost->getDate(); ?></div>
+                <div class="luogo"><?php echo $singlePost->getLocate(); ?></div>
+                <div class="data"><?php echo $singlePost->getDate(); ?></div>
                 <div class="privacy">
                     <?php 
-                        $pri = $showcasePost->getPrivacy(); 
+                        $pri = $singlePost->getPrivacy(); 
                         switch ($pri) {
                             case Privacy::privato :
                                 echo '<img src="/SocialProject/Template/images/private_fb.png" alt=" "/>';
@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="comments">
-                <?php $comments = Comment::getCommentsByPostID($showcasePost->getId());
+                <?php $comments = Comment::getCommentsByPostID($singlePost->getId());
                 foreach ($comments as $comment) {  ?>
                     <div class="comment">
                         <img class="Avatar" src="<?php echo $comment->getAuthor()->getProfile()->getAvatar();  ?>" alt="" >
@@ -58,7 +58,7 @@
                 <form name="sendComment" method="POST" action="?formValidate=addComment">
                     <textarea name="commentText"  value="" draggable="false" />
                     <input type="button" name="Invia" value="Invia" onclick="Showcase.sendComment(this)" />
-                    <input type="hidden" name="postid" value="<?php echo $showcasePost->getPost()->getId(); ?>" />
+                    <input type="hidden" name="postid" value="<?php echo $singlePost->getPost()->getId(); ?>" />
                    <input type="hidden" name="baseurl" value="" />
                 </form>
         </div>

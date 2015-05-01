@@ -79,12 +79,12 @@ class Showcase extends Model {
      * @param type $suplimit
      * @return \Showcase[]
      */
-    public static function getLimitShowcase($userid, $inflimit, $suplimit) {
-        $sql = "SELECT * FROM `Showcase` WHERE `id_user` = :id ORDER BY id DESC LIMIT :inf, :sup  ;";
+    public static function getShowcasePost($userid, $inflimit, $suplimit) {
+        $sql = "SELECT Post.* FROM `Showcase` JOIN Post ON Post.id = id_post WHERE `id_user` = :id ORDER BY id DESC LIMIT :inf, :sup  ;";
         $ris = self::ExecuteQuery($sql, array(":id" => $userid ), array(":inf" => $inflimit, ":sup" => $suplimit ));
         $showcase= array();
         while ($row = $ris->fetch()) {
-            $showcase[] = new Showcase($row);
+            $showcase[] = new Post($row);
         }
         return $showcase;
     }
