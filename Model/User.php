@@ -24,6 +24,7 @@ class User extends Model implements \JsonSerializable{
     protected $profile;
     protected $cookie;
     protected $cookieExpire;
+    protected $lastnewsaccess;
     
     
     
@@ -40,6 +41,8 @@ class User extends Model implements \JsonSerializable{
                 $this->cookie =  $ar['cookie'];
             if(isset($ar['$cookie_expire'])) 
                 $this->cookieExpire =  $ar['$cookie_expire'];  
+            if(isset($ar['lastnewsaccess']))
+                $this->lastnewsaccess = $ar['lastnewsaccess'];
 
     }
 
@@ -121,7 +124,11 @@ class User extends Model implements \JsonSerializable{
         return $vars;
     }
     
-    
+    public function updateLastNewsAccess()
+    {
+        $this->lastnewsaccess = date("y-m-d G:i:s");
+        $this->Update();
+    }
     
     /**
      * Aggiorna l'user salvando nel db le modifiche alle variabili <br>
@@ -129,8 +136,8 @@ class User extends Model implements \JsonSerializable{
      * Nota 2: il false indica che non ci sono state modifiche 
      */
     public function Update() {
-        $sql = "UPDATE `User` SET `username` = :user , `accessLevel` = :ac, `roles` = :role , `email` = :email , `cookie` = :cookie, `cookie_expire` = :cookesp WHERE `User`.`id` = :id ;";
-        return self::ExecuteQuery($sql, array(":user" => $this->getUsername(), ":ac" => $this->getAccessLevel(), ":role" => serialize($this->getRoles()), ":email" => $this->getEmail(), ":cookie" => $this->getCookie(), ":cookesp" => $this->getCookieExpire(), ":id" => $this->getId()))->rowCount() == 1;
+        $sql = "UPDATE `User` SET `username` = :user , `accessLevel` = :ac, `roles` = :role , `email` = :email , `cookie` = :cookie, `cookie_expire` = :cookesp , lastnewsaccess = :lastnewsaccess WHERE `User`.`id` = :id ;";
+        return self::ExecuteQuery($sql, array(":user" => $this->getUsername(), ":ac" => $this->getAccessLevel(), ":role" => serialize($this->getRoles()), ":email" => $this->getEmail(), ":cookie" => $this->getCookie(), ":cookesp" => $this->getCookieExpire(), ":lastnewsaccess" => $this->lastnewsaccess, ":id" => $this->getId()))->rowCount() == 1;
         
     }
     

@@ -46,6 +46,8 @@ function managePages($page)
         MenageTemplate::addJavascript("View/News/WriteComment.js");
         MenageTemplate::addCss("View/Showcase/Showcase.css");
         MenageTemplate::addJavascript("View/Showcase/Showcase.js");
+        //update delle notifiche:
+        $user->updateLastNewsAccess();
     }
     else if($page=="hashtag" && $user->getAccessLevel() >= Role::Register)
     {

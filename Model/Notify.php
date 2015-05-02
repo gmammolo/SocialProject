@@ -50,11 +50,7 @@ class Notify extends Model {
         
     }
     
-    public static function getNumNewLikeForUser($id) {
-        $sql = "SELECT count(*) as num FROM `Notify` WHERE ( `type` = :type1 OR `type` = :type2 )  AND `receiving` = :id";
-        $query = self::ExecuteQuery($sql,array(":id" => $id,  ":type1" => NotifyType::newLikeItPost ,  ":type2" => NotifyType::newLikeItComment ));
-        return ($query->rowCount() > 0 ) ? $query->fetch()["num"] : 0 ;
-    }
+
     
     public static function getNumNewUser() {
         $sql = "SELECT count(*) as num FROM `Notify` WHERE `type` = ? ";
@@ -73,7 +69,7 @@ class Notify extends Model {
         return ($q->rowCount() > 0 ) ? $q->fetch()["num"] : 0 ;
     }
     
-    public static function getNumNewPost($id){
+public static function getNumNewPost($id){
         $sqlFrienList = "SELECT requested FROM `Relationship` WHERE `applicant` = :id AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE UNION SELECT applicant FROM `Relationship` WHERE `requested` = :id AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE\n";
         $sql = "SELECT DISTINCT COUNT(*) as num FROM Post JOIN Notify ON reference = Post.id  Where type = :type AND privacy >= 1 AND  author in ( $sqlFrienList ) ";
         $q = self::ExecuteQuery($sql, array(":id" => $id, ":type" => NotifyType::newPost)  );
@@ -86,5 +82,11 @@ class Notify extends Model {
         $sql = "SELECT DISTINCT COUNT(*) as num FROM Comment JOIN Notify ON reference = Comment.id  Where type = :type AND author in ( $sqlFrienList )";
         $q = self::ExecuteQuery($sql, array(":id" => $id, ":type" => NotifyType::newComment) );
         return ($q->rowCount() > 0 ) ? $q->fetch()["num"] : 0 ;   
+    }
+    
+    public static function getNumNewLikeForUser($id) {
+        $sql = "SELECT count(*) as num FROM `Notify` JOIN User ON receiving = User.id WHERE ( `type` = :type1 OR `type` = :type2 )  AND `receiving` = :id AND lastnewsaccess < date";
+        $query = self::ExecuteQuery($sql,array(":id" => $id,  ":type1" => NotifyType::newLikeItPost ,  ":type2" => NotifyType::newLikeItComment ));
+        return ($query->rowCount() > 0 ) ? $query->fetch()["num"] : 0 ;
     }
 }
