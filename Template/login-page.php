@@ -44,15 +44,15 @@
                 ?>
             </div>
             
-<?php
-foreach (MenageTemplate::getContents() as $content)
-{
-    echo '<div class="section">'.PHP_EOL;
-    include $content;
-    echo '</div>'.PHP_EOL;
-}
+            <?php
+            foreach (MenageTemplate::getContents() as $content)
+            {
+                echo '<div class="section">'.PHP_EOL;
+                include $content;
+                echo '</div>'.PHP_EOL;
+            }
 
-?>
+            ?>
         </div>
     </body>
 </html>
