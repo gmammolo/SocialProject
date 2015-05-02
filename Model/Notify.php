@@ -71,7 +71,7 @@ class Notify extends Model {
     
 public static function getNumNewPost($id){
         $sqlFrienList = "SELECT requested FROM `Relationship` WHERE `applicant` = :id AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE UNION SELECT applicant FROM `Relationship` WHERE `requested` = :id AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE\n";
-        $sql = "SELECT DISTINCT COUNT(*) as num FROM Post JOIN Notify ON reference = Post.id  Where type = :type AND privacy >= 1 AND  author in ( $sqlFrienList ) ";
+        $sql = "SELECT DISTINCT COUNT(*) as num FROM User JOIN ( Post JOIN Notify ON reference = Post.id) ON User.id = :id  Where type = :type AND privacy >= 1 AND  author in ( $sqlFrienList ) AND lastnewsaccess < Notify.date ";
         $q = self::ExecuteQuery($sql, array(":id" => $id, ":type" => NotifyType::newPost)  );
         return ($q->rowCount() > 0 ) ? $q->fetch()["num"] : 0 ;
         
@@ -79,7 +79,7 @@ public static function getNumNewPost($id){
     
     public static function getNumNewComment($id){
         $sqlFrienList = "SELECT requested FROM `Relationship` WHERE `applicant` = :id AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE UNION SELECT applicant FROM `Relationship` WHERE `requested` = :id AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE\n";
-        $sql = "SELECT DISTINCT COUNT(*) as num FROM Comment JOIN Notify ON reference = Comment.id  Where type = :type AND author in ( $sqlFrienList )";
+        $sql = "SELECT DISTINCT COUNT(*) as num FROM User JOIN (Comment JOIN Notify ON reference = Comment.id) ON User.id = :id  Where type = :type AND author in ( $sqlFrienList ) AND lastnewsaccess < Notify.date ";
         $q = self::ExecuteQuery($sql, array(":id" => $id, ":type" => NotifyType::newComment) );
         return ($q->rowCount() > 0 ) ? $q->fetch()["num"] : 0 ;   
     }
