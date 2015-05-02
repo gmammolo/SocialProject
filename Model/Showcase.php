@@ -68,8 +68,10 @@ class Showcase extends Model {
     
     public static function insertPost($id_user, $id_post) {
        $sql = "INSERT INTO `Showcase` (`id`, `id_user`, `id_post`)  VALUES (NULL, :u , :p );";
-       $ris = self::ExecuteQuery($sql, array(":u" => $id_user , ":p" => $id_post ));
-       return ($ris->rowCount()== 1); 
+       $ris = self::InsertQuery($sql, array(":u" => $id_user , ":p" => $id_post ));
+//       if($ris>=0)
+//         $not =  Notify::addNotify($id_user, User::getUser()->getId(), NotifyType::newPost, $ris);
+       return ($ris>=0);
     }
 
     /**

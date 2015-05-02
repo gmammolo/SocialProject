@@ -137,3 +137,25 @@ else if( $ajaxRequest ==  "getHashPost" && User::hasAccess(Role::Register))  {
     }
     die();
 }
+
+else if( $ajaxRequest ==  "getUpdateNews" && User::hasAccess(Role::Register))  {
+   $like = Notify::getNumNewLikeForUser(User::getUser()->getId()) ;
+   $post = Notify::getNumNewPost(User::getUser()->getId());
+   $comment= Notify::getNumNewComment(User::getUser()->getId());
+   $num = $like+$post+$comment;
+   if($num > 0) echo $num;
+}
+
+else if( $ajaxRequest ==  "getUpdateFriend" && User::hasAccess(Role::Register))  {
+   $num = Notify::getNumFriendRequest(User::getUser()->getId());
+   if($num > 0) echo $num;
+}
+
+else if( $ajaxRequest ==  "getUpdateAmm" && User::hasAccess(Role::Register))  {
+    if(User::getUser()->hasAccess(Role::Administrator) ) {
+        $num = Notify::getNumNewUser();
+        if($num > 0) echo $num;
+        
+    }   
+    die();
+}

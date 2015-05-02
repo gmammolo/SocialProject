@@ -58,3 +58,17 @@ class Privacy extends BasicEnum
     const amiciplus = 2;
     const globale = 3;
 }
+
+class NotifyType extends BasicEnum
+{
+    const __default = self::generic;
+    
+    const generic = "generic";
+    const requestFriendship = "rFriend";
+    const acceptedFriendship = "aFriend";
+    const newPost = "newPost";
+    const newComment = "newComment"; 
+    const newLikeItPost = "LikePost";
+    const newLikeItComment = "LikeCommen";
+    const accessRequest = "accRequest";
+}

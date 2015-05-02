@@ -21,6 +21,7 @@ require_once _DIR_MODEL_.'Friendship.php';
 require_once _DIR_MODEL_.'Post.php';
 require_once _DIR_MODEL_.'Comment.php';
 require_once _DIR_MODEL_.'Showcase.php';
+require_once _DIR_MODEL_.'Notify.php';
 
 require_once _DIR_CONTROLLER_ .  'PageController.php';
 require_once _DIR_TEMPLATE_.'MenageTemplate.php';

@@ -22,42 +22,29 @@ $user = User::getUser(); ?>
         ?>
     </head>
     <body>
-
-       
         <aside class="skel-layers-fixed">
-
             <div class="top">
-
-                <!-- Logo -->
                 <div id="logo">
                     <span id="avatar"><img src="<?php echo $user->getProfile()->getAvatar();  ?>" alt="avatar" /></span>
                     <div>
                         <h1 class="name"><?php echo $user->getProfile()->getNome(); ?></h1>
                         <p class="username">@<?php echo $user->getUsername(); ?></p>
                     </div>
-
                 </div>
-                
                 <div id="search">
                     <input id="bar_search" type="search" name="search" pattern="[^'\x22]+" placeholder="Cerca" value="" onkeyup="Search.searchRequest(event)"/>
-                    <input id="button_search" type="button" onclick="search()" value=" " onclick="Search.goAdvancedSearch()" />
+                    <input id="button_search" type="button" value=" " onclick="Search.goAdvancedSearch()" />
                     <div id="search-result"></div>
                     <script>$("#search-result").hide();</script>
                 </div>
-                
-
-                <!-- Nav id="nav"> -->
                 <nav> 
-
-
-                    <?php
-                    echo "<ul>";
+                    <?php echo "<ul>";
                     foreach (MenageTemplate::getMenu() as $key => $submenues) {
                         if(User::hasAccess($submenues->getAccessLevel())) {
                             $chiave = $key;
                             if (is_a($submenues, "Menu") && !is_null($submenues->getHtml() )) {
                                 $chiave = '<a href="'.$submenues->getHtml().'" target="_self">'.$submenues->getIcon(). $key.' </a> ';
-                                echo "<li class = \"menutab \">$chiave</li>" . PHP_EOL;   
+                                echo "<li class = \"menutab t$key \">$chiave</li>" . PHP_EOL;   
                             }
                             else if (is_array($submenues)) :
                                 $icon = "";
@@ -67,17 +54,15 @@ $user = User::getUser(); ?>
                                 echo "<li class = \"no-visible\"><ol>" . PHP_EOL;
                                 foreach ($submenues as $alias => $submen) {
                                     if(User::hasAccess($submen->getAccessLevel()))
-                                        echo "<li class = \"submenutab hidden $key\"><a href=\"".$submen->getHtml()."\" > ".$submen->getIcon().$submen->getName()."</a></li>".PHP_EOL;
+                                        echo "<li class = \"submenutab hidden $key t$alias\"><a href=\"".$submen->getHtml()."\" > ".$submen->getIcon().$submen->getName()."</a></li>".PHP_EOL;
                                 }
                                 echo"</ol></li>" . PHP_EOL;
                             endif;
                         }
                     }
-                    echo("</ul>");
-                    ?>
+                    echo("</ul>");  ?>
                     <script>
-                        var click = function(event){ window.location.href = $(this)[0].childNodes[0].href; 
-                        };
+                        var click = function(event){ window.location.href = $(this)[0].childNodes[0].href;};
                         $(".menutab").click(click);
                         $(".submenutab").click(click);
                         $(".menutab").mouseover(function(event){ event.stopPropagation(); $(this).addClass("empathize");   });
@@ -138,23 +123,36 @@ $user = User::getUser(); ?>
                 ?>
                 
             </main>
-            
             <script> 
                 $(function(){
                     var $window = $(window).on('resize', function(){
-                        //height
                        var document_height = $( document ).height();
                        $("#container").height(document_height);
                        $("aside").height(document_height );
                        $("footer").css("top", document_height-15);
-                       
-//                       //width
-//                       var document_width = $( window ).width();
-//                       $("#container").width(document_width);
-//                       $("footer").width(document_width + $("aside").width() );
                     }).trigger('resize'); //on page load
 
                 });
+                $(".tFriends").append('<div id="notify_friend" class="notify_counter"></div>');
+                $(".tFriends").ready(function() {
+                    setInterval("Notify.updateFriendRequest()",15000);
+                });
+                Notify.updateFriendRequest();
+                $(".tNews").append('<div id="notify_news" class="notify_counter"></div>');
+                $(".tNews").ready(function() {
+                    setInterval("Notify.updateNews()",15000);
+                });
+                Notify.updateNews();
+                <?php ?>
+                    $(".tAmministrazione").append('<div  id="notify_amm" class="notify_counter"></div>');
+                    $(".tAmministrazione").ready(function() {
+                        setInterval("Notify.updateRequest()",15000);
+                    });
+                    Notify.updateRequest();
+                <?php ?>    
+                    
+
+ 
             </script>
         </div>
        

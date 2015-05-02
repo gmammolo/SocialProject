@@ -269,7 +269,7 @@ class User extends Model implements \JsonSerializable{
     public static function getAllUserWithAccessLevel($accLevel, $seach)
     {
         $search = "%".$seach."%";
-        $sql = "SELECT User.* FROM `User` JOIN Profile ON `profile` = Profile.id WHERE `accessLevel` < :accLevel AND ( `username` Like :sw OR nome LIKE :sw OR Profile.email Like :sw OR User.email Like :sw ) LIMIT 30 ";
+        $sql = "SELECT User.* FROM `User` JOIN Profile ON `profile` = Profile.id WHERE `accessLevel` < :accLevel AND ( `username` Like :sw OR nome LIKE :sw OR Profile.email Like :sw OR User.email Like :sw ) ORDER BY  accessLevel LIMIT 30 ";
         $lista = array();
         $ris = Model::ExecuteQuery($sql,array( ":accLevel" => $accLevel, ":sw" => $search ));
         foreach ($ris as $elem)
@@ -288,7 +288,16 @@ class User extends Model implements \JsonSerializable{
         return (Profile::deleteProfile($user->getProfile()->getId())) ? self::ExecuteQuery($sql, array($id))->rowCount() == 1 : false;
     }
 
-
+    public static function getAdminList() {
+        $sql= "SELECT * FROM User Where accessLevel >= ? ";
+        $query= self::ExecuteQuery($sql, array(Role::Administrator));
+        $ris= array();
+        while($row = $query->fetch()) {
+            $ris []= new User($row);
+        }
+        return $ris;
+                
+    }
 
 }
  

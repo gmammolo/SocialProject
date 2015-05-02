@@ -32,6 +32,7 @@ class Comment extends Model {
     
     function addLike() {
         $this->likeit++;
+        Notify::addNotify($this->author->getId(), -1, NotifyType::newLikeItComment, $this->id);
         return $this->Update();  
     }
 
@@ -102,8 +103,10 @@ class Comment extends Model {
     public static function addComment($idpost, $idauthor, $text) {
         
         $sql = "INSERT INTO `socialproject`.`Comment` ( `idpost`, `text`, `author`, `date`) VALUES (:idp , :text,  :author, :date);";
-        return  self::InsertQuery($sql, array(":idp" => $idpost, ":author" => $idauthor, ":text" => $text, ":date" => date("y-m-d G:i:s"))) > 0;
-        
+        $ris =  self::InsertQuery($sql, array(":idp" => $idpost, ":author" => $idauthor, ":text" => $text, ":date" => date("y-m-d G:i:s")));
+        if($ris >= 0 ) Notify::addNotify (-1, $idauthor, NotifyType::newComment, $ris);
+        return $ris;
+            
     }
     
     public static function delete($id) {

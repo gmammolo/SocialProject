@@ -17,7 +17,8 @@ MenageTemplate::addJavascript("Template/js/jquery.min.js");
 MenageTemplate::addJavascript("Template/js/jquery.scrolly.min.js");
 MenageTemplate::addJavascript("Template/js/jquery.scrollzer.min.js");
 MenageTemplate::addJavascript("Template/js/scripts.js");
-MenageTemplate::addJavascript("//tinymce.cachefly.net/4.1/tinymce.min.js");
+//MenageTemplate::addJavascript("//tinymce.cachefly.net/4.1/tinymce.min.js");
+MenageTemplate::addJavascript("View/Notify/Notify.js");
 MenageTemplate::addJavascript("View/SearchBar/search.js");
 
 MenageTemplate::addCss("Template/css/style.css");

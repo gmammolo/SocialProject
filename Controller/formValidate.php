@@ -272,6 +272,7 @@ switch($formValidate)
         if(User::hasAccess(Role::Register) && isset($pf))
         {
             $ris =Relationship::addFriendRequest(User::getUser()->getId(), $pf->getId());
+            Notify::addNotify($pf->getId(), User::getUser()->getId(), NotifyType::requestFriendship, User::getUser()->getId());
             echo json_encode($ris);
             
             
@@ -285,6 +286,8 @@ switch($formValidate)
         $friendship = Relationship::getRelationship(User::getUser()->getId(), $idf);
         if(isset($friendship) && $friendship->getRequested() == User::getUser() && $friendship->getApplicant()->getId() ===  $idf){
             $friendship->acceptFriendship();
+            Notify::addNotify($idf, User::getUser()->getId(), NotifyType::acceptedFriendship, User::getUser()->getId());
+            Notify::removeRequestFriendshipNotify($idf , User::getUser()->getId() );
             echo json_encode("{true}");
             
         }
