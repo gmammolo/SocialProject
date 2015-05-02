@@ -56,5 +56,11 @@ function managePages($page)
         MenageTemplate::addJavascript("View/Showcase/Showcase.js");
         MenageTemplate::addJavascript("View/Hashtag/Hashtag.js");
     }
+    else if($page=="advancedSearch" && $user->getAccessLevel() >= Role::Register)
+    {
+        MenageTemplate::addContent(_DIR_VIEW_."SearchBar/AdvancedSearch.php");
+        MenageTemplate::addCss("View/SearchBar/AdvancedSearch.css");
+        MenageTemplate::addCss("View/SearchBar/AdvancedSearch.css");
+    }
     
 }

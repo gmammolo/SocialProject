@@ -1,0 +1,29 @@
+/* 
+    Created on : 2-mag-2015, 18.09.52
+    Author     : Giuseppe
+*/
+
+#search_gump input[name="bar_search"]
+{
+    width: 300px;
+}
+
+#search_gump input[type="button"]
+{
+   margin-left: 20px;
+}
+
+.field_check
+{
+    display: inline-block;
+    width: 150px;
+    height: 250px;
+}
+
+.field_order
+{
+    display: inline-block;
+    width: 150px;
+    height: 250px;
+    vertical-align: top;
+}
