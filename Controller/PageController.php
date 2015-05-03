@@ -22,7 +22,8 @@ function managePages($page)
         MenageTemplate::addCss("View/PrivateArea/Profile.css");
         MenageTemplate::addJavascript("View/PrivateArea/Profile.js");
         MenageTemplate::addCss("View/Showcase/Showcase.css");
-        MenageTemplate::addJavascript("View/Showcase/Showcase.js");
+        MenageTemplate::addJavascript("View/Showcase/Showcase.js"); 
+
 
     }
     else if($page=="admin" && $user->getAccessLevel() >= Role::Moderator)
@@ -60,7 +61,9 @@ function managePages($page)
     {
         MenageTemplate::addContent(_DIR_VIEW_."SearchBar/AdvancedSearch.php");
         MenageTemplate::addCss("View/SearchBar/AdvancedSearch.css");
-        MenageTemplate::addCss("View/SearchBar/AdvancedSearch.css");
+        MenageTemplate::addJavascript("View/SearchBar/AdvancedSearch.js");
+        MenageTemplate::addCss("View/Showcase/Showcase.css");
+        MenageTemplate::addJavascript("View/Showcase/Showcase.js");
     }
     
 }

@@ -195,4 +195,18 @@ class Post extends Model {
         }
         return $list;
     }
+    
+    
+    public static function getPostListBySearch($search, $order = "Post.id" ) {
+        $search = "%$search%";
+        $sqlFrienList = "SELECT requested FROM `Relationship` WHERE `applicant` = :id AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE UNION SELECT applicant FROM `Relationship` WHERE `requested` = :id AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE";
+        $sql = "SELECT * FROM Post WHERE ( privacy = ".Privacy::globale." OR ( privacy = ".Privacy::amici." AND author in ($sqlFrienList) ) OR ( author = :id ) ) AND text LIKE :search  ORDER BY :order ";
+        $ris = self::ExecuteQuery($sql, array(":id" => User::getUser()->getId(), ":search" => $search), array(":order" => $order));
+        $list= array();
+        while($row = $ris->fetch()) {
+            $list[] = new Post($row);
+        }
+        return $list;
+        
+    }
 }

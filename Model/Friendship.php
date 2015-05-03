@@ -126,8 +126,8 @@ class Friendship {
         return isset($friendship);
     }
     
-    public static function getFriendsListWithSearch($user, $search) {
-        return Relationship::getFriendsListWithSearch($user->getId(),$search);
+    public static function getFriendsListWithSearch($user, $search, $order = "User.id", $residenza = "") {
+        return Relationship::getFriendsListWithSearch($user->getId(),$search, $order, $residenza);
     }
     
 }

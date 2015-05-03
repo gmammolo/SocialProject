@@ -273,12 +273,12 @@ class User extends Model implements \JsonSerializable{
      * @param type $accLevel
      * @return \User[]
      */
-    public static function getAllUserWithAccessLevel($accLevel, $seach)
+    public static function getAllUserWithAccessLevel($accLevel, $search, $order = "accessLevel")
     {
-        $search = "%".$seach."%";
-        $sql = "SELECT User.* FROM `User` JOIN Profile ON `profile` = Profile.id WHERE `accessLevel` < :accLevel AND ( `username` Like :sw OR nome LIKE :sw OR Profile.email Like :sw OR User.email Like :sw ) ORDER BY  accessLevel LIMIT 30 ";
+        $search = "%".$search."%";
+        $sql = "SELECT User.* FROM `User` JOIN Profile ON `profile` = Profile.id WHERE `accessLevel` < :accLevel AND ( `username` Like :sw OR nome LIKE :sw OR Profile.email Like :sw OR User.email Like :sw ) ORDER BY  :order LIMIT 30 ";
         $lista = array();
-        $ris = Model::ExecuteQuery($sql,array( ":accLevel" => $accLevel, ":sw" => $search ));
+        $ris = Model::ExecuteQuery($sql,array( ":accLevel" => $accLevel, ":sw" => $search ), array(":order" => $order));
         foreach ($ris as $elem)
         {
             $lista[] = new User($elem);

@@ -346,6 +346,49 @@ switch($formValidate)
         die();
     }
 
-    
+    case "advancedSearch" :
+    {
+        $choice = filter_input(INPUT_POST, "campo");
+        $search = filter_input(INPUT_POST, "bar_search");
+        $order = filter_input(INPUT_POST, "order");
+        if( preg_match("/['\x22]/", $search) ) {
+            echo "Valore di Ricerca non valido";
+            return FALSE;
+        }
+        if(isset($choice)) {
+            require_once _DIR_VIEW_ . 'SearchBar/AdvancedSearchList.php';
+            
+            switch($choice) {
+                case "utenti":
+                    if($order== "normal")                      
+                        $order= "User.id";
+                    $lista= User::getAllUserWithAccessLevel(User::getUser()->getAccessLevel(), $search, $order);
+                    advancedSearchUserList($lista);
+                    break;
+                case "amici":
+                    if($order== "normal")                      
+                        $order= "User.id";
+                    $res = filter_input(INPUT_POST, "luogo");
+                    $residenza = "";
+                    if(isset($res) &&  preg_match("/[^'\x22]+/", $res)) {
+                        $residenza= "AND residenza LIKE '%$res%'";
+                    }
+                    $lista= Friendship::getFriendsListWithSearch(User::getUser(), $search, $order, $residenza);
+                    advancedSearchFriendList($lista);
+                    break; 
+                case "post":
+                    if($order == "normal")                      
+                        $order= "Post.id";
+                    else if($order == "likeit")
+                        $order = "likeit DESC";    
+                    $postList = Post::getPostListBySearch($search, $order);
+                    echo "<div id='Showcase-div'>";
+                    require _DIR_VIEW_ .'Showcase/Showcase.php';
+                    echo "</div>";
+                    break;
+           }
+           MenageTemplate::resize();
+       }
+    }
     
 }

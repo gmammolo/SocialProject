@@ -242,11 +242,11 @@ class Relationship extends Model {
      * @param string $search
      * @return \User
      */
-    public static function getFriendsListWithSearch($iduser, $search){
+    public static function getFriendsListWithSearch($iduser, $search, $order = "User.id", $residenza= ""){
         $search = "%".$search."%";
         $sqlFrienList = "SELECT requested FROM `Relationship` WHERE `applicant` = :id AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE UNION SELECT applicant FROM `Relationship` WHERE `requested` = :id AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE";
-        $sql = "SELECT  DISTINCT  User.* FROM User JOIN Profile ON Profile.id = User.profile WHERE User.id IN ( $sqlFrienList )  AND ( username LIKE :search OR nome LIKE :search ) ";
-        $ris = self::ExecuteQuery($sql, array(":id" => $iduser, ":search" => $search));
+        $sql = "SELECT  DISTINCT  User.* FROM User JOIN Profile ON Profile.id = User.profile WHERE User.id IN ( $sqlFrienList )  AND ( username LIKE :search OR nome LIKE :search ) $residenza ORDER BY :order ";
+        $ris = self::ExecuteQuery($sql, array(":id" => $iduser, ":search" => $search),array(":order" => $order));
         $acp = array();
         while($row=$ris->fetch()) {
             $acp[] = new User($row);
