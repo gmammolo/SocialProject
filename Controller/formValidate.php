@@ -194,13 +194,13 @@ switch($formValidate)
         
         preg_match_all('/(?<=@)[A-Za-z0-9]+/', $testo,$other);
         $other = $other[0];
-        if(preg_match("/['\x22]+/", $locate) || preg_match("/['\x22]+/", $testo) )
+        if(preg_match("/['\x22]+/", $locate) /* || preg_match("/['\x22]+/", $testo) */ )
         {
             Utility::RedMessage("Dati non ammissibili");
             header("location: " . _HOME_URL_ );
             die();
         }
-        $post = Post::createNewPost(User::getUser()->getId(),$testo, $image ,$locate , $hashtag, $privacy );
+        $post = Post::createNewPost(User::getUser()->getId(),htmlentities($testo), $image ,$locate , $hashtag, $privacy );
         if(isset($post)) {
             Utility::GreenMessage("Post inviato correttamente");
             Showcase::insertPost(User::getUser()->getId(), $post->getId());

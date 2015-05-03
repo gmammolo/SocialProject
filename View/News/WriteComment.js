@@ -79,11 +79,11 @@ function WriteComment() {}
              return false;
         }
 
-        if(/['\x22]+/.test($("textarea[name='text']").val()) )
-        {
-             alert("Testo non valido");
-             $("textarea[name='text']").focus();
-             return false;
-        }
+//        if(/['\x22]+/.test($("textarea[name='text']").val()) )
+//        {
+//             alert("Testo non valido");
+//             $("textarea[name='text']").focus();
+//             return false;
+//        }
         $("form[name='newComment']").submit();
     };

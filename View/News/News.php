@@ -13,7 +13,7 @@ if(User::getUser()->hasAccess(Role::Register)) { ?>
             <span><input type="url" name="p_url" placeholder="http://" /></span>
         </div>
         <div class="row"></div>
-        <div class="row"><textarea name="text" placeholder="A cosa stai pensando?" onKeyPress="Home.abilityHelpUser(event)" onkeyup="Home.ricercaUtenti(event)"></textarea></div>
+        <div class="row"><textarea name="text" placeholder="A cosa stai pensando?" onKeyPress="WriteComment.abilityHelpUser(event)" onkeyup="WriteComment.ricercaUtenti(event)"></textarea></div>
         <div class="help_input"></div>
         <div class="row"><input type="text" name="luogo" title="Luogo dove è stata scattata" placeholder="Dove sei?" pattern="/[^'\x22]+/" /> </div>
         <div class="row">
