@@ -209,4 +209,14 @@ class Post extends Model {
         return $list;
         
     }
+    
+    public static function getAttivity($author) {
+       $sql = "SELECT DISTINCT date FROM Post Where author = :id";
+        $ris = self::ExecuteQuery($sql, array(":id" => $author) );
+        $list= array();
+        while($row = $ris->fetch()) {
+            $list[] = date("Y-m-d",  strtotime($row["date"]));
+        }
+        return $list;
+    }
 }

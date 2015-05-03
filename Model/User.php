@@ -318,6 +318,11 @@ class User extends Model implements \JsonSerializable{
         return $ris;
     }
 
+    
+    public static function getAttivity()
+    {
+        return Post::getAttivity(User::getUser()->getId());
+    }
 }
  
 

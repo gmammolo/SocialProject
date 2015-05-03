@@ -169,3 +169,9 @@ else if( $ajaxRequest ==  "prolificPoster" && User::hasAccess(Role::Register))  
     echo json_encode($list);
     die();
 }
+
+else if( $ajaxRequest ==  "attivity" && User::hasAccess(Role::Register))  { 
+    $list = User::getAttivity();
+    echo json_encode($list);
+    die();
+}

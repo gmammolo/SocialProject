@@ -13,7 +13,7 @@ MenageTemplate::addTabMenu("Friends","/SocialProject/index.php?page=friends" ,  
 MenageTemplate::addTabMenu("Amministrazione","/SocialProject/index.php?page=admin",  $icon ."shield.png" , Role::Administrator );
 //MenageTemplate::addTabMenu("Statistiche","/SocialProject/index.php?page=statistiche",  $icon ."stats%204.png" , Role::Register );
 MenageTemplate::addTabMenu("Statistiche",null,  $icon ."stats%204.png" , Role::Register );
-MenageTemplate::addTabMenu("test","?page=statistiche&grafico=test",  $icon ."stats%204.png" , Role::Register ,"Statistiche");
+MenageTemplate::addTabMenu("Attivita","?page=statistiche&grafico=attivity",  $icon ."stats%204.png" , Role::Register ,"Statistiche");
 MenageTemplate::addTabMenu("classifica post","?page=statistiche&grafico=postatoreProlifico",  $icon ."stats%204.png" , Role::Register ,"Statistiche" );
 MenageTemplate::addTabMenu("Logout", '/SocialProject/index.php?Logout=true', $icon ."display%20down.png" , Role::Unverified);
 

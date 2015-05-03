@@ -73,6 +73,9 @@ function managePages($page)
             case "postatoreProlifico":
                 MenageTemplate::addContent(_DIR_VIEW_."Statistiche/Grafici/PostatoreProlifico.php");
                 break;
+            case "attivity":
+                MenageTemplate::addContent(_DIR_VIEW_."Statistiche/Grafici/attivity.php");
+                break;
             default:
                 MenageTemplate::addContent(_DIR_VIEW_."Statistiche/Statistiche.php");
                 break;
