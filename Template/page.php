@@ -40,9 +40,8 @@ $user = User::getUser(); ?>
                 <nav> 
                     <?php echo "<ul>";
                     foreach (MenageTemplate::getMenu() as $key => $submenues) {
-                        if(User::hasAccess($submenues->getAccessLevel())) {
                             $chiave = $key;
-                            if (is_a($submenues, "Menu") && !is_null($submenues->getHtml() )) {
+                            if (is_a($submenues, "Menu") && !is_null($submenues->getHtml() &&  User::hasAccess($submenues->getAccessLevel()) )) {
                                 $chiave = '<a href="'.$submenues->getHtml().'" target="_self">'.$submenues->getIcon(). $key.' </a> ';
                                 echo "<li class = \"menutab t$key \">$chiave</li>" . PHP_EOL;   
                             }
@@ -58,7 +57,7 @@ $user = User::getUser(); ?>
                                 }
                                 echo"</ol></li>" . PHP_EOL;
                             endif;
-                        }
+                        
                     }
                     echo("</ul>");  ?>
                     <script>

@@ -67,10 +67,17 @@ function managePages($page)
     }
     else if($page=="statistiche" && $user->getAccessLevel() >= Role::Register)
     {
-        MenageTemplate::addContent(_DIR_VIEW_."Statistiche/Statistiche.php");
-        MenageTemplate::addCss("View/Statistiche/Statistiche.css");
-        MenageTemplate::addJavascript("View/Statistiche/Statistiche.js");
         MenageTemplate::addJavascript("Template/js/jsapi.js");
+        $grafico = filter_input(INPUT_GET, "grafico");
+        switch($grafico) {
+            case "postatoreProlifico":
+                MenageTemplate::addContent(_DIR_VIEW_."Statistiche/Grafici/PostatoreProlifico.php");
+                break;
+            default:
+                MenageTemplate::addContent(_DIR_VIEW_."Statistiche/Statistiche.php");
+                break;
+        }
+        
     }
     
 }

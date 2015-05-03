@@ -162,3 +162,10 @@ else if( $ajaxRequest ==  "getUpdateAmm" && User::hasAccess(Role::Register))  {
     }   
     die();
 }
+
+
+else if( $ajaxRequest ==  "prolificPoster" && User::hasAccess(Role::Register))  { 
+    $list = User::getMustPosters();
+    echo json_encode($list);
+    die();
+}

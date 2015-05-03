@@ -11,7 +11,10 @@ MenageTemplate::addTabMenu("Friends","/SocialProject/index.php?page=friends" ,  
 //MenageTemplate::addTabMenu("Profilo", "/SocialProject/index.php?page=profile&amp;id=".User::getUser()->getId() , $icon ."eye.png" , Role::Register ,"Gestione");
 //MenageTemplate::addTabMenu("Amministrazione","/SocialProject/index.php?page=admin",  $icon ."shield.png" , Role::Administrator , "Gestione");
 MenageTemplate::addTabMenu("Amministrazione","/SocialProject/index.php?page=admin",  $icon ."shield.png" , Role::Administrator );
-MenageTemplate::addTabMenu("Statistiche","/SocialProject/index.php?page=statistiche",  $icon ."shield.png" , Role::Register );
+//MenageTemplate::addTabMenu("Statistiche","/SocialProject/index.php?page=statistiche",  $icon ."stats%204.png" , Role::Register );
+MenageTemplate::addTabMenu("Statistiche",null,  $icon ."stats%204.png" , Role::Register );
+MenageTemplate::addTabMenu("test","?page=statistiche&grafico=test",  $icon ."stats%204.png" , Role::Register ,"Statistiche");
+MenageTemplate::addTabMenu("classifica post","?page=statistiche&grafico=postatoreProlifico",  $icon ."stats%204.png" , Role::Register ,"Statistiche" );
 MenageTemplate::addTabMenu("Logout", '/SocialProject/index.php?Logout=true', $icon ."display%20down.png" , Role::Unverified);
 
 MenageTemplate::addJavascript("Template/js/jquery.min.js");

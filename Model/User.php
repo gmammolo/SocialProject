@@ -305,6 +305,18 @@ class User extends Model implements \JsonSerializable{
         return $ris;
                 
     }
+    
+    public static function getMustPosters() {
+        $sql = "SELECT nome , count(author) as num FROM (User Join Post On User.id=author) JOIN Profile ON Profile.id = User.profile Where accessLevel <= ".User::getUser()->getAccessLevel()." Group by author Order By num DESC ";
+        $query= self::ExecuteQuery($sql,array());
+        $ris= array();
+        while($row = $query->fetch()) {
+            $ris[] = $row["nome"];
+            $ris[] = $row["num"];
+            
+        }
+        return $ris;
+    }
 
 }
  
