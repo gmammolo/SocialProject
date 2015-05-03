@@ -50,8 +50,7 @@
         $("#gender").html("<img src=\"http://php.server/SocialProject/Template/images/man.jpg\"  ALT='sesso'/>");
 </script>
 
-
-
+<div id="profile_id" style="display: none;"><?php echo $id; ?></div>
 <div id="Showcase" >
     <div id="Showcase-div">
     </div>

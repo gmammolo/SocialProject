@@ -9,7 +9,7 @@ function Showcase () {}
         supLimit = numrow + rangeLimit;
          $.ajax({
           type: "POST",
-          data: { "ajaxRequest" : "getShowcase" , "infLimit" : infLimit , "supLimit" : supLimit },
+          data: { "ajaxRequest" : "getShowcase" , "infLimit" : infLimit , "supLimit" : supLimit, "id" : $("#profile_id").html() },
           dataType: "html",
           success: function(risposta){
             old =  $("#Showcase-div").html();

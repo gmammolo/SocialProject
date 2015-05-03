@@ -55,7 +55,10 @@ else if($ajaxRequest == "getAccountList" && User::hasAccess(Role::Register)  ) {
 else if( $ajaxRequest == "getShowcase" && User::hasAccess(Role::Register) ) {
     $infLimit = filter_input(INPUT_POST, 'infLimit');
     $supLimit = filter_input(INPUT_POST, 'supLimit');
-    $postList = Showcase::getShowcasePost(User::getUser()->getId(),$infLimit, $supLimit ); 
+    $id = filter_input(INPUT_POST, 'id');
+    if(!isset($id) || !is_numeric($id))
+        $id = User::getUser ()->getId ();
+    $postList = Showcase::getShowcasePost($id,$infLimit, $supLimit ); 
     require_once _DIR_VIEW_ .  'Showcase/Showcase.php';
     MenageTemplate::resize();
     die();
