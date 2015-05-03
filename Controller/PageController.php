@@ -65,5 +65,12 @@ function managePages($page)
         MenageTemplate::addCss("View/Showcase/Showcase.css");
         MenageTemplate::addJavascript("View/Showcase/Showcase.js");
     }
+    else if($page=="statistiche" && $user->getAccessLevel() >= Role::Register)
+    {
+        MenageTemplate::addContent(_DIR_VIEW_."Statistiche/Statistiche.php");
+        MenageTemplate::addCss("View/Statistiche/Statistiche.css");
+        MenageTemplate::addJavascript("View/Statistiche/Statistiche.js");
+        MenageTemplate::addJavascript("Template/js/jsapi.js");
+    }
     
 }
