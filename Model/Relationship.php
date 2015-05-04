@@ -273,6 +273,21 @@ class Relationship extends Model {
     }
     
     
+    public static function getAttendendFriend($id) {
+        $sqlFrienList = "SELECT requested FROM `Relationship` WHERE `applicant` = :id AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE UNION SELECT applicant FROM `Relationship` WHERE `requested` = :id AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE";
+        $sql = "SELECT requested AS userid FROM `Relationship` WHERE  `applicant` = :id AND requested NOT IN ($sqlFrienList)  UNION  SELECT applicant AS userid FROM `Relationship` WHERE  `requested` = :id AND applicant  NOT IN ($sqlFrienList) ;";
+        $ris = self::ExecuteQuery($sql, array(":id" => $id));
+        $acp = array();
+        while($row=$ris->fetch()) {
+          
+            $acp[] = User::getUserByID($row['userid']);
+        }
+        return $acp;
+        
+        
+    }
+
+    
 }
 
 

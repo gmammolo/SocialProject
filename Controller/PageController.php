@@ -23,6 +23,7 @@ function managePages($page)
         MenageTemplate::addJavascript("View/PrivateArea/Profile.js");
         MenageTemplate::addCss("View/Showcase/Showcase.css");
         MenageTemplate::addJavascript("View/Showcase/Showcase.js"); 
+        MenageTemplate::addJavascript("View/Friends/Friends.js"); 
 
 
     }

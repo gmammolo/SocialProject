@@ -36,8 +36,12 @@
     } ?>
         
 </div>
-<?php  if(User::getUser() != $utente && !Friendship::IsFriend($utente)  )  { ?>
-    <input name="addFriend" type="button" value="Aggiungi Amico" onclick="addFriend(event)"/>
+<?php  
+$relation = Relationship::getRelationship(User::getUser()->getId(), $utente->getId());
+if(User::getUser()->getId() != $utente->getId() &&  /*!Friendship::IsFriend($utente)  */ isset($relation) )  { ?>
+<div class="pid<?php echo $utente->getId();?>">
+    <input name="addFriend" type="button" value="Aggiungi Amico" onclick="FriendRequest.sendRequestFriend(<?php echo $utente->getId(); ?>)"/>
+</div>
 <?php  } ?>
 <script>
   //get gender
