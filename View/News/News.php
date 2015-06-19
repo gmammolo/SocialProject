@@ -1,7 +1,7 @@
 <?php 
 if(User::getUser()->hasAccess(Role::Register)) { ?>
 <div id="newComment">
-    <form name="newComment" method="POST" action="?formValidate=addPost">
+    <form name="newComment" method="POST" action="?formValidate=addPost" enctype="multipart/form-data">
         <div class="row">
             <span>
                 <select name="switchUpload" onchange="WriteComment.switchUploadFunction()">

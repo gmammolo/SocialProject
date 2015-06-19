@@ -2,7 +2,7 @@
 if(!User::getUser()->hasAccess(Role::Moderator))
 {
     Utility::RedMessage("Non hai i permessi per visualizzare questa pagina.");
-    header("location: " . _HOME_URL_ . ""  );
+    header("location: " . _INDEX_URL_ . ""  );
     die();
 }
 ?>

@@ -50,7 +50,14 @@ class Notify extends Model {
         
     }
     
-
+    
+     public static function removeAdminNotify($cause) {
+       $type = "accRequest";
+       $sql = "DELETE FROM `Notify` WHERE type = ? AND cause  = ?";
+       $ris= self::ExecuteQuery($sql, array($type,$cause ));
+       return $ris->rowCount() > 0;
+       
+     }
     
     public static function getNumNewUser() {
         $sql = "SELECT count(*) as num FROM `Notify` WHERE `type` = ? ";

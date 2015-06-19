@@ -98,7 +98,7 @@ class Profile extends Model implements \JsonSerializable{
         if($id == -1)
             return self::getVisitator ();
         
-        $ar = Self::ExecuteQuery("SELECT * FROM Profile WHERE id=?;", array($id))->fetch();
+        $ar = self::ExecuteQuery("SELECT * FROM Profile WHERE id=?;", array($id))->fetch();
         return new Profile($ar);
         
     }
@@ -111,7 +111,7 @@ class Profile extends Model implements \JsonSerializable{
     
     
     public function Update() {
-        $sql = "UPDATE `socialproject`.`Profile` SET `nome` = :nome, `generalita` = :gen, `residenza` = :res, `data` = :data, `email` = :email, avatar = :avatar WHERE `Profile`.`id` = :id;";
+        $sql = "UPDATE `Profile` SET `nome` = :nome, `generalita` = :gen, `residenza` = :res, `data` = :data, `email` = :email, avatar = :avatar WHERE `Profile`.`id` = :id;";
         $ris = Model::ExecuteQuery($sql,array(":nome" => $this->getNome(), ":gen" => $this->getGeneralita() , ":res" => $this->getResidenza(), ":data" => $this->getData(), ":email" => $this->getEmail(), ":avatar"=> $this->getAvatar() , ":id" => $this->getId() ));
         
     }
@@ -143,7 +143,7 @@ class Profile extends Model implements \JsonSerializable{
     public static function createProfile($nome, $email)
     {
         $avatar = "Template/images/avatar.jpg";
-        $sql = "INSERT INTO `socialproject`.`Profile` (`id`, `nome`, `avatar`, `residenza`, `email`) VALUES (NULL, ?, ?, '', ?)";
+        $sql = "INSERT INTO `Profile` (`id`, `nome`, `avatar`, `residenza`, `email`) VALUES (NULL, ?, ?, '', ?)";
         $id = self::InsertQuery($sql, array($nome, $avatar, $email));
         $prof = Profile::getProfileByID($id);
         return (isset($prof)) ? $id : -1 ;
@@ -151,7 +151,7 @@ class Profile extends Model implements \JsonSerializable{
 
     public static function deleteProfile($id)
     {
-        $sql = "DELETE FROM `socialproject`.`Profile` WHERE `Profile`.`id` = ?";
+        $sql = "DELETE FROM `Profile` WHERE `Profile`.`id` = ?";
         return self::ExecuteQuery($sql,array($id))->rowCount() == 1;
     }
     

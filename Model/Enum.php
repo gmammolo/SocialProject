@@ -1,22 +1,30 @@
 <?php
 
 abstract class BasicEnum {
-    
+    const __class = __CLASS__;
     const __default =  NULL;
 
     private static function getConstants() {
-        
-          $reflect = new ReflectionClass ( static::class );
+          /* NOTA IMPLEMENTATIVA: su una versione di PHP successiva a 5.4 la riga qui sotto è in realtà
+           * $reflect = new ReflectionClass ( static::class );
+           * Il vantaggio in quella implementazione è la possibilità di non utilizzare la 
+           * const __class = __CLASS__; 
+           * che in questa versione viene invece obbligatoriamente scritta in tutti gli enum che implementano
+           * BasicEnum. Inoltre in quella versione qui in questo metodo non è richiesto il secondo 
+           * array_shift($constats); (in quanto la costancle __class non esiste e non va tolta dalla lista)
+           */
+          $reflect = new ReflectionClass ( static::__class);
     	  $list_constants = $reflect->getConstants();
            
           $constats = array_keys($list_constants);
+          array_shift($constats);
           array_shift($constats);
           return $constats;
     }
     
     
     public static function getConstant($index)
-    {
+    { 
         if(static::isValidValue($index))
         {
             
@@ -39,6 +47,8 @@ abstract class BasicEnum {
 
 class Role extends BasicEnum 
 {
+
+    const __class = __CLASS__;
     const __default =  self::Unregister;
     
     const Unregister = 0;
@@ -51,6 +61,7 @@ class Role extends BasicEnum
 
 class Privacy extends BasicEnum 
 {
+    const __class = __CLASS__;
     const __default =  self::amici;
     
     const privato = 0;
@@ -61,6 +72,7 @@ class Privacy extends BasicEnum
 
 class NotifyType extends BasicEnum
 {
+    const __class = __CLASS__;
     const __default = self::generic;
     
     const generic = "generic";

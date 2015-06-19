@@ -1,13 +1,20 @@
 <?php
+// TODO: come reperire percorso completo:
+//$actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
-define("_HOME_DIR_" , "php.server/SocialProject/");
-define("_HOME_URL_" , "/SocialProject/index.php");
+//define("_HOME_URL_" , "http://localhost:8200/studenti/st116798/Public/SocialProject/");
+
+define("_HOME_URL_" , "http://$_SERVER[HTTP_HOST]/studenti/st116798/Public/SocialProject/");
+define("_INDEX_URL_" , "/studenti/st116798/Public/SocialProject/index.php");
+define("_BASE_URL_" , "/studenti/st116798/Public/SocialProject/");
 define("_DIR_TEMPLATE_", _ROOT_."Template/");
 define("_DIR_MODEL_", _ROOT_."Model/");
 define("_DIR_VIEW_", _ROOT_."View/");
 define("_DIR_CONTROLLER_", _ROOT_."Controller/");
 define("_DIR_CONFIG_", _ROOT_."Config/");
-define("_DIR_PLUGIN_", _ROOT_."Plugin/");
+define("__DIR_UPLOAD__", _ROOT_."Public/");
+define("__PUBLIC_URL__", _HOME_URL_ . "Public/");
+
 
 require_once _DIR_MODEL_. 'Utility.php';
 require_once _DIR_MODEL_. 'Database.php';

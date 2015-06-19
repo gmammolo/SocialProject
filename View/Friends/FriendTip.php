@@ -10,12 +10,12 @@
                 $sesso = $pf->getProfile()->getGeneralita();
                 switch ($sesso) {
                     case "uomo" :
-                        echo "<img src=\"/SocialProject/Template/images/man.jpg\" ALT='sesso' />";
+                        echo "<img src=\"" . _HOME_URL_ ."Template/images/man.jpg\" ALT='sesso' />";
                         break;
                     case "donna":
-                        echo "<img src=\"/SocialProject/Template/images/woman.jpg\" ALT='sesso'/>";
+                        echo "<img src=\"" . _HOME_URL_ ."Template/images/woman.jpg\" ALT='sesso'/>";
                     default:
-                        echo "<img src=\"/SocialProject/Template/images/man.jpg\"  ALT='sesso'/>";
+                        echo "<img src=\"" . _HOME_URL_ ."Template/images/man.jpg\"  ALT='sesso'/>";
                 }
             ?>
         </div>

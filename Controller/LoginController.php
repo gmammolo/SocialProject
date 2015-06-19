@@ -11,7 +11,7 @@ if ($user_regular && $pass_regular) {
         
         $user = User::getUserByLogin($username, $password);
         $user = Session::set('user', $user);
-        header("Location: "._HOME_URL_);
+        header("Location: "._INDEX_URL_);
         die();
     }
     else

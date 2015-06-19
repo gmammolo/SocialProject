@@ -1,11 +1,6 @@
 <div id="friend_list">
     
 </div>
-In attesa di essere accettati.
-<div id="attend_friend">
-    
-</div>
-
 
 <div id="possible_friend">
     Amici che potresti conoscere:
@@ -32,15 +27,6 @@ In attesa di essere accettati.
       dataType: "html",
       success: function(risposta){
         $("#possible_friend_list").html(risposta);
-      }
-    });
-    
-    $.ajax({
-      type: "POST",
-      data: {"ajaxRequest" : "getAttendFriends"},
-      dataType: "html",
-      success: function(risposta){
-        $("#attend_friend").html(risposta);
       }
     });
     

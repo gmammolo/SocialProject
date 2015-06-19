@@ -38,7 +38,7 @@ else if($ajaxRequest == "getAccountList" && User::hasAccess(Role::Register)  ) {
                         <a href="?formValidate=deleteAccount&AMP;id=<?php echo $userList[$i]->getId(); ?>"> Delete </a>
                     </div>                   
                 </div><!--
-             --><div class="redirectElement" onclick=" window.location.href = '/SocialProject/index.php?page=profile&AMP;id=<?php echo $userList[$i]->getId(); ?>'">
+             --><div class="redirectElement"onclick=" window.location.href = '/SocialProject/index.php?page=profile&AMP;id=<?php echo $userList[$i]->getId(); ?>'">
                     <img class="avatar" src="<?php echo $userList[$i]->getProfile()->getAvatar(); ?>" alt="photo">
                     <div class="generalita">
                         <div class="row"><div class="label-field  name"> <?php echo $userList[$i]->getProfile()->getNome(); ?></div><span> Email Profilo:</span> <div class="profile-email"><?php echo $userList[$i]->getProfile()->getEmail(); ?> </div> </div>
@@ -113,18 +113,6 @@ else if ( $ajaxRequest ==  "getFriends" && User::hasAccess(Role::Register))
         require _DIR_VIEW_ . 'Friends/FriendTip.php';
     }
     die();
-}
-
-else if ( $ajaxRequest ==  "getAttendFriends" && User::hasAccess(Role::Register)) 
-{
-        
-        $possFriends = Relationship::getAttendendFriend(User::getUser()->getId());
-        $type = "afriend";
-        foreach($possFriends as $pf) {
-            require _DIR_VIEW_ . 'Friends/FriendTip.php';
-        }
-        die();
-        
 }
 
 

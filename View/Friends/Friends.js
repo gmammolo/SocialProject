@@ -22,7 +22,7 @@ function FriendRequest() {}
           url: "?formValidate=acceptRequest&friendId="+id,
           dataType: "json",
           success: function(risposta){
-            if(risposta)
+            if(risposta!="null")
                 $(".pid"+id).html('');
           }
         });

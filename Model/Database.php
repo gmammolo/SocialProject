@@ -14,9 +14,9 @@ class Database
     // configuration
     protected static    $dbtype     = "sqlite";
     protected static    $dbhost     = "localhost";
-    protected static    $dbname     = "socialproject";
-    protected static    $dbuser     = "root";
-    protected static    $dbpass     = "password";
+    protected static    $dbname     = "dbgiuseppemammolo";
+    protected static    $dbuser     = "giuseppemammolo";
+    protected static    $dbpass     = "giuseppemammolo";
 
     /**
      *

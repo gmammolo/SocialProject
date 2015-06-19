@@ -143,7 +143,7 @@ class Relationship extends Model {
     
 
     public function Update() {
-        $sql = "UPDATE `socialproject`.`Relationship` SET `ablocked` = :ablocked, `rblocked` = :rblocked, `accepted` = :accepted, `acceptedDate` = :acceptedDate, `requestDate` = :requestDate, `ablockedDate` = :ablockedDate , `rblockedDate` = :rblockedDate WHERE `Relationship`.`id` = :id";
+        $sql = "UPDATE `Relationship` SET `ablocked` = :ablocked, `rblocked` = :rblocked, `accepted` = :accepted, `acceptedDate` = :acceptedDate, `requestDate` = :requestDate, `ablockedDate` = :ablockedDate , `rblockedDate` = :rblockedDate WHERE `Relationship`.`id` = :id";
         $ris= self::ExecuteQuery($sql, array( ":ablocked" => $this->getAblocked() ,":rblocked" => $this->getRblocked(), ":accepted" => $this->getAccepted(),  ":acceptedDate" => $this->getAcceptedDate() , ":requestDate" => $this->getRequestDate(), ":ablockedDate" => $this->getAblockedDate(), ":rblockedDate" => $this->getRblockedDate(), ":id" => $this->getId()  ));
         return ($ris->rowCount() == 1);
     }
@@ -272,21 +272,6 @@ class Relationship extends Model {
         
     }
     
-    
-    public static function getAttendendFriend($id) {
-        $sqlFrienList = "SELECT requested FROM `Relationship` WHERE `applicant` = :id AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE UNION SELECT applicant FROM `Relationship` WHERE `requested` = :id AND `accepted`= TRUE AND `ablocked`=FALSE AND `rblocked`= FALSE";
-        $sql = "SELECT requested AS userid FROM `Relationship` WHERE  `applicant` = :id AND requested NOT IN ($sqlFrienList)  UNION  SELECT applicant AS userid FROM `Relationship` WHERE  `requested` = :id AND applicant  NOT IN ($sqlFrienList) ;";
-        $ris = self::ExecuteQuery($sql, array(":id" => $id));
-        $acp = array();
-        while($row=$ris->fetch()) {
-          
-            $acp[] = User::getUserByID($row['userid']);
-        }
-        return $acp;
-        
-        
-    }
-
     
 }
 

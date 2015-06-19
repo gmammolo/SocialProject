@@ -288,7 +288,7 @@ class User extends Model implements \JsonSerializable{
     
     public static function deleteAccount($id)
     {
-        $sql =  "DELETE FROM `socialproject`.`User` WHERE `User`.`id` = ?";
+        $sql =  "DELETE FROM `User` WHERE `User`.`id` = ?";
         $user = User::getUserByID($id);
         if(!isset($user))
             return false;

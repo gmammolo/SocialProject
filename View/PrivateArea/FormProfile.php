@@ -6,14 +6,14 @@
     if(is_null($utente))
     {
         Utility::RedMessage("Utente non disponibile");
-        header("location: " . _HOME_URL_ . "?page=home"  );
+        header("location: " . _INDEX_URL_ . "?page=home"  );
         die();
     }
     
-    if(User::getUser() != $utente && !User::checkAccessLevel(Role::Moderator) )
+    if(User::getUser()->getId() != $utente->getId() && !User::checkAccessLevel(Role::Moderator) )
     {
         Utility::RedMessage("Non hai i permessi per visualizzare questo utente");
-        echo "<script>window.location.href=\"" . _HOME_URL_ . "?page=home\"; </script>";
+        echo "<script>window.location.href=\"" . _INDEX_URL_ . "?page=home\"; </script>";
 //        header("location: " . _HOME_URL_ . "?page=home"  );
         die();
     }
@@ -24,9 +24,9 @@
 </script>
 
 <div id="change-photo">
-    <form name="change-photo-form" method="POST" action="?formValidate=FormChangeAvatar&amp;id=<?php echo $utente->getId() ?>">
+    <form name="change-photo-form" method="POST" action="?formValidate=FormChangeAvatar&amp;id=<?php echo $utente->getId() ?>" enctype="multipart/form-data">
         <div class="change-avatar-url"><input type="radio" name="choose" value="image_url"><input type="url" name="image_url" placeholder="http://"  onclick="ProfileClass.selectURL();" /></div>
-        <div class="change-avatar-url"><input type="radio" name="choose" value="image_file"><input type="file" name="image_file" onclick="ProfileClass.selectFILE();"/></div>
+        <div class="change-avatar-url"><input type="radio" name="choose" value="image_file"><input type="hidden" name="MAX_FILE_SIZE" value="100000" /><input type="file" name="image_file" onclick="ProfileClass.selectFILE();"/></div>
         <input type="button" value="Cambia" onclick="ProfileClass.sendPhotoRequest()" />
         <input type="button" value="Cancel" onclick="ProfileClass.closeFormAvatar()" />
     </form>

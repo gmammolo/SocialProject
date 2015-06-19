@@ -16,11 +16,6 @@ function validateRegularString(string)
     return re.test(string) ;
 }
 
-function getHome()
-{
-    return "http://php.server/SocialProject/index.php";
-}
-
 
 function jsRedirect(param)
 {

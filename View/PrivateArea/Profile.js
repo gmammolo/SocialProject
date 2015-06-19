@@ -101,11 +101,11 @@ function ProfileClass() {}
     ProfileClass.sendPhotoRequest = function ()
     {
         radio = document.forms["change-photo-form"].choose;
-        if(radio.value == "image_file")
-        {
-            alert("Sono spiacente, ma questa funzionalità non è attiva in questa versione");
-            return false;
-        }
+//        if(radio.value == "image_file")
+//        {
+//            alert("Sono spiacente, ma questa funzionalità non è attiva in questa versione");
+//            return false;
+//        }
          document.forms["change-photo-form"].submit();
     }
 
@@ -158,8 +158,22 @@ function ProfileClass() {}
         $("#change-password").hide();
     }
     
-    
-    
+    ProfileClass.addFriend = function(butt)
+    {
+	var id = $("#id").html();
+        $.ajax({
+          url: "?formValidate=sendFriendRequest&friendId="+id,
+          dataType: "json",
+          success: function(risposta){
+            if(risposta) {
+                $(butt.parentNode).html('<input type="button" value="Richiesta Inviata" disabled="true"/>');
+	    }
+          }
+        });
+    }   
+
+
+
 function Profile  (username , avatar, email, residenza, data, sesso) {
     this.username = username;
     this.avatar = avatar;

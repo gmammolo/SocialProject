@@ -125,7 +125,7 @@ class Post extends Model {
      * @return \Post
      */
     public static function createNewPost($author, $text, $image, $locate , $hashtag, $privacy ) {
-        $sql = "INSERT INTO `socialproject`.`Post` (`id`, `author`, `text`, `image`, `hashtag`, `date`, `locate`, `privacy`) VALUES (NULL, :author, :text, :image, :hashtag, :date, :loco, :privacy);";       
+        $sql = "INSERT INTO `Post` (`id`, `author`, `text`, `image`, `hashtag`, `date`, `locate`, `privacy`) VALUES (NULL, :author, :text, :image, :hashtag, :date, :loco, :privacy);";       
         $id = self::InsertQuery($sql, array(":author" => $author , ":text" => $text , ":image" => $image , ":hashtag" => serialize($hashtag), ":date" => date("y-m-d G:i:s"), ":loco" => $locate, ":privacy" => $privacy));
         if($id>0) Notify::addNotify (-1, $author, NotifyType::newPost, $id);
         return ($id > 0) ? Post::getPostByID($id) : null;

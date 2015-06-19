@@ -1,28 +1,23 @@
 <?php
 
-//################################à
+//################################�&nbsp;
 //DEFAULT TEMPLATE
 $icon = "Template/images/";
 
-MenageTemplate::addTabMenu("Home","/SocialProject/index.php",  $icon ."home.png" , Role::Unverified );
-MenageTemplate::addTabMenu("News","/SocialProject/index.php?page=news" ,  $icon . 'file%203.png' , Role::Register);
-MenageTemplate::addTabMenu("Friends","/SocialProject/index.php?page=friends" ,   $icon . 'user.png' , Role::Register);
-//MenageTemplate::addTabMenu("Gestione", null , $icon . "engine.png" , Role::Register );
-//MenageTemplate::addTabMenu("Profilo", "/SocialProject/index.php?page=profile&amp;id=".User::getUser()->getId() , $icon ."eye.png" , Role::Register ,"Gestione");
-//MenageTemplate::addTabMenu("Amministrazione","/SocialProject/index.php?page=admin",  $icon ."shield.png" , Role::Administrator , "Gestione");
-MenageTemplate::addTabMenu("Amministrazione","/SocialProject/index.php?page=admin",  $icon ."shield.png" , Role::Administrator );
-//MenageTemplate::addTabMenu("Statistiche","/SocialProject/index.php?page=statistiche",  $icon ."stats%204.png" , Role::Register );
+MenageTemplate::addTabMenu("Home",_INDEX_URL_ ,  $icon ."home.png" , Role::Unverified );
+MenageTemplate::addTabMenu("News", _INDEX_URL_ ."?page=news" ,  $icon . 'file%203.png' , Role::Register);
+MenageTemplate::addTabMenu("Friends",_INDEX_URL_ . "?page=friends" ,   $icon . 'user.png' , Role::Register);
+MenageTemplate::addTabMenu("Amministrazione",_INDEX_URL_ . "?page=admin",  $icon ."shield.png" , Role::Administrator );
 MenageTemplate::addTabMenu("Statistiche",null,  $icon ."stats%204.png" , Role::Register );
-MenageTemplate::addTabMenu("Attivita","?page=statistiche&grafico=attivity",  $icon ."stats%204.png" , Role::Register ,"Statistiche");
-MenageTemplate::addTabMenu("classifica post","?page=statistiche&grafico=postatoreProlifico",  $icon ."stats%204.png" , Role::Register ,"Statistiche" );
-MenageTemplate::addTabMenu("Logout", '/SocialProject/index.php?Logout=true', $icon ."display%20down.png" , Role::Unverified);
+MenageTemplate::addTabMenu("Attivita",_INDEX_URL_ . "?page=statistiche&grafico=attivity",  $icon ."stats%204.png" , Role::Register ,"Statistiche");
+MenageTemplate::addTabMenu("classifica post",_INDEX_URL_ . "?page=statistiche&grafico=postatoreProlifico",  $icon ."stats%204.png" , Role::Register ,"Statistiche" );
+MenageTemplate::addTabMenu("Logout", _INDEX_URL_ . '?Logout=true', $icon ."display%20down.png" , Role::Unverified);
 
 MenageTemplate::addJavascript("Template/js/jquery.min.js");
 MenageTemplate::addJavascript("Template/js/jquery.scrolly.min.js");
 MenageTemplate::addJavascript("Template/js/jquery.scrollzer.min.js");
 MenageTemplate::addJavascript("Template/js/jquery.form.js"); 
 MenageTemplate::addJavascript("Template/js/scripts.js");
-//MenageTemplate::addJavascript("//tinymce.cachefly.net/4.1/tinymce.min.js");
 MenageTemplate::addJavascript("View/Notify/Notify.js");
 MenageTemplate::addJavascript("View/SearchBar/search.js");
 
@@ -60,11 +55,11 @@ $logout = filter_input(INPUT_GET, 'Logout');
 if(isset($logout))
 {
     Session::destroy();
-    header("Location: "._HOME_URL_);
+    header("Location: "._INDEX_URL_);
     die();
 }
 
-//#############################à
+//#############################�&nbsp;
 //GESTIONE ACCESSI 
 if( User::checkAccessLevel(Role::Register) ) {
     MenageTemplate::addCss("Template/css/style-site.css");

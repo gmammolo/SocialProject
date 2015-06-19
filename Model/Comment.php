@@ -102,7 +102,7 @@ class Comment extends Model {
     
     public static function addComment($idpost, $idauthor, $text) {
         
-        $sql = "INSERT INTO `socialproject`.`Comment` ( `idpost`, `text`, `author`, `date`) VALUES (:idp , :text,  :author, :date);";
+        $sql = "INSERT INTO `Comment` ( `idpost`, `text`, `author`, `date`) VALUES (:idp , :text,  :author, :date);";
         $ris =  self::InsertQuery($sql, array(":idp" => $idpost, ":author" => $idauthor, ":text" => $text, ":date" => date("y-m-d G:i:s")));
         if($ris >= 0 ) Notify::addNotify (-1, $idauthor, NotifyType::newComment, $ris);
         return $ris;

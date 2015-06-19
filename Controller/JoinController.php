@@ -29,7 +29,7 @@ if(!preg_match("/['\x22]/", $username ) &&
            Session::set('user', $user);
            Notify::addNotify(-1, $user->getId(), NotifyType::accessRequest, $user->getId());
            Utility::GreenMessage("Registrazione Completata con Successo. Benvenuto!");
-           header("Location: " . _HOME_URL_ . "?page=profile" );
+           header("Location: " . _INDEX_URL_ . "?page=profile" );
            die();
         }
     }
