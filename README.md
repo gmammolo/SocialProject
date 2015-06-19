@@ -72,7 +72,7 @@ Nelle varie barre di ricerca e nel caso si cerchi un amico si è supportati nell
 
   
 ## Contenuto
-
+```
 /
 ├───Config
 ├───Controller
@@ -97,3 +97,4 @@ Nelle varie barre di ricerca e nel caso si cerchi un amico si è supportati nell
     ├───Showcase
     └───Statistiche
         └───Grafici
+```
