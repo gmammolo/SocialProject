@@ -36,16 +36,16 @@
                         $pri = $singlePost->getPrivacy(); 
                         switch ($pri) {
                             case Privacy::privato :
-                                echo '<img src="/SocialProject/Template/images/private_fb.png" alt=" "/>';
+                                echo '<img src="'. _HOME_URL_.'Template/images/private_fb.png" alt=" "/>';
                                 break;
                             case Privacy::amici :
-                                echo '<img src="/SocialProject/Template/images/friend_fb2.png" alt=" "/>';
+                                echo '<img src="'. _HOME_URL_.'Template/images/friend_fb2.png" alt=" "/>';
                                 break;
                             case Privacy::amiciplus :
-                                echo '<img src="/SocialProject/Template/images/friend_fb2.png" alt=" "/>';
+                                echo '<img src="'. _HOME_URL_.'Template/images/friend_fb2.png" alt=" "/>';
                                 break;
                             case Privacy::globale :
-                                echo '<img src="/SocialProject/Template/images/global_fb.png" alt=" "/>';
+                                echo '<img src="'. _HOME_URL_.'Template/images/global_fb.png" alt=" "/>';
                                 break;
                         }
                     ?>
