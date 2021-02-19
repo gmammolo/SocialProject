@@ -1,5 +1,8 @@
 # Social Project
 
+> NOTA: Progetto universitario di Tecnologie Software.
+
+
  * URL: http://labappweb.labinfo.educ.di.unito.it/studenti/st116798/SocialProject
  * ADMIN: Admin:Qwe123
  * USER: 
